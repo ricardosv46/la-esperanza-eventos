@@ -20,9 +20,11 @@ module.exports = {
     },
     colors: {
       primary: '#4C000C',
+      primarydark: '#2F080D',
       secondary: '#F0AC42',
       tertiary: '#A02E2B',
       text: '#505050',
+      blacklight: '#1c1c1c',
 
       inherit: colors.inherit,
       current: colors.current,
