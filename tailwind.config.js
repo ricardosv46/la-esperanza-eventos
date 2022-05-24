@@ -126,7 +126,8 @@ module.exports = {
       spin: 'spin 1s linear infinite',
       ping: 'ping 1s cubic-bezier(0, 0, 0.2, 1) infinite',
       pulse: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-      bounce: 'bounce 1s infinite'
+      bounce: 'bounce 1s infinite ',
+      fade: 'fade 1.3s ease-in-out'
     },
     aspectRatio: {
       auto: 'auto',
@@ -606,6 +607,14 @@ module.exports = {
           transform: 'none',
           animationTimingFunction: 'cubic-bezier(0,0,0.2,1)'
         }
+      },
+      fade: {
+        '0%': { transform: 'translateY(100%)', opacity: 0 },
+        '100%': { transform: 'translateY(0)', opacity: 1 }
+      },
+      'fade-out': {
+        '0%': { transform: 'translateY(0)', opacity: 1 },
+        '100%': { transform: 'translateY(100%)', opacity: 0 }
       }
     },
     letterSpacing: {

@@ -11,7 +11,7 @@ const links = [
   { title: 'La Plaza', path: '/plaza' },
   { title: 'Eventos', path: '/eventos' },
   { title: 'Noticias', path: '/noticias' },
-  { title: 'Contacto', path: '/contacto' }
+  { title: 'Contacto', path: '#contacto' }
 ]
 
 const Header = () => {
@@ -40,7 +40,7 @@ const Header = () => {
           ? navbar
             ? 'bg-primary'
             : 'bg-transparent'
-          : 'bg-primary'
+          : 'bg-primary relative'
       }`}
     >
       {/* menu desktop */}

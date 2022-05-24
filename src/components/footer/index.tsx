@@ -11,7 +11,7 @@ import Container from '../container'
 
 const Footer = () => {
   return (
-    <>
+    <footer id='contacto'>
       <Container
         bgColor='bg-primarydark'
         className='flex flex-col md:flex-row text-white py-10 gap-5 md:gap-0'
@@ -71,7 +71,7 @@ const Footer = () => {
         <p>© All rights reserved</p>
         <p> Diseñado por: Softaki Software Solutions S.A.C</p>
       </Container>
-    </>
+    </footer>
   )
 }
 

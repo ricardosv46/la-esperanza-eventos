@@ -36,7 +36,45 @@
   background-image: url('/imgs/banners/banner1.jpg');
   height: 400px;
 }
+.banner-home5 {
+  background-image: url('/imgs/logos/logo-fondo.png');
+  background-size: 110px;
+  background-color: #fff2e6;
+  background-repeat: no-repeat;
+  height: auto;
+}
+.banner-home5::before {
+  background-color: transparent;
+}
 
+.banner-home6 {
+  background-image: url('/imgs/logos/logo-fondo.png');
+  background-size: cover;
+  background-color: #a02e2b;
+  background-repeat: no-repeat;
+  height: auto;
+  background-position: bottom right;
+}
+.banner-home6::before {
+  background-color: transparent;
+}
+
+.banner-parallax {
+  background-image: url('/imgs/home/torero.jpg');
+  background-size: contain;
+  background-color: #2f080d;
+  background-position: calc(50% - 300px) calc(50% - -100px);
+  background-repeat: no-repeat;
+  width: auto;
+  height: auto;
+  background-attachment: fixed;
+}
+
+.banner-parallax::before {
+  background-color: transparent;
+}
+
+/* banner de para plaza */
 .banner-plaza::before {
   content: '';
   background-color: #4c000c;
@@ -45,4 +83,19 @@
   position: absolute;
   width: 100%;
   height: 100%;
+}
+
+.swiper-button-next:after {
+  font-size: 15px !important;
+  font-weight: bolder;
+  color: white !important;
+}
+
+.swiper-button-prev:after {
+  font-size: 15px !important;
+  font-weight: bolder;
+  color: white !important;
+}
+.swiper-pagination-bullet-active {
+  background-color: #fff !important;
 }
