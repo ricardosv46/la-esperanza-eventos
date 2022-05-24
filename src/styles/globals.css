@@ -1,3 +1,48 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* banner de para paginas */
+.banner {
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  height: 955px;
+  position: relative;
+}
+.banner::before {
+  content: '';
+  background-color: rgba(0, 0, 0, 0.2);
+  top: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+/* banner de para home */
+.banner-home1 {
+  background-image: url('/imgs/banners/banner1.jpg');
+}
+.banner-home2 {
+  background-image: url('/imgs/banners/banner2.jpg');
+}
+.banner-home3 {
+  background-image: url('/imgs/banners/banner3.jpg');
+}
+.banner-home4 {
+  background-image: url('/imgs/banners/banner4.jpg');
+}
+.banner-plaza {
+  background-image: url('/imgs/banners/banner1.jpg');
+  height: 400px;
+}
+
+.banner-plaza::before {
+  content: '';
+  background-color: #4c000c;
+  opacity: 0.24;
+  top: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
