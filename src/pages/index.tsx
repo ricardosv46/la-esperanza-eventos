@@ -36,8 +36,6 @@ const Home: NextPage = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-
-      <div className='h-[955px] w-full bg-primary-100'>Plantilla base</div>
     </>
   )
 }
