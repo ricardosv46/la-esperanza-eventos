@@ -61,7 +61,7 @@ const Header = () => {
           <div className='flex items-center gap-16'>
             <ul className='flex gap-16 relative font-semibold'>
               {links.map(({ title, path }) => (
-                <Link href={path} passHref>
+                <Link href={path} passHref key={title}>
                   <li
                     className={`cursor-pointer  py-2 border-b-2 border-transparent hover:border-yellow-500 ease-out duration-300 transition-all hover:text-yellow-500 ${
                       pathname === path ? 'text-secondary border-secondary' : ''
@@ -119,7 +119,7 @@ const Header = () => {
             } ${isOpen && 'transition-all translate-x-0 duration-500'}`}
           >
             {links.map(({ title, path }) => (
-              <Link href={path} passHref>
+              <Link href={path} passHref key={title}>
                 <li
                   className={`text-center cursor-pointer  py-2 border-b-2 border-transparent  ease-out duration-300 transition-all hover:text-yellow-500 ${
                     pathname === path ? 'text-secondary ' : ''
