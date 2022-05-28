@@ -3,7 +3,7 @@ import React from 'react'
 
 interface IProps {
   title: string
-  ogtitle: string
+  link: string
   description: string
   url: string
   img: string
@@ -13,7 +13,7 @@ interface IProps {
 
 const OpenGraph = ({
   title,
-  ogtitle,
+  link,
   description,
   url,
   img,
@@ -26,14 +26,15 @@ const OpenGraph = ({
       <meta name='description' content={description} />
       <meta name='keywords' content={keywords} />
 
+      <meta property='og:site_name' content={link} />
       <meta property='og:type' content='website' />
-      <meta property='og:title' content={ogtitle} />
+      <meta property='og:title' content={title} />
       <meta property='og:description' content={description} />
       <meta property='og:url' content={url} />
       <meta property='og:image' content={img} />
 
       <meta name='twitter:card' content='summary_large_image' />
-      <meta name='twitter:title' content={ogtitle} />
+      <meta name='twitter:title' content={title} />
       <meta name='twitter:description' content={description} />
       <meta property='twitter:domain' content={domain} />
       <meta property='twitter:url' content={url} />

@@ -11,9 +11,9 @@ import OpenGraph from '../components/openGraph'
 const banners = ['banner-home1', 'banner-home2', 'banner-home3', 'banner-home4']
 
 const flyers = [
-  { id: 0, img: 'flyer1' },
-  { id: 1, img: 'flyer2' },
-  { id: 2, img: 'flyer3' }
+  { id: 0, img: 'flyer1.jpg' },
+  { id: 1, img: 'flyer2.jpg' },
+  { id: 2, img: 'flyer3.jpg' }
 ]
 
 const Home: NextPage = () => {
@@ -21,8 +21,8 @@ const Home: NextPage = () => {
     <>
       <OpenGraph
         title='La Esperanza - Incio'
+        link='La Esperanza'
         description='Disfuta del mejor evento de la ciudad, La esperanza, con una gran variedad de eventos, promociones y mucho más.'
-        ogtitle='La Esperanza'
         domain='la-esperanza-eventos.vercel.app'
         img='https://la-esperanza-eventos.vercel.app/imgs/banners/banner3.jpg'
         keywords='Entradas,Eventos,PLazas'
@@ -147,13 +147,13 @@ const Home: NextPage = () => {
             modules={[Autoplay, Navigation, Pagination]}
             className='mySwiper'
           >
-            {flyers.map((flyer, index) => (
+            {flyers.map((flyer) => (
               <SwiperSlide key={flyer.id}>
                 {({ isActive }) => (
                   <div className='flex justify-center items-center '>
                     <Image
                       className='cursor-pointer relative'
-                      src={`/imgs/flyers/${flyer.img}.jpg`}
+                      src={`/imgs/flyers/${flyer.img}`}
                       width={520}
                       height={344}
                       alt='logo'

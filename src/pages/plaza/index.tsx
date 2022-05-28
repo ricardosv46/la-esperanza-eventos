@@ -4,9 +4,19 @@ import Image from 'next/image'
 
 // import required modules
 import { Navigation, Pagination } from 'swiper'
+import OpenGraph from '../../components/openGraph'
 const Plaza = () => {
   return (
     <>
+      <OpenGraph
+        title='La Esperanza - La Plaza'
+        link='La Esperanza'
+        description='La Plaza de Toros La Esperanza fue inaugurada en el año 2009, siendo un ruedo sin graderías, el punto de encuentro y lugar donde se incubó la nueva generación de aficionados prácticos.'
+        domain='la-esperanza-eventos.vercel.app'
+        img='https://la-esperanza-eventos.vercel.app/imgs/la-esperanza/la-esperanza-01.jpg'
+        keywords='Entradas,Eventos,PLazas'
+        url='https://la-esperanza-eventos.vercel.app/'
+      />
       <div className='banner banner-plaza relative'>
         <p className='absolute top-[40%]  right-[30%]  sm:right-[40%] text-5xl sm:text-6xl font-bold text-white'>
           La Plaza
@@ -79,7 +89,7 @@ const Plaza = () => {
             <SwiperSlide>
               <div className=' pb-10 pt-3'>
                 <Image
-                  src='/imgs/la-esperanza/la-esperanza-02.jpeg'
+                  src='/imgs/la-esperanza/la-esperanza-02.jpg'
                   alt='Picture of the author'
                   width={500}
                   height={250}
