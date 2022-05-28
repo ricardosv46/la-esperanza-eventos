@@ -33,13 +33,13 @@ const OpenGraph = ({
       <meta property='og:image' content={img} />
 
       <meta name='twitter:card' content='summary_large_image' />
-      <meta property='og:image:width' content='400' />
-      <meta property='og:image:height' content='300' />
       <meta name='twitter:title' content={ogtitle} />
       <meta name='twitter:description' content={description} />
       <meta property='twitter:domain' content={domain} />
       <meta property='twitter:url' content={url} />
       <meta name='twitter:image' content={img} />
+      <meta property='og:image:width' content='400' />
+      <meta property='og:image:height' content='300' />
     </Head>
   )
 }
