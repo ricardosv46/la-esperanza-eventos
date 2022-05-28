@@ -6,6 +6,12 @@ html {
   scroll-behavior: smooth;
 }
 
+html,
+body {
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
 /* banner de para paginas */
 .banner {
   background-size: cover;

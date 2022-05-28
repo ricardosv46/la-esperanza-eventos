@@ -1,7 +1,8 @@
 import React from 'react'
+import Container from '../../components/container'
 
 const Noticias = () => {
-  return <div className='banner banner-home'></div>
+  return <Container>holam undo</Container>
 }
 
 export default Noticias

@@ -40,7 +40,7 @@ const Header = () => {
           ? navbar
             ? 'bg-primary'
             : 'bg-transparent'
-          : 'bg-primary relative'
+          : 'bg-primary relative '
       }`}
     >
       {/* menu desktop */}

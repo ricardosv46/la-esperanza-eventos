@@ -8,13 +8,6 @@ import Header from '../components/header'
 import Footer from '../components/footer'
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [showChild, setShowChild] = useState(false)
-  useEffect(() => {
-    setShowChild(true)
-  }, [])
-  if (!showChild) {
-    return null
-  }
   return (
     <>
       <Header />
