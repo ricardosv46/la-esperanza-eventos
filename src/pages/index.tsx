@@ -7,6 +7,7 @@ import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper'
 import Container from '../components/container'
 import Image from 'next/image'
 import Head from 'next/head'
+import OpenGraph from '../components/openGraph'
 const banners = ['banner-home1', 'banner-home2', 'banner-home3', 'banner-home4']
 
 const flyers = [
@@ -18,47 +19,15 @@ const flyers = [
 const Home: NextPage = () => {
   return (
     <>
-      <Head>
-        <title>La esperanza - Inicio</title>
-        <meta
-          name='description'
-          content='Disfuta del mejor evento de la ciudad, La esperanza, con una gran variedad de eventos, promociones y mucho más.'
-        />
-
-        <meta
-          property='og:url'
-          content='https://la-esperanza-eventos.vercel.app/'
-        />
-        <meta property='og:type' content='website' />
-        <meta property='og:title' content='Garden Chic' />
-        <meta name='keywords' content='Plantas, Jardeines, Mazetas' />
-        <meta
-          property='og:description'
-          content='Disfuta del mejor evento de la ciudad, La esperanza, con una gran variedad de eventos, promociones y mucho más.'
-        />
-        <meta
-          property='og:image'
-          content='https://la-esperanza-eventos.vercel.app/imgs/banners/banner3.jpg'
-        />
-
-        <meta name='twitter:card' content='summary_large_image' />
-        <meta property='twitter:domain' content='garden-chic-web.vercel.app' />
-        <meta
-          property='twitter:url'
-          content='https://la-esperanza-eventos.vercel.app/'
-        />
-        <meta name='twitter:title' content='La esperanza' />
-        <meta
-          name='twitter:description'
-          content='Disfuta del mejor evento de la ciudad, La esperanza, con una gran variedad de eventos, promociones y mucho más.'
-        />
-        <meta
-          name='twitter:image'
-          content='https://la-esperanza-eventos.vercel.app/imgs/banners/banner3.jpg'
-        />
-        <meta property='og:image:width' content='400' />
-        <meta property='og:image:height' content='300' />
-      </Head>
+      <OpenGraph
+        title='La Esperanza - Incio'
+        description='Disfuta del mejor evento de la ciudad, La esperanza, con una gran variedad de eventos, promociones y mucho más.'
+        ogtitle='La Esperanza'
+        domain='la-esperanza-eventos.vercel.app'
+        img='https://la-esperanza-eventos.vercel.app/imgs/banners/banner3.jpg'
+        keywords='Entradas,Eventos,PLazas'
+        url='https://la-esperanza-eventos.vercel.app/'
+      />
       <Swiper
         loop={true}
         autoplay={{
