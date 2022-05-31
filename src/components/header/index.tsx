@@ -15,7 +15,7 @@ const links = [
 ]
 
 const Header = () => {
-  const { pathname } = useRouter()
+  const { pathname, query } = useRouter()
   const [isOpen, setIsOpen] = useState(false)
   const [navbar, setNavbar] = useState(false)
 
@@ -35,12 +35,14 @@ const Header = () => {
 
   return (
     <header
-      className={`h-[70px] md:h-[100px] w-full fixed top-0  z-10 flex-col justify-center items-center transition-colors duration-500 ease-in-out  ${
-        pathname === '/' || pathname === '/plaza'
+      className={`h-[70px] md:h-[100px] w-full fixed  top-0  z-10 flex-col justify-center items-center transition-colors duration-500 ease-in-out  ${
+        pathname === '/' ||
+        pathname === '/plaza' ||
+        pathname === `/eventos/[slug]`
           ? navbar
             ? 'bg-primary'
             : 'bg-transparent'
-          : 'bg-primary relative '
+          : 'bg-primary  sticky'
       }`}
     >
       {/* menu desktop */}
@@ -110,13 +112,13 @@ const Header = () => {
           </div>
 
           <ul
-            className={`text-white absolute top-16 left-0 w-full p-5 transition-all translate-x-full duration-500 ${
+            className={`text-white fixed top-16  w-full p-5 transition-all -right-full duration-500 ${
               pathname === '/' || pathname === '/plaza'
                 ? navbar
                   ? 'bg-primary'
                   : 'bg-transparent'
                 : 'bg-primary'
-            } ${isOpen && 'transition-all translate-x-0 duration-500'}`}
+            } ${isOpen && 'transition-all -right-0 duration-500'}`}
           >
             {links.map(({ title, path }) => (
               <Link href={path} passHref key={title}>
