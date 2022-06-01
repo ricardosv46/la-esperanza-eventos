@@ -5,6 +5,10 @@ import IconCart from '../../../public/icons/IconCart'
 import IconUser from '../../../public/icons/IconUser'
 import { useRouter } from 'next/router'
 import BtnBurger from '../btnBurger'
+import Modal from '../modal'
+import IconFacebook from '../../../public/icons/IconFacebook'
+import ModalUser from '../modal/modalUser'
+import SidebarCart from '../sidebarCart'
 
 const links = [
   { title: 'Inicio', path: '/' },
@@ -15,9 +19,11 @@ const links = [
 ]
 
 const Header = () => {
-  const { pathname, query } = useRouter()
+  const { pathname } = useRouter()
   const [isOpen, setIsOpen] = useState(false)
   const [navbar, setNavbar] = useState(false)
+  const [showModal, setShowModal] = useState(false)
+  const [isOpenCart, setIsOpenCart] = useState(false)
 
   const changeBackground = () => {
     if (window.scrollY >= 80) {
@@ -76,9 +82,13 @@ const Header = () => {
             </ul>
             <div className='flex gap-10'>
               <button>
-                <IconCart height={25} width={25} />
+                <IconCart
+                  height={25}
+                  width={25}
+                  onClick={() => setIsOpenCart(true)}
+                />
               </button>
-              <button>
+              <button onClick={() => setShowModal(true)}>
                 <IconUser height={25} width={25} />
               </button>
             </div>
@@ -104,7 +114,7 @@ const Header = () => {
               <button>
                 <IconCart fill='#fff' height={25} width={25} />
               </button>
-              <button>
+              <button onClick={() => setShowModal(true)}>
                 <IconUser fill='#fff' height={25} width={25} />
               </button>
             </div>
@@ -113,7 +123,9 @@ const Header = () => {
 
           <ul
             className={`text-white fixed top-16  w-full p-5 transition-all -right-full duration-500 ${
-              pathname === '/' || pathname === '/plaza'
+              pathname === '/' ||
+              pathname === '/plaza' ||
+              pathname === `/eventos/[slug]`
                 ? navbar
                   ? 'bg-primary'
                   : 'bg-transparent'
@@ -134,6 +146,8 @@ const Header = () => {
           </ul>
         </div>
       </nav>
+      <ModalUser isOpen={showModal} onClose={() => setShowModal(false)} />
+      <SidebarCart isOpen={isOpenCart} onClose={() => setIsOpenCart(false)} />
     </header>
   )
 }

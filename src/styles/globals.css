@@ -6,6 +6,10 @@ html {
   scroll-behavior: smooth;
 }
 
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 /* banner de para paginas */
 .banner {
   background-size: cover;
@@ -102,4 +106,13 @@ html {
 }
 .swiper-pagination-bullet-active {
   background-color: #fff !important;
+}
+
+input:focus-within ~ .label,
+input:not(:placeholder-shown) ~ .label {
+  @apply transform  -translate-y-4 duration-300  text-xs;
+}
+
+input:focus-within ~ .label {
+  @apply text-primary;
 }

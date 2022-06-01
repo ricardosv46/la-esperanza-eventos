@@ -3,6 +3,8 @@ import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import Container from '../../components/container'
 import Modal from '../../components/modal'
+import ModalCompra from '../../components/modal/modalCompra'
+import ModalUser from '../../components/modal/modalUser'
 
 const asientos = [
   { text1: 'Tendido 1 ', text2: 'desde S/ 429', color: 'bg-[#EDA366]' },
@@ -12,7 +14,7 @@ const asientos = [
 ]
 
 const Compra = () => {
-  const [showModal, setShowModal] = useState(true)
+  const [showModal, setShowModal] = useState(false)
   return (
     <>
       <div className='w-full  relative '>
@@ -110,7 +112,6 @@ const Compra = () => {
               Fundo La Esperanza
             </p>
             <div className=''>
-              {' '}
               <iframe
                 src='https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d124765.90864455116!2d-76.87008!3d-12.252702!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x6836d2dfddd46029!2sFundo%20La%20Esperanza%20-%20Lur%C3%ADn!5e0!3m2!1sen!2sus!4v1653950659611!5m2!1sen!2sus'
                 width='350'
@@ -121,80 +122,8 @@ const Compra = () => {
           </article>
         </section>
       </Container>
-      <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
-        <section className='bg-white   w-[90%] lg:w-[920px]   rounded-lg relative'>
-          <p className='text-5xl text-primary font-bold text-center'>
-            SELECCIONA TUS ASIENTOS
-          </p>
-          <article className='flex '>
-            <div className='w-7/12'>
-              <p className='text-4xl text-tertiary font-bold '>
-                {' '}
-                Oscar Quinteros 1 Mayo
-              </p>
-              <section className='flex'>
-                <article className='w-7/12'>
-                  <div className='-mb-12'>
-                    <Image
-                      src={`/imgs/compra/coliseo1.png`}
-                      alt='Picture of the author'
-                      width={342}
-                      height={120}
-                      objectFit='scale-down'
-                    />
-                  </div>
-                  <div className='-mb-8'>
-                    <Image
-                      src={`/imgs/compra/coliseo2.png`}
-                      alt='Picture of the author'
-                      width={342}
-                      height={93}
-                      objectFit='scale-down'
-                    />
-                  </div>
-                  <div className='-mb-2'>
-                    <Image
-                      src={`/imgs/compra/coliseo3.png`}
-                      alt='Picture of the author'
-                      width={342}
-                      height={72}
-                      objectFit='scale-down'
-                    />
-                  </div>
-                  <div className='-mb-5'>
-                    <Image
-                      src={`/imgs/compra/coliseo4.png`}
-                      alt='Picture of the author'
-                      width={342}
-                      height={55}
-                      objectFit='scale-down'
-                    />
-                  </div>
-                </article>
-                <article className='w-5/12'>
-                  <p>
-                    Lorem fistrum por la gloria de mi madre esse jarl aliqua
-                    llevame al sircoo. De la pradera ullamco qué dise usteer
-                    está la cosa muy malar.
-                  </p>
-                  <Image
-                    src={`/imgs/compra/coliseo.jpg`}
-                    alt='Picture of the author'
-                    width={130}
-                    height={130}
-                    objectFit='scale-down'
-                  />
-                </article>
-              </section>
-            </div>
-            <div className='w-5/12'>
-              <p className='text-4xl text-primary font-bold '>
-                Asientos Tendido{' '}
-              </p>
-            </div>
-          </article>
-        </section>
-      </Modal>
+
+      <ModalCompra isOpen={showModal} onClose={() => setShowModal(false)} />
     </>
   )
 }
