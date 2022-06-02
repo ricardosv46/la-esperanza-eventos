@@ -2,6 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import IconCart from '../../../public/icons/IconCart'
 import CardItemCarrito from '../cards/cardItemCarrito'
+import { useCarritoContext } from '../../context/cart/CarritoState'
+interface SidebarCartProps {
+  isOpen: boolean
+  onClose: () => void
+}
 
 const variants = {
   open: {
@@ -21,12 +26,17 @@ const fade = {
   closed: { opacity: 0, pointerEvents: 'none' }
 } as const
 
-interface SidebarCartProps {
-  isOpen: boolean
-  onClose: () => void
-}
-
 const SidebarCart = ({ isOpen = false, onClose }: SidebarCartProps) => {
+  const { carrito, eliminarCarrito, actualizarPrecioCarrito } =
+    useCarritoContext()
+  const [total, setTotal] = useState(0)
+  useEffect(() => {
+    const calculoTotal = carrito.reduce(
+      (total, product) => total + product.amount * product.price,
+      0
+    )
+    setTotal(calculoTotal)
+  }, [carrito])
   return (
     <div className='absolute top-0 text-primary-800   h-screen md:left-auto md:bottom-px z-40'>
       <motion.div
@@ -45,30 +55,26 @@ const SidebarCart = ({ isOpen = false, onClose }: SidebarCartProps) => {
         <div className='text-primary-600 w-[340px]  bg-white  min-h-screen border-r '>
           <div className='flex flex-col w-full bg-white  py-6  h-screen'>
             <div className='flex justify-between items-center  px-5'>
-              <h2 className='uppercase font-bold text-primarydark'>
-                Mi carrito
-              </h2>
+              <h2 className='uppercase font-bold text-primary'>Mi carrito</h2>
               <p
-                className='font-bold text-primary cursor-pointer'
+                className='font-bold text-black cursor-pointer'
                 onClick={onClose}
               >
                 Seguir comprando
               </p>
             </div>
 
-            {true ? (
-              <div className='mt-5 h-full scroll overflow-y-scroll px-3'>
+            {carrito.length ? (
+              <div className='mt-5 h-full scroll overflow-y-scroll px-3 pb-24'>
                 <div>
-                  <CardItemCarrito />
-                  <CardItemCarrito />
-                  <CardItemCarrito />
-                  <CardItemCarrito />
-                  <CardItemCarrito />
-                  <CardItemCarrito />
-                  <CardItemCarrito />
-                  <CardItemCarrito />
-                  <CardItemCarrito />
-                  <CardItemCarrito />
+                  {carrito.map((item) => (
+                    <CardItemCarrito
+                      key={item.id}
+                      {...item}
+                      eliminarCarrito={eliminarCarrito}
+                      actualizarPrecioCarrito={actualizarPrecioCarrito}
+                    />
+                  ))}
                 </div>
 
                 <div className='fixed left-0 bg-white bottom-0 w-full p-3'>
@@ -76,7 +82,9 @@ const SidebarCart = ({ isOpen = false, onClose }: SidebarCartProps) => {
                     <p className='font-semibold text-lg text-primary'>
                       Subtotal
                     </p>
-                    <p className='font-bold text-primary'>S/ 1200</p>
+                    <p className='font-bold text-black'>
+                      S/ {total.toFixed(2)}
+                    </p>
                   </div>
                   <div className='flex flex-col gap-y-3 '>
                     <button className='bg-primarydark text-sm text-white font-bold py-2 px-4 rounded w-full uppercase'>

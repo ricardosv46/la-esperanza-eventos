@@ -19,7 +19,7 @@ type Props = {
 
 export interface CarritoContextValue extends CarritoInitialState {
   addCarrito: (payload: CarritoProps) => void
-  actualizarPrecioCarrito: (payload: CarritoProps) => void
+  actualizarPrecioCarrito: (id: number, amount: number) => void
   eliminarCarrito: (payload: number) => void
   CalcularTotal: (payload: number) => void
 }
@@ -35,8 +35,9 @@ const CarritoState = ({ children }: Props) => {
   const addCarrito = async (payload: CarritoProps) => {
     dispatch({ type: 'AddCarrito', payload })
   }
-  const actualizarPrecioCarrito = async (payload: CarritoProps) => {
-    dispatch({ type: 'UpAmount', payload })
+  const actualizarPrecioCarrito = async (id: number, amount: number) => {
+    console.log(id, amount)
+    dispatch({ type: 'UpAmount', id, amount })
   }
   const eliminarCarrito = async (payload: number) => {
     dispatch({ type: 'DeleteCarrito', payload })

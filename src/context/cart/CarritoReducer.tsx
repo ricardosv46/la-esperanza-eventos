@@ -2,7 +2,7 @@ import { CarritoInitialState, CarritoProps } from './CarritoState'
 
 type Action =
   | { type: 'AddCarrito'; payload: CarritoProps }
-  | { type: 'UpAmount'; payload: CarritoProps }
+  | { type: 'UpAmount'; id: number; amount: number }
   | { type: 'DeleteCarrito'; payload: number }
   | { type: 'Total'; payload: number }
 
@@ -24,7 +24,7 @@ const CarritoReducer = (
       return {
         ...state,
         carrito: state.carrito.map((item) =>
-          item.id === action.payload.id ? action.payload : item
+          item.id === action.id ? { ...item, amount: action.amount } : item
         )
       }
     case 'DeleteCarrito':

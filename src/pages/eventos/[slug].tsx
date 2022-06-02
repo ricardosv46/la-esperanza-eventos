@@ -29,6 +29,7 @@ const Compra = () => {
 
   const handleClickModal = () => {
     addCarrito(product)
+    setShowModal(false)
   }
 
   return (

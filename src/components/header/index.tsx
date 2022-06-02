@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import BtnBurger from '../btnBurger'
 import ModalUser from '../modal/modalUser'
 import SidebarCart from '../sidebarCart'
+import { useCarritoContext } from '../../context/cart/CarritoState'
 
 const links = [
   { title: 'Inicio', path: '/' },
@@ -22,6 +23,7 @@ const Header = () => {
   const [navbar, setNavbar] = useState(false)
   const [showModal, setShowModal] = useState(false)
   const [isOpenCart, setIsOpenCart] = useState(false)
+  const { carrito } = useCarritoContext()
 
   const changeBackground = () => {
     if (window.scrollY >= 80) {
@@ -79,8 +81,17 @@ const Header = () => {
               ))}
             </ul>
             <div className='flex gap-10'>
-              <button aria-label='Carrito' onClick={() => setIsOpenCart(true)}>
+              <button
+                aria-label='Carrito'
+                className='relative p-1'
+                onClick={() => setIsOpenCart(true)}
+              >
                 <IconCart height={25} width={25} />
+                {carrito.length > 0 && (
+                  <div className='flex justify-center items-center  absolute top-0 right-0 rounded-full h-4 w-4 bg-white text-primary font-bold text-[9px]'>
+                    {carrito.length}
+                  </div>
+                )}
               </button>
               <button aria-label='Login' onClick={() => setShowModal(true)}>
                 <IconUser height={25} width={25} />
@@ -107,9 +118,19 @@ const Header = () => {
           </Link>
           <div className='flex gap-5'>
             <div className='flex gap-5'>
-              <button aria-label='Carrito' onClick={() => setIsOpenCart(true)}>
+              <button
+                aria-label='Carrito'
+                className='relative p-1'
+                onClick={() => setIsOpenCart(true)}
+              >
                 <IconCart fill='#fff' height={25} width={25} />
+                {carrito.length > 0 && (
+                  <div className='flex justify-center items-center  absolute top-0 right-0 rounded-full h-4 w-4 bg-white text-primary font-bold text-[9px]'>
+                    {carrito.length}
+                  </div>
+                )}
               </button>
+
               <button aria-label='Login' onClick={() => setShowModal(true)}>
                 <IconUser fill='#fff' height={25} width={25} />
               </button>

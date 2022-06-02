@@ -12,10 +12,10 @@ const ModalCompra = ({ isOpen, onClose, onClick }: Props) => {
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      width='w-full md:w-[920px]'
+      width='w-full md:w-[920px] overflow-y-scroll no-scrollbar '
       height='h-full md:h-auto'
     >
-      <section className='bg-white overflow-y-scroll no-scrollbar scroll-smooth rounded-lg py-10 relative'>
+      <section className='bg-white  rounded-lg py-10 relative'>
         <button
           onClick={onClose}
           className='absolute top-2 right-4 text-primary font-bold cursor-pointer'
