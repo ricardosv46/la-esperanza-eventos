@@ -113,12 +113,12 @@ const Header = () => {
           </Link>
           <div className='flex gap-5'>
             <div className='flex gap-5'>
-              <button>
+              <i>
                 <IconCart fill='#fff' height={25} width={25} />
-              </button>
-              <button onClick={() => setShowModal(true)}>
+              </i>
+              <i onClick={() => setShowModal(true)}>
                 <IconUser fill='#fff' height={25} width={25} />
-              </button>
+              </i>
             </div>
             <BtnBurger isOpen={isOpen} setIsOpen={setIsOpen} />
           </div>
