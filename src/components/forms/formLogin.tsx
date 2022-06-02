@@ -12,7 +12,6 @@ const FormLogin = () => {
     <div className='flex flex-col gap-5 '>
       <InputFloat
         type='email'
-        className='lg:w-full'
         label='E-mail'
         name='email'
         value={email}
@@ -20,7 +19,6 @@ const FormLogin = () => {
       />
       <InputFloat
         type='password'
-        className='lg:w-full'
         label='Contraseña'
         name='password'
         value={password}

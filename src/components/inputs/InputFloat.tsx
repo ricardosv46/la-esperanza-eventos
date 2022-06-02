@@ -1,4 +1,3 @@
-import { text } from 'node:stream/consumers'
 import React, { ChangeEvent } from 'react'
 interface IProps {
   label: string
@@ -13,33 +12,29 @@ const InputFloat = ({
   value,
   name,
   onChange,
-  className,
+  className = 'w-full',
   type = 'text'
 }: IProps) => {
   return (
-    <div
-      className={`rounded border-2 border-slate-200  focus-within:border-primary-300 h-12 flex px-3 focus-within:pt-3  items-center  ${
-        value.length > 0 ? 'pt-3' : ''
-      } ${className}`}
-    >
-      <div className='relative w-full'>
+    <>
+      <div className='relative '>
         <input
           type={type}
           id={name}
           name={name}
           value={value}
           onChange={onChange}
+          className={`${className} block px-2.5  pb-2 pt-5 text-sm text-gray-900 font-semibold border border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-primary peer rounded-md`}
           placeholder=' '
-          className='block w-full appearance-none focus:outline-none bg-transparent text-primary-300 font-semibold'
         />
         <label
           htmlFor={name}
-          className='absolute left-0 top-0 -z-1 text-slate-400 text-lg font-semibold label '
+          className='absolute text-sm text-gray-500 font-semibold duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-primary peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75  peer-focus:-translate-y-4'
         >
           {label}
         </label>
       </div>
-    </div>
+    </>
   )
 }
 

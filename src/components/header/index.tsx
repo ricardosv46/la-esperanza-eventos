@@ -79,16 +79,12 @@ const Header = () => {
               ))}
             </ul>
             <div className='flex gap-10'>
-              <i>
-                <IconCart
-                  height={25}
-                  width={25}
-                  onClick={() => setIsOpenCart(true)}
-                />
-              </i>
-              <i onClick={() => setShowModal(true)}>
+              <button aria-label='Carrito' onClick={() => setIsOpenCart(true)}>
+                <IconCart height={25} width={25} />
+              </button>
+              <button aria-label='Login' onClick={() => setShowModal(true)}>
                 <IconUser height={25} width={25} />
-              </i>
+              </button>
             </div>
           </div>
         </div>
@@ -111,12 +107,12 @@ const Header = () => {
           </Link>
           <div className='flex gap-5'>
             <div className='flex gap-5'>
-              <i>
+              <button aria-label='Carrito' onClick={() => setIsOpenCart(true)}>
                 <IconCart fill='#fff' height={25} width={25} />
-              </i>
-              <i onClick={() => setShowModal(true)}>
+              </button>
+              <button aria-label='Login' onClick={() => setShowModal(true)}>
                 <IconUser fill='#fff' height={25} width={25} />
-              </i>
+              </button>
             </div>
             <BtnBurger isOpen={isOpen} setIsOpen={setIsOpen} />
           </div>

@@ -2,24 +2,40 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import Container from '../../components/container'
-import Modal from '../../components/modal'
 import ModalCompra from '../../components/modal/modalCompra'
-import ModalUser from '../../components/modal/modalUser'
+import {
+  CarritoProps,
+  useCarritoContext
+} from '../../context/cart/CarritoState'
+import { eventos } from '../../data/eventos'
 
-const asientos = [
-  { text1: 'Tendido 1 ', text2: 'desde S/ 429', color: 'bg-[#EDA366]' },
-  { text1: 'Tendido 2 ', text2: 'desde S/ 350', color: 'bg-[#F4BA31]' },
-  { text1: 'Tendido 3 ', text2: 'desde S/ 229', color: 'bg-[#C14744]' },
-  { text1: 'Tendido 4 ', text2: 'desde S/ 90', color: 'bg-[#4C000C]' }
-]
+const colors = ['bg-[#EDA366]', ' bg-[#F4BA31]', 'bg-[#C14744]', 'bg-[#4C000C]']
 
 const Compra = () => {
   const [showModal, setShowModal] = useState(false)
+  const [product, setProduct] = useState({} as CarritoProps)
+  const { addCarrito, carrito } = useCarritoContext()
+
+  console.log(carrito)
+
+  const { slug } = useRouter().query
+
+  const evento = eventos.filter((evento) => evento.img === slug)[0]
+
+  const handleModal = (product: CarritoProps) => {
+    setShowModal(true)
+    setProduct(product)
+  }
+
+  const handleClickModal = () => {
+    addCarrito(product)
+  }
+
   return (
     <>
       <div className='w-full  relative '>
         <Image
-          src='/imgs/flyers/flyer1.jpg'
+          src={`/imgs/flyers/${evento?.img}`}
           width={'100%'}
           height={'100%'}
           layout='fill'
@@ -30,7 +46,7 @@ const Compra = () => {
           <main className='lg:px-5 flex flex-col lg:flex-row gap-5'>
             <section className='lg:relative w-full lg:w-[760px] mt-10 lg:h-[506px] gap-5  flex flex-col lg:flex-row'>
               <Image
-                src={`/imgs/flyers/flyer1.jpg`}
+                src={`/imgs/flyers/${evento?.img}`}
                 alt='Picture of the author'
                 width={760}
                 height={506}
@@ -67,23 +83,23 @@ const Compra = () => {
               <article className='my-5'>
                 <h2 className='text-2xl text-primary font-bold '>Entradas</h2>
                 <section className='flex flex-col gap-2'>
-                  {asientos.map(({ text1, text2, color }, index) => (
+                  {evento?.entradas.map((item, index) => (
                     <article
-                      key={index}
+                      key={item.id}
                       className='shadow-md rounded-lg bg-[#f9f9f9] border flex justify-between p-3 items-center '
                     >
                       <div>
                         <p className='text-md text-primary font-semibold leading-5'>
-                          {text1}
+                          {item.title}
                         </p>
                         <p className='text-md text-primary font-semibold leading-5'>
-                          {text2}
+                          desde S/ {item.price}
                         </p>
                       </div>
 
                       <button
-                        onClick={() => setShowModal(true)}
-                        className={`py-3 px-8 rounded-md text-white font-semibold ${color}`}
+                        onClick={() => handleModal(item)}
+                        className={`py-3 px-8 rounded-md text-white font-semibold ${colors[index]} `}
                       >
                         Asientos
                       </button>
@@ -123,7 +139,11 @@ const Compra = () => {
         </section>
       </Container>
 
-      <ModalCompra isOpen={showModal} onClose={() => setShowModal(false)} />
+      <ModalCompra
+        onClick={handleClickModal}
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+      />
     </>
   )
 }

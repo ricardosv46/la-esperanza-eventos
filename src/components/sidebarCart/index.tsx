@@ -72,7 +72,7 @@ const SidebarCart = ({ isOpen = false, onClose }: SidebarCartProps) => {
                 </div>
 
                 <div className='fixed left-0 bg-white bottom-0 w-full p-3'>
-                  <div className='flex justify-between mb-4 mt-8'>
+                  <div className='flex justify-between mb-4 '>
                     <p className='font-semibold text-lg text-primary'>
                       Subtotal
                     </p>

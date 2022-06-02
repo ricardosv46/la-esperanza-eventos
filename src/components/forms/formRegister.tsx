@@ -13,7 +13,6 @@ const FormRegister = () => {
     <div className='flex flex-col gap-5 '>
       <InputFloat
         type='text'
-        className='lg:w-full'
         label='Nombre'
         name='nombre'
         value={nombre}
@@ -21,7 +20,6 @@ const FormRegister = () => {
       />
       <InputFloat
         type='text'
-        className='lg:w-full'
         label='Apellido'
         name='apellido'
         value={apellido}
@@ -29,7 +27,6 @@ const FormRegister = () => {
       />
       <InputFloat
         type='email'
-        className='lg:w-full'
         label='E-mail'
         name='email'
         value={email}
@@ -37,7 +34,6 @@ const FormRegister = () => {
       />
       <InputFloat
         type='password'
-        className='lg:w-full'
         label='Contraseña'
         name='password'
         value={password}

@@ -69,7 +69,7 @@ const Footer = () => {
         className='flex justify-between text-white text-xs font-semibold py-2'
       >
         <p>© All rights reserved</p>
-        <p> Diseñado por: Softaki Software Solutions S.A.C</p>
+        <p>Diseñado por IDEAS Avenue</p>
       </Container>
     </footer>
   )

@@ -4,9 +4,10 @@ import Modal from '.'
 interface Props {
   onClose: () => void
   isOpen: boolean
+  onClick: () => void
 }
 
-const ModalCompra = ({ isOpen, onClose }: Props) => {
+const ModalCompra = ({ isOpen, onClose, onClick }: Props) => {
   return (
     <Modal
       isOpen={isOpen}
@@ -101,7 +102,10 @@ const ModalCompra = ({ isOpen, onClose }: Props) => {
                 Fila 3: 53 asientos
               </p>
             </div>
-            <button className='bg-tertiary px-5 py-2 text-white rounded-lg mt-10 lg:mt-0'>
+            <button
+              onClick={onClick}
+              className='bg-tertiary px-5 py-2 text-white rounded-lg mt-10 lg:mt-0'
+            >
               PAGAR AHORA: S/.288.00
             </button>
           </div>
