@@ -77,6 +77,12 @@ html {
   height: auto;
   background-attachment: fixed;
 }
+@media (max-width: 768px) {
+  .banner-parallax {
+    background-position: center;
+    height: 100%;
+  }
+}
 
 .banner-parallax::before {
   background-color: transparent;

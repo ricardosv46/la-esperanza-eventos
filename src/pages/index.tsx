@@ -6,7 +6,6 @@ import 'swiper/css/effect-fade'
 import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper'
 import Container from '../components/container'
 import Image from 'next/image'
-import Head from 'next/head'
 import OpenGraph from '../components/openGraph'
 const banners = ['banner-home1', 'banner-home2', 'banner-home3', 'banner-home4']
 
@@ -60,7 +59,7 @@ const Home: NextPage = () => {
         <h1 className='text-5xl text-primary font-bold text-center pt-16'>
           LA PLAZA
         </h1>
-        <p className='text-center text-[#505050] font-semibold text-md p-16'>
+        <p className='text-center px-0 text-[#505050] font-semibold text-md p-16'>
           La Plaza de Toros La Esperanza fue inaugurada en el año 2009, siendo
           un ruedo sin graderías, el punto de encuentro y lugar donde se incubó
           la nueva generación de aficionados prácticos, llenando aquel año cada
@@ -173,8 +172,8 @@ const Home: NextPage = () => {
         </div>
       </Container>
       <Container bgColor='bg-primarydark'>
-        <div className='flex  banner banner-parallax'>
-          <div className='flex'>
+        <div className='flex flex-col md:flex-row  banner banner-parallax '>
+          <div className='flex  sm:bg-transparent'>
             <Image
               className='cursor-pointer relative'
               src={`/imgs/home/toro.png`}
@@ -184,11 +183,11 @@ const Home: NextPage = () => {
             />
           </div>
           <div className=' w-full flex-1 flex items-center  bg-primarydark'>
-            <div className='flex flex-col items-end gap-10'>
-              <p className='text-5xl text-secondary font-bold lg:px-5'>
+            <div className='flex flex-col md:items-end gap-10'>
+              <p className='text-3xl md:text-5xl text-secondary font-bold lg:px-5'>
                 VENTA DE ENTRADAS
               </p>
-              <p className='text-white font-semibold text-md lg:px-5 text-right'>
+              <p className='text-white font-semibold text-md lg:px-5 md:text-right'>
                 Las fiestas de toros es considerada un arte que sólo los
                 entendidos pueden apreciar. A partir de las reflexiones del
                 filósofo Francis Wolff, se emprende un recorrido histórico y

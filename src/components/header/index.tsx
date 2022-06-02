@@ -41,7 +41,7 @@ const Header = () => {
 
   return (
     <header
-      className={`h-[70px] md:h-[100px] w-full fixed  top-0  z-10 flex-col justify-center items-center transition-colors duration-500 ease-in-out  ${
+      className={`h-[70px] md:h-[100px] w-full fixed  top-0  z-10 flex-col justify-center items-center transition-colors duration-500 ease-in-out $ ${
         pathname === '/' ||
         pathname === '/plaza' ||
         pathname === `/eventos/[slug]`
@@ -81,22 +81,24 @@ const Header = () => {
               ))}
             </ul>
             <div className='flex gap-10'>
-              <button>
+              <i>
                 <IconCart
                   height={25}
                   width={25}
                   onClick={() => setIsOpenCart(true)}
                 />
-              </button>
-              <button onClick={() => setShowModal(true)}>
+              </i>
+              <i onClick={() => setShowModal(true)}>
                 <IconUser height={25} width={25} />
-              </button>
+              </i>
             </div>
           </div>
         </div>
       </nav>
       {/* menu mobile */}
-      <nav className='md:hidden mx-auto my-0 w-[90%] xl:w-[1280px] flex justify-between items-center h-full'>
+      <nav
+        className={`md:hidden mx-auto my-0 w-[90%] xl:w-[1280px] flex justify-between items-center h-full `}
+      >
         <div className='flex w-full justify-between items-center  '>
           <Link href='/' passHref>
             <div className='flex'>
@@ -122,7 +124,7 @@ const Header = () => {
           </div>
 
           <ul
-            className={`text-white fixed top-16  w-full p-5 transition-all -right-full duration-500 ${
+            className={`text-white fixed top-16  w-full p-5 transition-all -right-full duration-500 backdrop-blur-lg ${
               pathname === '/' ||
               pathname === '/plaza' ||
               pathname === `/eventos/[slug]`
@@ -135,7 +137,7 @@ const Header = () => {
             {links.map(({ title, path }) => (
               <Link href={path} passHref key={title}>
                 <li
-                  className={`text-center cursor-pointer  py-2 border-b-2 border-transparent  ease-out duration-300 transition-all hover:text-yellow-500 ${
+                  className={`text-center cursor-pointer font-semibold  py-2 border-b-2 border-transparent  ease-out duration-300 transition-all hover:text-yellow-500 ${
                     pathname === path ? 'text-secondary ' : ''
                   }`}
                 >
