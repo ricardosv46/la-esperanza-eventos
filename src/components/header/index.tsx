@@ -5,8 +5,6 @@ import IconCart from '../../../public/icons/IconCart'
 import IconUser from '../../../public/icons/IconUser'
 import { useRouter } from 'next/router'
 import BtnBurger from '../btnBurger'
-import Modal from '../modal'
-import IconFacebook from '../../../public/icons/IconFacebook'
 import ModalUser from '../modal/modalUser'
 import SidebarCart from '../sidebarCart'
 

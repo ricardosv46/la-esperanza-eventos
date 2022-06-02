@@ -29,19 +29,19 @@ html {
 
 /* banner de para home */
 .banner-home1 {
-  background-image: url('/imgs/banners/banner1.jpg');
+  background-image: url('/imgs/banners/banner1.webp');
 }
 .banner-home2 {
-  background-image: url('/imgs/banners/banner2.jpg');
+  background-image: url('/imgs/banners/banner2.webp');
 }
 .banner-home3 {
-  background-image: url('/imgs/banners/banner3.jpg');
+  background-image: url('/imgs/banners/banner3.webp');
 }
 .banner-home4 {
-  background-image: url('/imgs/banners/banner4.jpg');
+  background-image: url('/imgs/banners/banner4.webp');
 }
 .banner-plaza {
-  background-image: url('/imgs/banners/banner1.jpg');
+  background-image: url('/imgs/banners/banner1.webp');
   height: 400px;
 }
 .banner-home5 {
