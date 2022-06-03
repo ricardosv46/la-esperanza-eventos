@@ -21,7 +21,8 @@
 
 .activeline2__bars-menu {
   opacity: 0;
-  margin-left: -30px;
+  padding: 0 7.5px;
+  transform: scale(0.1);
 }
 
 .activeline3__bars-menu {

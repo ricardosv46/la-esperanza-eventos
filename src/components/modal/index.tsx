@@ -4,8 +4,7 @@ interface Props {
   children: React.ReactNode
   isOpen: boolean
   onClose: () => void
-  width?: string
-  height?: string
+  className?: string
 }
 
 const fade = {
@@ -26,21 +25,21 @@ const variants = {
   }
 }
 
-const Modal = ({ children, isOpen = false, onClose, width, height }: Props) => {
+const Modal = ({ children, isOpen = false, onClose, className }: Props) => {
   return (
     <motion.div
       variants={fade}
       onClick={onClose}
       initial={{ opacity: 0 }}
       animate={isOpen ? 'open' : 'closed'}
-      className='fixed h-screen top-0   w-full flex justify-center items-center bg-black bg-opacity-50 z-50'
+      className='fixed h-full top-0 w-full flex justify-center items-center bg-black bg-opacity-50 z-50'
     >
       <motion.div
         variants={variants}
         initial={{ opacity: 0, scale: 0.9 }}
         animate={isOpen ? 'open' : 'closed'}
         onClick={(e) => e.stopPropagation()}
-        className={`${width} ${height}`}
+        className={`${className} bg-primarydark`}
       >
         {children}
       </motion.div>

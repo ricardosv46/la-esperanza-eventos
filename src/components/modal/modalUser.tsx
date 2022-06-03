@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import React, { useState } from 'react'
-import { motion } from 'framer-motion'
 import FormLogin from '../forms/formLogin'
 import FormRegister from '../forms/formRegister'
 import Modal from '.'
@@ -68,44 +67,46 @@ const ModalUser = ({ isOpen, onClose }: Props) => {
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      width='w-[95%] lg:w-[750px]'
-      height='md:h-[500px]'
+      className='w-[95%] md:w-[800px] md:h-[540px] flex rounded-xl shadow-lg overflow-hidden'
     >
-      <div className='py-2 md:py-0 text-left overflow-hidden shadow-xl rounded-2xl bg-white'>
-        <div className='flex w-full '>
-          <div className='flex-1 hidden md:flex items-center justify-center '>
-            <Image
-              src='/imgs/home/torero.jpg'
-              alt='Torero'
-              width={500}
-              height={800}
-              objectFit='cover'
-            />
-          </div>
-          <div className='flex-1 p-6'>
-            <h2 className='text-blue font-bold text-2xl text-primary'>
-              {textoBtnCambiarForm()[2]}
-            </h2>
+      <div className='w-full hidden md:block lg:w-1/2'>
+        <Image
+          src='/imgs/home/torero.jpg'
+          alt='Torero'
+          width={500}
+          height={800}
+          objectPosition='center'
+          objectFit='cover'
+        />
+      </div>
+      <div className=' w-full lg:w-1/2 p-6 bg-white'>
+        <div className='flex justify-center mb-5'>
+          <Image
+            objectFit='scale-down'
+            className='cursor-pointer filter-logo'
+            src='/imgs/logos/logo.png'
+            width={200}
+            height={80}
+            alt='logo'
+          />
+        </div>
 
-            <hr className='my-8 bg-blue-500 ' />
-            {asignarFormulario()}
-            <div className='mt-5 flex justify-end'>
-              <button className=' bg-primary text-white cursor-pointer px-8 py-3 rounded-full '>
-                {textoBtnCambiarForm()[3]}
-              </button>
-            </div>
-            <div className='mt-3'>
-              <p className='text-base text-gray-400'>
-                {textoBtnCambiarForm()[0]}
-                <span
-                  className='text-primary cursor-pointer'
-                  onClick={cambiarFormulario}
-                >
-                  {textoBtnCambiarForm()[1]}
-                </span>{' '}
-              </p>
-            </div>
-          </div>
+        {asignarFormulario()}
+        <div className='mt-7 flex justify-end'>
+          <button className=' bg-primary text-white cursor-pointer w-full  py-3 rounded-lg'>
+            {textoBtnCambiarForm()[3]}
+          </button>
+        </div>
+        <div className='mt-7'>
+          <p className='text-base text-gray-400'>
+            {textoBtnCambiarForm()[0]}
+            <span
+              className='text-primary cursor-pointer'
+              onClick={cambiarFormulario}
+            >
+              {textoBtnCambiarForm()[1]}
+            </span>{' '}
+          </p>
         </div>
       </div>
     </Modal>

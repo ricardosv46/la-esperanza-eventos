@@ -12,8 +12,7 @@ const ModalCompra = ({ isOpen, onClose, onClick }: Props) => {
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      width='w-full md:w-[920px] overflow-y-scroll no-scrollbar '
-      height='h-full md:h-auto'
+      className='h-full md:h-auto w-full md:w-[920px] overflow-y-scroll no-scrollbar '
     >
       <section className='bg-white  rounded-lg py-10 relative'>
         <button

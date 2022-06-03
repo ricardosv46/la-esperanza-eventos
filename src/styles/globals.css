@@ -107,6 +107,11 @@ html {
   scroll-behavior: smooth;
 }
 
+.filter-logo {
+  filter: brightness(0) saturate(100%) invert(21%) sepia(100%) saturate(7117%)
+    hue-rotate(338deg) brightness(32%) contrast(111%);
+}
+
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
