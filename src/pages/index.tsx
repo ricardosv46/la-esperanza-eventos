@@ -59,7 +59,7 @@ const Home: NextPage = () => {
         <h1 className='text-5xl text-primary font-bold text-center pt-16'>
           LA PLAZA
         </h1>
-        <p className='text-center px-0 text-[#505050] font-semibold text-md p-16'>
+        <p className='text-center px-0 text-[#505050]  font-bold p-16 '>
           La Plaza de Toros La Esperanza fue inaugurada en el año 2009, siendo
           un ruedo sin graderías, el punto de encuentro y lugar donde se incubó
           la nueva generación de aficionados prácticos, llenando aquel año cada
@@ -187,14 +187,14 @@ const Home: NextPage = () => {
               <p className='text-3xl md:text-5xl text-secondary font-bold lg:px-5'>
                 VENTA DE ENTRADAS
               </p>
-              <p className='text-white font-semibold text-md lg:px-5 md:text-right'>
+              <p className='text-white font-semibold text-md lg:px-5 md:text-right '>
                 Las fiestas de toros es considerada un arte que sólo los
                 entendidos pueden apreciar. A partir de las reflexiones del
                 filósofo Francis Wolff, se emprende un recorrido histórico y
                 antropológico para mostrar cuán diversas son las tradiciones
                 taurinas en España, México y Perú.
               </p>
-              <button className='bg-tertiary px-8 py-3 rounded-md text-white font-semibold cursor-pointer'>
+              <button className='bg-tertiary px-8 py-3 rounded-md text-white font-semibold cursor-pointer '>
                 Comprar aquí
               </button>
             </div>

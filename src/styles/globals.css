@@ -2,6 +2,107 @@
 @tailwind components;
 @tailwind utilities;
 
+/* FrankRuhlLibre */
+
+@font-face {
+  font-family: FrankRuhl;
+  font-weight: 900;
+  font-display: swap;
+  src: url(/fonts/Frank_Ruhl_Libre/FrankRuhlLibre-Black.ttf);
+}
+
+@font-face {
+  font-family: FrankRuhl;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/fonts/Frank_Ruhl_Libre/FrankRuhlLibre-Bold.ttf);
+}
+
+@font-face {
+  font-family: FrankRuhl;
+  font-weight: 300;
+  font-display: swap;
+  src: url(/fonts/Frank_Ruhl_Libre/FrankRuhlLibre-Light.ttf);
+}
+
+@font-face {
+  font-family: FrankRuhl;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/fonts/Frank_Ruhl_Libre/FrankRuhlLibre-Medium.ttf);
+}
+
+@font-face {
+  font-family: FrankRuhl;
+  font-display: swap;
+  src: url(/fonts/Frank_Ruhl_Libre/FrankRuhlLibre-Regular.ttf);
+}
+
+/* NotoSerifDisplay */
+
+@font-face {
+  font-family: NotoSerif;
+  font-weight: 900;
+  font-display: swap;
+  src: url(/fonts/Noto_Serif_Display/NotoSerifDisplay-Black.ttf) format('ttf');
+}
+@font-face {
+  font-family: NotoSerif;
+  font-weight: 800;
+  font-display: swap;
+  src: url(/fonts/Noto_Serif_Display/NotoSerifDisplay-ExtraBold.ttf)
+    format('ttf');
+}
+@font-face {
+  font-family: NotoSerif;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/fonts/Noto_Serif_Display/NotoSerifDisplay-Bold.ttf) format('ttf');
+}
+
+@font-face {
+  font-family: NotoSerif;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/fonts/Noto_Serif_Display/NotoSerifDisplay-SemiBold.ttf)
+    format('ttf');
+}
+
+@font-face {
+  font-family: NotoSerif;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/fonts/Noto_Serif_Display/NotoSerifDisplay-Medium.ttf) format('ttf');
+}
+@font-face {
+  font-family: NotoSerif;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/Noto_Serif_Display/NotoSerifDisplay-Regular.ttf) format('ttf');
+}
+
+@font-face {
+  font-family: NotoSerif;
+  font-weight: 300;
+  font-display: swap;
+  src: url(/fonts/Noto_Serif_Display/NotoSerifDisplay-Light.ttf) format('ttf');
+}
+
+@font-face {
+  font-family: NotoSerif;
+  font-weight: 200;
+  font-display: swap;
+  src: url(/fonts/Noto_Serif_Display/NotoSerifDisplay-ExtraLight.ttf)
+    format('ttf');
+}
+
+@font-face {
+  font-family: NotoSerif;
+  font-weight: 100;
+  font-display: swap;
+  src: url(/fonts/Noto_Serif_Display/NotoSerifDisplay-Thin.ttf) format('ttf');
+}
+
 html {
   scroll-behavior: smooth;
 }
