@@ -13,7 +13,6 @@ const links = [
   { title: 'Inicio', path: '/' },
   { title: 'La Plaza', path: '/plaza' },
   { title: 'Eventos', path: '/eventos' },
-  { title: 'Noticias', path: '/noticias' },
   { title: 'Contacto', path: '#contacto' }
 ]
 
