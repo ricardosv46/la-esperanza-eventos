@@ -17,6 +17,53 @@ const Eventos = () => {
         keywords='Entradas,Eventos,PLazas'
         url='https://la-esperanza-eventos.vercel.app/eventos'
       />
+      <div className="flex flex-col md:flex-row justify-between max-w-[1200px] gap-x-5 items-center  mx-auto px-5 mt-10">
+        <div className="">
+          <h1 className='text-3xl font-bold'>Compra tu abono para toda la temporada</h1>
+          <p className='text-base w-full max-w-[530px] mt-5 text-justify'>La compra de abonos está ya <strong>disponible</strong> exclusivamente a través de nuestra plataforma online. Compra ahora tus abonos con un 20%
+            de descuento y disfruta de la mejor fiesta taurina de la temporada.</p>
+        </div>
+        <div className="mt-5">
+          <Image
+            src='/imgs/eventos/flyers/abonado_descuento.png'
+            alt='descuento'
+            width={200}
+            height={100}
+          />
+        </div>
+      </div>
+
+      <div className="flex justify-center max-w-[1200px]  mx-auto px-5 mt-10">
+        <div className="mt-5 relative hidden sm:block">
+          <Image
+            src='/imgs/eventos/flyers/flyer-web-esperanza.jpg'
+            alt='descuento'
+            width={1000}
+            height={250}
+          />
+          <div className="absolute w-full  bottom-5 md:bottom-10  z-10">
+            <div className="w-full flex flex-col gap-1 md:gap-y-2 items-center">
+              <h2 className='text-xs sm:text-3xl md:text-4xl text-yellow-500 font-semibold'>FERIA DE JULIO EN LA ESPERANZA</h2>
+              <p className='text-white'>Separa tu abono y disfruta de la mejor feria del año. </p>
+            </div>
+
+          </div>
+        </div>
+
+        <div className="mt-5 relative sm:hidden">
+          <Image
+            src='/imgs/eventos/flyers/flyer-web-esperanza.jpg'
+            alt='descuento'
+            width={400}
+            height={400}
+          />
+          <div className="absolute w-full px-10 bottom-10 left-1/2 -translate-x-1/2 z-10 text-center">
+            <h2 className='text-2xl text-yellow-500'>FERIA DE JULIO EN LA ESPERANZA</h2>
+            <p className='text-white'>Separa tu abono y disfruta de la mejor feria del año. </p>
+          </div>
+
+        </div>
+      </div>
       <div className='grid px-5 pb-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-[1200px]  mx-auto text-center text-[#505050] mt-20'>
         {eventos.map(({ name, img }) => (
           <article
