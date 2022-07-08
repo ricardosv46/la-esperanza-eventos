@@ -42,6 +42,7 @@ const Compra = () => {
           layout='fill'
           objectFit='cover'
           className='-z-10 '
+          alt='flyer'
         />
         <Container bgColor='backdrop-blur-lg' className=' pt-36 pb-5'>
           <main className='lg:px-5 flex flex-col lg:flex-row gap-5'>

@@ -1,8 +1,13 @@
+import { useRouter } from 'next/router'
 import React from 'react'
 import useForm from '../../hooks/useForm'
 import InputFloat from '../inputs/InputFloat'
 
-const FormLogin = () => {
+interface IProps {
+  onClose: () => void
+}
+const FormLogin = ({ onClose }: IProps) => {
+  const navigate = useRouter()
   const { email, password, onChange } = useForm({
     email: '',
     password: ''
@@ -24,6 +29,13 @@ const FormLogin = () => {
         value={password}
         onChange={onChange}
       />
+      <div className='mt-7 flex justify-end'>
+        <button className=' bg-primary text-white cursor-pointer w-full  py-3 rounded-lg'
+          onClick={() => { navigate.push(`/mi-cuenta`); onClose() }}
+        >
+          Iniciar sesión
+        </button>
+      </div>
     </div>
   )
 }

@@ -39,6 +39,11 @@ const FormRegister = () => {
         value={password}
         onChange={onChange}
       />
+      <div className='mt-7 flex justify-end'>
+        <button className=' bg-primary text-white cursor-pointer w-full  py-3 rounded-lg'>
+          Registrarse
+        </button>
+      </div>
     </div>
   )
 }

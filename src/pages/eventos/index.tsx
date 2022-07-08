@@ -41,7 +41,7 @@ const Eventos = () => {
             width={1000}
             height={250}
           />
-          <div className="absolute w-full  bottom-5 md:bottom-10  z-10">
+          <div className="absolute w-full  bottom-5 md:bottom-10 ">
             <div className="w-full flex flex-col gap-1 md:gap-y-2 items-center">
               <h2 className='text-xs sm:text-3xl md:text-4xl text-yellow-500 font-semibold'>FERIA DE JULIO EN LA ESPERANZA</h2>
               <p className='text-white'>Separa tu abono y disfruta de la mejor feria del año. </p>
@@ -57,13 +57,25 @@ const Eventos = () => {
             width={400}
             height={400}
           />
-          <div className="absolute w-full px-10 bottom-10 left-1/2 -translate-x-1/2 z-10 text-center">
+          <div className="absolute w-full px-10 bottom-10 left-1/2 -translate-x-1/2  text-center">
             <h2 className='text-2xl text-yellow-500'>FERIA DE JULIO EN LA ESPERANZA</h2>
             <p className='text-white'>Separa tu abono y disfruta de la mejor feria del año. </p>
           </div>
 
         </div>
+
       </div>
+      <div className="flex justify-center">
+        <button
+          onClick={() => navigate.push(`/eventos/abono`)}
+          className='bg-[#a02e2b] text-white pb-2 pt-1 mt-5  px-4 hover:opacity-75 transition-all duration-500 rounded-md'
+        >
+          Comprar tu abono
+        </button>
+      </div>
+
+
+
       <div className='grid px-5 pb-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-[1200px]  mx-auto text-center text-[#505050] mt-20'>
         {eventos.map(({ name, img }) => (
           <article
