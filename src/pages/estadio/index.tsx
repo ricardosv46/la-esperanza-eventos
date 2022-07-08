@@ -67,7 +67,10 @@ const Estadio = () => {
                 <TransformComponent>
                   <div className='flex flex-col gap-3 justify-center items-center '>
                     {Object.keys(filas).map((fila) => (
-                      <div className='flex justify-center items-center gap-1'>
+                      <div
+                        key={fila}
+                        className='flex justify-center items-center gap-1'
+                      >
                         {filas[`${fila.toString()}`].map(
                           (columna: any, index: any) => {
                             if (index < columna) {

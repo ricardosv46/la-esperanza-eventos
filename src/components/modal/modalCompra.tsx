@@ -135,7 +135,10 @@ const ModalCompra = ({ isOpen, onClose, onClick }: Props) => {
                     >
                       <div className='flex flex-col gap-3 justify-center items-center '>
                         {Object.keys(filas).map((fila) => (
-                          <div className='flex justify-center items-center gap-1'>
+                          <div
+                            key={fila}
+                            className='flex justify-center items-center gap-1'
+                          >
                             {filas[`${fila.toString()}`].map(
                               (columna: any, index: any) => {
                                 if (index < columna) {
@@ -147,12 +150,10 @@ const ModalCompra = ({ isOpen, onClose, onClick }: Props) => {
                                       onClick={() =>
                                         selectId(`${fila}${columna.toString()}`)
                                       }
-                                      className='rounded-full h-2.5 w-2.5 bg-yellow-500 flex justify-center items-center '
+                                      className='rounded-full h-2.5 w-2.5 bg-yellow-500 flex justify-center items-center text-[3px] font-mono text-center '
                                     >
-                                      <p className='text-[3px] font-mono'>
-                                        {fila}
-                                        {columna}
-                                      </p>
+                                      {fila}
+                                      {columna}
                                     </button>
                                   )
                                 } else return null
@@ -203,7 +204,9 @@ const ModalCompra = ({ isOpen, onClose, onClick }: Props) => {
             <p className='text-primary font-bold'>Seleccionados:</p>
             <div className='flex flex-wrap w-60 gap-2 leading-none'>
               {ids.map((item) => (
-                <p className='text-primary font-bold'>{item}</p>
+                <p key={item} className='text-primary font-bold'>
+                  {item}
+                </p>
               ))}
             </div>
           </div>
