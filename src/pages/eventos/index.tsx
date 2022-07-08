@@ -67,7 +67,7 @@ const Eventos = () => {
       </div>
       <div className="flex justify-center">
         <button
-          onClick={() => navigate.push(`/eventos/abono`)}
+          onClick={() => navigate.push(`/abonados`)}
           className='bg-[#a02e2b] text-white pb-2 pt-1 mt-5  px-4 hover:opacity-75 transition-all duration-500 rounded-md'
         >
           Comprar tu abono
