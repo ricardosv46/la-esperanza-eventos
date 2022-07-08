@@ -13,7 +13,7 @@ const Footer = () => {
   return (
     <footer id='contacto'>
       <Container
-        bgColor='bg-primarydark'
+        bgColor='bg-black'
         className='flex flex-col md:flex-row text-white py-10 gap-5 md:gap-0'
       >
         <div className='flex-1 flex flex-col justify-center items-start gap-5'>

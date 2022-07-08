@@ -115,7 +115,7 @@ const Header = () => {
           </Link>
           <div className='flex gap-5'>
             <div className='flex gap-5'>
-              <button
+              {/*               <button
                 aria-label='Carrito'
                 className='relative p-1'
                 onClick={() => setIsOpenCart(true)}
@@ -126,7 +126,7 @@ const Header = () => {
                     {carrito.length}
                   </div>
                 )}
-              </button>
+              </button> */}
 
               <button aria-label='Login' onClick={() => setShowModal(true)}>
                 <IconUser fill='#fff' height={25} width={25} />
