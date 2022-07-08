@@ -40,15 +40,14 @@ const Header = () => {
 
   return (
     <header
-      className={`h-[70px] md:h-[100px] w-full fixed  top-0  z-10 flex-col justify-center items-center transition-colors duration-500 ease-in-out $ ${
-        pathname === '/' ||
+      className={`h-[70px] md:h-[100px] w-full fixed  top-0  z-10 flex-col justify-center items-center transition-colors duration-500 ease-in-out $ ${pathname === '/' ||
         pathname === '/plaza' ||
         pathname === `/eventos/[slug]`
-          ? navbar
-            ? 'bg-primary'
-            : 'bg-transparent'
-          : 'bg-primary  sticky'
-      }`}
+        ? navbar
+          ? 'bg-primary'
+          : 'bg-transparent'
+        : 'bg-primary  sticky'
+        }`}
     >
       {/* menu desktop */}
       <nav className='hidden mx-auto my-0 w-[90%] xl:w-[1200px] flex-col h-full  md:flex items-center justify-center'>
@@ -70,9 +69,8 @@ const Header = () => {
               {links.map(({ title, path }) => (
                 <Link href={path} passHref key={title}>
                   <li
-                    className={`cursor-pointer  py-2 border-b-2 border-transparent hover:border-yellow-500 ease-out duration-300 transition-all hover:text-yellow-500 ${
-                      pathname === path ? 'text-secondary border-secondary' : ''
-                    }`}
+                    className={`cursor-pointer  py-2 border-b-2 border-transparent hover:border-yellow-500 ease-out duration-300 transition-all hover:text-yellow-500 ${pathname === path ? 'text-secondary border-secondary' : ''
+                      }`}
                   >
                     {title}
                   </li>
@@ -80,7 +78,7 @@ const Header = () => {
               ))}
             </ul>
             <div className='flex gap-10'>
-              <button
+              {/* <button
                 aria-label='Carrito'
                 className='relative p-1'
                 onClick={() => setIsOpenCart(true)}
@@ -91,7 +89,7 @@ const Header = () => {
                     {carrito.length}
                   </div>
                 )}
-              </button>
+              </button> */}
               <button aria-label='Login' onClick={() => setShowModal(true)}>
                 <IconUser height={25} width={25} />
               </button>
@@ -138,22 +136,20 @@ const Header = () => {
           </div>
 
           <ul
-            className={`text-white fixed top-16  w-full p-5 transition-all -right-full duration-500 backdrop-blur-lg ${
-              pathname === '/' ||
+            className={`text-white fixed top-16  w-full p-5 transition-all -right-full duration-500 backdrop-blur-lg ${pathname === '/' ||
               pathname === '/plaza' ||
               pathname === `/eventos/[slug]`
-                ? navbar
-                  ? 'bg-primary'
-                  : 'bg-transparent'
-                : 'bg-primary'
-            } ${isOpen && 'transition-all -right-0 duration-500'}`}
+              ? navbar
+                ? 'bg-primary'
+                : 'bg-transparent'
+              : 'bg-primary'
+              } ${isOpen && 'transition-all -right-0 duration-500'}`}
           >
             {links.map(({ title, path }) => (
               <Link href={path} passHref key={title}>
                 <li
-                  className={`text-center cursor-pointer font-semibold  py-2 border-b-2 border-transparent  ease-out duration-300 transition-all hover:text-yellow-500 ${
-                    pathname === path ? 'text-secondary ' : ''
-                  }`}
+                  className={`text-center cursor-pointer font-semibold  py-2 border-b-2 border-transparent  ease-out duration-300 transition-all hover:text-yellow-500 ${pathname === path ? 'text-secondary ' : ''
+                    }`}
                 >
                   {title}
                 </li>

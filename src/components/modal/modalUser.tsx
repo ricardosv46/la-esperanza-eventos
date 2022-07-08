@@ -16,7 +16,7 @@ const ModalUser = ({ isOpen, onClose }: Props) => {
     let component = null
 
     if (tipoForm === 'ingresar') {
-      component = <FormLogin />
+      component = <FormLogin onClose={onClose} />
     } else if (tipoForm === 'registrate') {
       component = <FormRegister />
     }
@@ -92,11 +92,7 @@ const ModalUser = ({ isOpen, onClose }: Props) => {
         </div>
 
         {asignarFormulario()}
-        <div className='mt-7 flex justify-end'>
-          <button className=' bg-primary text-white cursor-pointer w-full  py-3 rounded-lg'>
-            {textoBtnCambiarForm()[3]}
-          </button>
-        </div>
+
         <div className='mt-7'>
           <p className='text-base text-gray-400'>
             {textoBtnCambiarForm()[0]}
