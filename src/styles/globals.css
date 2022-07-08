@@ -116,6 +116,16 @@ html {
   display: none;
 }
 
+.custom-scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background-color: #4c000c;
+  border-radius: 20px;
+}
+
 /* banner de para paginas */
 .banner {
   background-size: cover;

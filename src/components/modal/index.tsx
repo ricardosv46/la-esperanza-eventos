@@ -39,7 +39,7 @@ const Modal = ({ children, isOpen = false, onClose, className }: Props) => {
         initial={{ opacity: 0, scale: 0.9 }}
         animate={isOpen ? 'open' : 'closed'}
         onClick={(e) => e.stopPropagation()}
-        className={`${className} bg-primarydark`}
+        className={`${className} `}
       >
         {children}
       </motion.div>
