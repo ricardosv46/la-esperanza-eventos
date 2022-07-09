@@ -8,6 +8,7 @@ interface Props {
   onClose: () => void
   isOpen: boolean
   onClick: () => void
+  tipomodal: ''
 }
 
 const ModalCompra = ({ isOpen, onClose, onClick }: Props) => {

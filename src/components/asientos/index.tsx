@@ -44,12 +44,13 @@ const Asientos = ({
     return tfilas
   }, [])
 
-  const selectId = (item: IColums) => {
-    if (seleccionados.includes(item)) {
-      const newids = seleccionados.filter((item) => item !== item)
+  const selectId = (itemselected: IColums) => {
+    const validar = seleccionados.some((item) => item.id === itemselected.id)
+    if (validar) {
+      const newids = seleccionados.filter((item) => item.id !== itemselected.id)
       setSeleccionados(newids)
     } else {
-      setSeleccionados([...seleccionados, item])
+      setSeleccionados([...seleccionados, itemselected])
     }
   }
 
