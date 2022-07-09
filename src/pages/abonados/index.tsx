@@ -4,6 +4,7 @@ import IconCalendar from '../../../public/icons/IconCalendar'
 import IconHour from '../../../public/icons/IconHour'
 import Container from '../../components/container'
 import ModalCompra from '../../components/modal/modalCompra'
+import ModalTenido3B from '../../components/modal/modalTenido3B'
 import {
   CarritoProps,
   useCarritoContext
@@ -13,7 +14,7 @@ import { eventos } from '../../data/eventos'
 const colors = ['bg-[#EDA366]', ' bg-[#F4BA31]', 'bg-[#C14744]', 'bg-[#4C000C]']
 
 const Abonados = () => {
-  const [showModal, setShowModal] = useState(false)
+  const [showModalTenido3B, setShowModalTenido3B] = useState(false)
   const [product, setProduct] = useState({} as CarritoProps)
   const { addCarrito, carrito } = useCarritoContext()
 
@@ -22,16 +23,12 @@ const Abonados = () => {
 
   const evento = eventos.filter((evento) => evento.img === 'flyer1.jpg')[0]
 
-  const handleModal = (product: CarritoProps) => {
-    setShowModal(true)
-    setProduct(product)
-  }
+  const handleModal = (id: number) => {
+    if (id === 1) {
+      setShowModalTenido3B(true)
+    }
 
-  const handleClickModal = () => {
-    addCarrito(product)
-    setShowModal(false)
   }
-
   return (
     <>
       <div className='w-full  relative '>
@@ -175,7 +172,7 @@ const Abonados = () => {
                       </div>
 
                       <button
-                        onClick={() => handleModal(item)}
+                        onClick={() => handleModal(item.id)}
                         className={`py-3 px-8 rounded-md text-white font-semibold ${colors[index]} `}
                       >
                         Asientos
@@ -192,7 +189,7 @@ const Abonados = () => {
         </Container>
         <Container bgColor='bg-white' className=' pb-5 pr-5'>
           <section className='py-5 flex justify-center lg:justify-end'>
-            <article className='border w-full  lg:w-[280px] xl:w-[380px] p-3 rounded-md flex flex-col gap-1'>
+            <article className='border w-full  lg:w-[280px] xl:w-[380px] p-3 rounded-md flex flex-col gap-1 shadow-xl'>
               <h2 className='text-2xl text-primary font-bold'>Lurín, Lima</h2>
               <p className='text-md text-text font-semibold'>
                 Fundo La Esperanza
@@ -210,10 +207,9 @@ const Abonados = () => {
         </Container>
       </div>
 
-      <ModalCompra
-        onClick={handleClickModal}
-        isOpen={showModal}
-        onClose={() => setShowModal(false)}
+      <ModalTenido3B
+        isOpen={showModalTenido3B}
+        onClose={() => setShowModalTenido3B(false)}
       />
     </>
   )

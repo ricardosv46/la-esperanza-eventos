@@ -193,8 +193,8 @@ const Compra = () => {
           </main>
         </Container>
         <Container bgColor='bg-white' className=' pb-5 pr-5'>
-          <section className='py-5 flex justify-center lg:justify-end'>
-            <article className='border w-full  lg:w-[280px] xl:w-[380px] p-3 rounded-md flex flex-col gap-1'>
+          <section className='py-5 flex justify-center lg:justify-end '>
+            <article className='border w-full  lg:w-[280px] xl:w-[380px] p-3 rounded-md flex flex-col gap-1 shadow-xl'>
               <h2 className='text-2xl text-primary font-bold'>Lurín, Lima</h2>
               <p className='text-md text-text font-semibold'>
                 Fundo La Esperanza
@@ -212,11 +212,11 @@ const Compra = () => {
         </Container>
       </div>
 
-      <ModalCompra
+      {/*   <ModalCompra
         onClick={handleClickModal}
         isOpen={showModal}
         onClose={() => setShowModal(false)}
-      />
+      /> */}
     </>
   )
 }
