@@ -29,6 +29,7 @@ const Estadio = () => {
         .map((_, i) => i + 1)
     }
     return tfilas
+
   }, [])
 
   const selectId = (id: string) => {

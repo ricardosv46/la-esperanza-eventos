@@ -112,6 +112,10 @@ html {
     hue-rotate(338deg) brightness(32%) contrast(111%);
 }
 
+.snap-section {
+  scroll-snap-align: center;
+}
+
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }

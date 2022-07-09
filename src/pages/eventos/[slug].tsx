@@ -5,6 +5,7 @@ import IconCalendar from '../../../public/icons/IconCalendar'
 import IconHour from '../../../public/icons/IconHour'
 import Container from '../../components/container'
 import ModalCompra from '../../components/modal/modalCompra'
+import ModalTendido1 from '../../components/modal/ModalTendido1'
 import {
   CarritoProps,
   useCarritoContext
@@ -49,29 +50,27 @@ const Compra = () => {
         <Container bgColor='backdrop-blur-lg' className=' pt-36 pb-5'>
           <main className='lg:px-5 flex flex-col lg:flex-row gap-5'>
             <section className='lg:relative w-full lg:w-[760px]  lg:h-[470px] gap-5  flex flex-col lg:flex-row'>
-              <div className="bg-white w-full h-full rounded-lg">
-                <div className="flex flex-col  py-5 px-8">
-                  <div className="">
-                    <h1 className='text-3xl font-extrabold'>FERIA LA ESPERANZA</h1>
+              <div className='bg-white w-full h-full rounded-lg'>
+                <div className='flex flex-col  py-5 px-8'>
+                  <div className=''>
+                    <h1 className='text-3xl font-extrabold'>
+                      FERIA LA ESPERANZA
+                    </h1>
                     <h2 className='text-3xl font-extrabold'>Compra tu Abono</h2>
                   </div>
-                  <div className="flex gap-x-5 items-center mt-4">
-                    <div className="flex gap-x-3">
-                      <div className="mt-0.5">
+                  <div className='flex gap-x-5 items-center mt-4'>
+                    <div className='flex gap-x-3'>
+                      <div className='mt-0.5'>
                         <IconCalendar width={16} height={16} />
                       </div>
 
-                      <div className="">
-                        23 jul 2022
-                      </div>
+                      <div className=''>23 jul 2022</div>
                     </div>
-                    <div className="flex gap-x-3">
-                      <div className="mt-0.5">
+                    <div className='flex gap-x-3'>
+                      <div className='mt-0.5'>
                         <IconHour width={16} height={16} />
                       </div>
-                      <div className="">
-                        1:56 am
-                      </div>
+                      <div className=''>1:56 am</div>
                     </div>
                   </div>
                   <div className='flex justify-center mt-5'>
@@ -83,7 +82,6 @@ const Compra = () => {
                     />
                   </div>
                 </div>
-
               </div>
 
               <article className='w-full bg-white rounded-lg lg:absolute top-[30.5rem] p-5 lg:p-9 flex flex-col gap-5 border shadow-lg'>
@@ -97,29 +95,50 @@ const Compra = () => {
                 <p className='text-md text-primary font-bold'>
                   Información adicional
                 </p>
-                <h3>Términos y condiciones:
-                </h3>
+                <h3>Términos y condiciones:</h3>
                 <h3 className='-mt-5'>ANTES DE COMPRAR:</h3>
                 <p>
-                  Por disposiciones sanitarias del MINSA, solo podrán acceder al estadio las personas (niños y adultos) que cuenten con constancia de vacunación completa con el COVID 19.
+                  Por disposiciones sanitarias del MINSA, solo podrán acceder al
+                  estadio las personas (niños y adultos) que cuenten con
+                  constancia de vacunación completa con el COVID 19.
                 </p>
-                <p>Mascarilla KN95 o Doble Mascarilla (En caso sean quirúrgicas o de tela)</p>
                 <p>
-                  Constancia digital o física de esquema de vacunación completo:<br />
-                  Ingreso para menores de edad con 2 dosis<br />
-                  Ingreso para mayores de 18 años a más con 2 dosis y dosis de refuerzo
+                  Mascarilla KN95 o Doble Mascarilla (En caso sean quirúrgicas o
+                  de tela)
+                </p>
+                <p>
+                  Constancia digital o física de esquema de vacunación completo:
+                  <br />
+                  Ingreso para menores de edad con 2 dosis
+                  <br />
+                  Ingreso para mayores de 18 años a más con 2 dosis y dosis de
+                  refuerzo
                 </p>
 
-                <p>Documento Nacional de Identidad<br />
-                  Entrada Impresa</p>
+                <p>
+                  Documento Nacional de Identidad
+                  <br />
+                  Entrada Impresa
+                </p>
 
                 <p>
-                  No hay Reembolso o devolución por entradas adquiridas<br />
-                  Cada entrada debe tener el nombre y DNI de la persona que hará uso de la misma<br />
-                  No se permiten cambios de tribuna, tipo de entrada o de partido<br />
-                  Los menores de edad deben ingresar acompañados por un adulto<br />
+                  No hay Reembolso o devolución por entradas adquiridas
+                  <br />
+                  Cada entrada debe tener el nombre y DNI de la persona que hará
+                  uso de la misma
+                  <br />
+                  No se permiten cambios de tribuna, tipo de entrada o de
+                  partido
+                  <br />
+                  Los menores de edad deben ingresar acompañados por un adulto
+                  <br />
                 </p>
-                <p>Recuerda que, si el partido sufre de inconvenientes causados por circunstancias externas a la organización, el partido o el ingreso al estadio puede anularse o verse restringido sin opción a devolución o reembolso.</p>
+                <p>
+                  Recuerda que, si el partido sufre de inconvenientes causados
+                  por circunstancias externas a la organización, el partido o el
+                  ingreso al estadio puede anularse o verse restringido sin
+                  opción a devolución o reembolso.
+                </p>
               </article>
             </section>
 
@@ -135,23 +154,19 @@ const Compra = () => {
                 <h2 className='text-2xl text-center mt-2 text-primary font-bold '>
                   Feria La Esperanza
                 </h2>
-                <div className="flex gap-x-5 justify-center items-center">
-                  <div className="flex gap-x-3">
-                    <div className="mt-0.5">
+                <div className='flex gap-x-5 justify-center items-center'>
+                  <div className='flex gap-x-3'>
+                    <div className='mt-0.5'>
                       <IconCalendar width={16} height={16} />
                     </div>
 
-                    <div className="">
-                      23 jul 2022
-                    </div>
+                    <div className=''>23 jul 2022</div>
                   </div>
-                  <div className="flex gap-x-3">
-                    <div className="mt-0.5">
+                  <div className='flex gap-x-3'>
+                    <div className='mt-0.5'>
                       <IconHour width={16} height={16} />
                     </div>
-                    <div className="">
-                      1:56 am
-                    </div>
+                    <div className=''>1:56 am</div>
                   </div>
                 </div>
                 <p className='text-md text-text text-center'>
@@ -185,10 +200,7 @@ const Compra = () => {
                     </article>
                   ))}
                 </section>
-
-
               </article>
-
             </section>
           </main>
         </Container>
@@ -212,11 +224,17 @@ const Compra = () => {
         </Container>
       </div>
 
-      {/*   <ModalCompra
+      {/* <ModalCompra
         onClick={handleClickModal}
         isOpen={showModal}
         onClose={() => setShowModal(false)}
       /> */}
+
+      <ModalTendido1
+        onClick={handleClickModal}
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+      />
     </>
   )
 }
