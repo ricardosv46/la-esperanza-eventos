@@ -208,6 +208,7 @@ const Abonados = () => {
       </div>
 
       <ModalTenido3B
+        onClick={() => { }}
         isOpen={showModalTenido3B}
         onClose={() => setShowModalTenido3B(false)}
       />
