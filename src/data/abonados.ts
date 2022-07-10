@@ -1,4 +1,4 @@
-export const eventos = [
+export const abonados = [
   {
     name: 'Oscar Quiñonez',
     img: 'flyer1.jpg',

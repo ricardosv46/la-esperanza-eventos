@@ -10,6 +10,7 @@ interface IProps {
   setSeleccionados: Dispatch<SetStateAction<IColums[]>>
   desabilitados: string[]
   nombreFilas: string[]
+  direccion?: "start" | "center" | "end" // default: "center"  start: es al final por el reverse y end: es al inicio
 }
 
 interface Filas {
@@ -30,7 +31,8 @@ const Asientos = ({
   setSeleccionados,
   data,
   desabilitados,
-  nombreFilas
+  nombreFilas,
+  direccion = 'center',
 }: IProps) => {
   const filas = useMemo(() => {
     let tfilas: any = {}
@@ -67,7 +69,7 @@ const Asientos = ({
             <div className=' w-full overflow-x-scroll custom-scroll snap-section'>
               <TransformComponent>
                 <div className='py-10'>
-                  <div className='flex flex-col gap-3 justify-center items-center  px-5 w-full '>
+                  <div className='flex flex-col  justify-center items-center  px-5 w-full '>
                     {Object.keys(filas).map((fila, index) => (
                       <div
                         key={fila}
@@ -78,7 +80,7 @@ const Asientos = ({
                             {nombreFilas[index]}
                           </p>
                         </div>
-                        <div className='flex flex-row-reverse justify-center items-center gap-1 flex-1'>
+                        <div className={`flex flex-row-reverse justify-${direccion} items-center gap-1 flex-1`}>
                           {filas[`${fila.toString()}`].map(
                             (
                               { id, estado, precio, numero }: IColums,
@@ -100,14 +102,13 @@ const Asientos = ({
                                     }
                                     disabled={disabled}
                                     className={`
-                                  ${
-                                    disabled
-                                      ? 'bg-text text-white'
-                                      : isActive
-                                      ? 'bg-primary text-white'
-                                      : 'bg-yellow-500  text-primary'
-                                  }
-                                   rounded-full h-7 w-7 lg:h-3.5 lg:w-3.5  font-semibold  flex justify-center items-center lg:text-[7px] text-base `}
+                                  ${disabled
+                                        ? 'bg-text text-white'
+                                        : isActive
+                                          ? 'bg-primary text-white'
+                                          : 'bg-yellow-500  text-primary'
+                                      }
+                                   rounded-full h-5 w-5 lg:h-2 lg:w-2  font-semibold  flex justify-center items-center lg:text-[2px] text-[10px] `}
                                   >
                                     {numero}
                                   </button>

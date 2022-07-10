@@ -14,9 +14,9 @@ const ModalTendido3B = ({ isOpen, onClose, onClick }: Props) => {
   const [seleccionados, setSeleccionados] = useState<IColums[]>([])
 
   const data = [
-    { fila: 'T1-F3-', columnas: 53, precio: 50 },
-    { fila: 'T1-CB-', columnas: 48, precio: 100 },
-    { fila: 'T1-B-', columnas: 46, precio: 150 }
+    { fila: 'T3-F3-', columnas: 53, precio: 50 },
+    { fila: 'T3-CB-', columnas: 48, precio: 100 },
+    { fila: 'T3-B-', columnas: 46, precio: 150 }
   ]
 
   const total = seleccionados.reduce(
@@ -24,8 +24,8 @@ const ModalTendido3B = ({ isOpen, onClose, onClick }: Props) => {
     0
   )
 
-  const desabilitados = ['T1-F3-10', 'T1-F3-15', 'T1-F3-20']
-  const nombreFilas = ['F03', 'CONTRA BARRERA', 'BARRERA']
+  const desabilitados = ['T3-F3-10', 'T3-F3-15', 'T3-F3-20']
+  const nombreFilas = ['FILA 3', 'CONTRA BARRERA', 'BARRERA']
   return (
     <Modal
       isOpen={isOpen}
@@ -55,7 +55,7 @@ const ModalTendido3B = ({ isOpen, onClose, onClick }: Props) => {
         <div className='flex flex-col justify-center border-b-2 border-t-2 border-primary py-5 mt-5 mx-5'>
           <div className='flex justify-between items-center lg:px-8'>
             <p className=' text-base text-primary font-bold lg:text-xl'>
-              Tendido 1 Sombra
+              Tendido 3B
             </p>
             <div className='flex gap-3 items-center'>
               <IconDate fill='#4C000C' width={20} height={20} />
@@ -73,6 +73,7 @@ const ModalTendido3B = ({ isOpen, onClose, onClick }: Props) => {
               setSeleccionados,
               nombreFilas
             }}
+            direccion="start"
           />
         </div>
         <div className='p-5 flex gap-3 text-sm lg:text-base'>
@@ -108,5 +109,6 @@ const ModalTendido3B = ({ isOpen, onClose, onClick }: Props) => {
     </Modal>
   )
 }
+
 
 export default ModalTendido3B

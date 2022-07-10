@@ -6,16 +6,26 @@ import IconHour from '../../../public/icons/IconHour'
 import Container from '../../components/container'
 import ModalCompra from '../../components/modal/modalCompra'
 import ModalTendido1 from '../../components/modal/ModalTendido1'
+import ModalTendido2Bajo from '../../components/modal/ModalTendido2Bajo'
+import ModalTendido2Sol from '../../components/modal/ModalTendido2Sol'
+import ModalTendido3ASol from '../../components/modal/ModalTendido3ASol'
+import ModalTendido3B from '../../components/modal/ModalTendido3B'
+import ModalTendido3Sol from '../../components/modal/ModalTendido3Sol'
 import {
   CarritoProps,
   useCarritoContext
 } from '../../context/cart/CarritoState'
 import { eventos } from '../../data/eventos'
 
-const colors = ['bg-[#EDA366]', ' bg-[#F4BA31]', 'bg-[#C14744]', 'bg-[#4C000C]']
+const colors = ['bg-[#F89F59]', ' bg-[#FFD066]', 'bg-[#FFDA99]', 'bg-[#D03B3E]', 'bg-[#E7565C]', 'bg-[#E7565C]']
 
 const Compra = () => {
-  const [showModal, setShowModal] = useState(false)
+  const [showModalTenido1, setShowModalTenido1] = useState(false)
+  const [showModalTenido2Sol, setShowModalTenido2Sol] = useState(false)
+  const [showModalTenido2Bajo, setShowModalTenido2Bajo] = useState(false)
+  const [showModalTenido3Sol, setShowModalTenido3Sol] = useState(false)
+  const [showModalTenido3ASol, setShowModalTenido3ASol] = useState(false)
+  const [showModalTenido3B, setShowModalTenido3B] = useState(false)
   const [product, setProduct] = useState({} as CarritoProps)
   const { addCarrito, carrito } = useCarritoContext()
 
@@ -25,14 +35,26 @@ const Compra = () => {
 
   const evento = eventos.filter((evento) => evento.img === slug)[0]
 
-  const handleModal = (product: CarritoProps) => {
-    setShowModal(true)
-    setProduct(product)
-  }
+  const handleModal = (id: number) => {
+    if (id === 1) {
+      setShowModalTenido1(true)
+    }
+    if (id === 2) {
+      setShowModalTenido2Sol(true)
+    }
+    if (id === 3) {
+      setShowModalTenido2Bajo(true)
+    }
+    if (id === 4) {
+      setShowModalTenido3Sol(true)
+    }
+    if (id === 5) {
+      setShowModalTenido3ASol(true)
+    }
+    if (id === 6) {
+      setShowModalTenido3B(true)
+    }
 
-  const handleClickModal = () => {
-    addCarrito(product)
-    setShowModal(false)
   }
 
   return (
@@ -183,16 +205,16 @@ const Compra = () => {
                       className='shadow-md rounded-lg bg-[#f9f9f9] border flex justify-between p-3 items-center '
                     >
                       <div>
-                        <p className='text-md text-primary font-semibold leading-5'>
+                        <p className='text-sm text-primary font-semibold leading-5'>
                           {item.title}
                         </p>
-                        <p className='text-md text-primary font-semibold leading-5'>
+                        <p className='text-sm text-primary font-semibold leading-5'>
                           desde S/ {item.price}
                         </p>
                       </div>
 
                       <button
-                        onClick={() => handleModal(item)}
+                        onClick={() => handleModal(item.id)}
                         className={`py-3 px-8 rounded-md text-white font-semibold ${colors[index]} `}
                       >
                         Asientos
@@ -231,9 +253,39 @@ const Compra = () => {
       /> */}
 
       <ModalTendido1
-        onClick={handleClickModal}
-        isOpen={showModal}
-        onClose={() => setShowModal(false)}
+        onClick={() => { }}
+        isOpen={showModalTenido1}
+        onClose={() => setShowModalTenido1(false)}
+      />
+
+      <ModalTendido2Sol
+        onClick={() => { }}
+        isOpen={showModalTenido2Sol}
+        onClose={() => setShowModalTenido2Sol(false)}
+      />
+
+      <ModalTendido2Bajo
+        onClick={() => { }}
+        isOpen={showModalTenido2Bajo}
+        onClose={() => setShowModalTenido2Bajo(false)}
+      />
+
+      <ModalTendido3Sol
+        onClick={() => { }}
+        isOpen={showModalTenido3Sol}
+        onClose={() => setShowModalTenido3Sol(false)}
+      />
+
+      <ModalTendido3ASol
+        onClick={() => { }}
+        isOpen={showModalTenido3ASol}
+        onClose={() => setShowModalTenido3ASol(false)}
+      />
+
+      <ModalTendido3B
+        onClick={() => { }}
+        isOpen={showModalTenido3B}
+        onClose={() => setShowModalTenido3B(false)}
       />
     </>
   )
