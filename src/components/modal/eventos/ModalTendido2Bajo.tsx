@@ -1,10 +1,10 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useMemo, useState } from "react";
-import Modal from ".";
-import IconDate from "../../../public/icons/IconDate";
-import { usePaymentContext } from "../../context/payment/PaymentState";
-import Asientos, { IColums } from "../asientos";
+import { useState } from "react";
+import Modal from "..";
+import IconDate from "../../../../public/icons/IconDate";
+import { usePaymentContext } from "../../../context/payment/PaymentState";
+import Asientos, { IColums } from "../../asientos";
 
 interface Props {
   onClose: () => void;
@@ -109,7 +109,7 @@ const ModalTendido2Bajo = ({ isOpen, onClose }: Props) => {
               onClick={() => {
                 navigation.push({
                   pathname: "/check-out/",
-                  query: { name: "abono" },
+                  query: { name: "evento" },
                 });
                 EnviarPago(seleccionados);
               }}

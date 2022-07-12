@@ -1,25 +1,25 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useMemo, useState } from "react";
-import Modal from ".";
-import IconDate from "../../../public/icons/IconDate";
-import { usePaymentContext } from "../../context/payment/PaymentState";
-import Asientos, { IColums } from "../asientos";
+import { useState } from "react";
+import Modal from "..";
+import IconDate from "../../../../public/icons/IconDate";
+import { usePaymentContext } from "../../../context/payment/PaymentState";
+import Asientos, { IColums } from "../../asientos";
 
 interface Props {
   onClose: () => void;
   isOpen: boolean;
 }
 
-const ModalTendido2Bajo = ({ isOpen, onClose }: Props) => {
+const ModalTendido3ASol = ({ isOpen, onClose }: Props) => {
   const [seleccionados, setSeleccionados] = useState<IColums[]>([]);
   const navigation = useRouter();
   const { EnviarPago } = usePaymentContext();
 
   const data = [
-    { fila: "T1-F3-", columnas: 66, precio: 50 },
-    { fila: "T1-CB-", columnas: 60, precio: 100 },
-    { fila: "T1-B-", columnas: 58, precio: 150 },
+    { fila: "T1-F3-", columnas: 53, precio: 50 },
+    { fila: "T1-CB-", columnas: 48, precio: 100 },
+    { fila: "T1-B-", columnas: 46, precio: 150 },
   ];
 
   const total = seleccionados.reduce(
@@ -28,7 +28,7 @@ const ModalTendido2Bajo = ({ isOpen, onClose }: Props) => {
   );
 
   const desabilitados = ["T1-F3-10", "T1-F3-15", "T1-F3-20"];
-  const nombreFilas = ["F03", "CONTRA BARRERA", "BARRERA"];
+  const nombreFilas = ["FILA 3", "CONTRA BARRERA", "BARRERA"];
   return (
     <Modal
       isOpen={isOpen}
@@ -58,7 +58,7 @@ const ModalTendido2Bajo = ({ isOpen, onClose }: Props) => {
         <div className="flex flex-col justify-center border-b-2 border-t-2 border-primary py-5 mt-5 mx-5">
           <div className="flex justify-between items-center lg:px-8">
             <p className=" text-base text-primary font-bold lg:text-xl">
-              Tendido 2 Bajo
+              Tendido 3A Sol
             </p>
             <div className="flex gap-3 items-center">
               <IconDate fill="#4C000C" width={20} height={20} />
@@ -76,6 +76,7 @@ const ModalTendido2Bajo = ({ isOpen, onClose }: Props) => {
               setSeleccionados,
               nombreFilas,
             }}
+            direccion="end"
           />
         </div>
         <div className="p-5 flex gap-3 text-sm lg:text-base">
@@ -109,7 +110,7 @@ const ModalTendido2Bajo = ({ isOpen, onClose }: Props) => {
               onClick={() => {
                 navigation.push({
                   pathname: "/check-out/",
-                  query: { name: "abono" },
+                  query: { name: "evento" },
                 });
                 EnviarPago(seleccionados);
               }}
@@ -123,4 +124,4 @@ const ModalTendido2Bajo = ({ isOpen, onClose }: Props) => {
   );
 };
 
-export default ModalTendido2Bajo;
+export default ModalTendido3ASol;
