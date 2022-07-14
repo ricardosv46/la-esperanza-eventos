@@ -103,6 +103,22 @@
   src: url(/fonts/Noto_Serif_Display/NotoSerifDisplay-Thin.ttf) format('ttf');
 }
 
+/* Fuente Lato */
+
+@font-face {
+  font-family: Lato;
+  font-weight: 300;
+  font-display: swap;
+  src: url(/fonts/Lato/Lato-Light.ttf)
+}
+
+
+@layer base{
+  p{
+    @apply font-parrafo font-light
+  }
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -134,8 +150,8 @@ html {
 .banner {
   background-size: cover;
   width: 100%;
-  height: 100%;
-  height: 955px;
+  height: 100vh;
+ /*  height: 955px; */
   position: relative;
 }
 .banner::before {

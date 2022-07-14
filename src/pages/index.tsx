@@ -35,6 +35,7 @@ const Home: NextPage = () => {
         keywords="Entradas,Eventos,PLazas"
         url="https://la-esperanza-eventos.vercel.app/"
       />
+
       <Swiper
         loop={true}
         autoplay={{
@@ -50,7 +51,7 @@ const Home: NextPage = () => {
           <SwiperSlide key={banner}>
             <div className={`banner ${banner}`}>
               <div className="mx-auto h-full my-0 w-[90%] xl:w-[1200px] flex justify-end items-center relative z-10">
-                <div className="text-white text-6xl font-bold flex flex-col items-end">
+                <div className="text-white text-8xl font-bold flex flex-col items-end">
                   <p>Vive la tradición</p>
                   <p>Vive la magia</p>
                   <button className="text-lg text-center font-bold rounded-lg bg-secondary px-4 py-2 mt-4 hover:bg-tertiary ease-in-out duration-300 transition-all shadow-2xl">
@@ -62,12 +63,11 @@ const Home: NextPage = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-
       <Container bgColor="banner banner-home5">
         <h1 className="text-5xl text-primary font-bold text-center pt-16">
           LA PLAZA
         </h1>
-        <p className="text-center px-0 text-[#505050]  font-bold p-16 ">
+        <p className="text-center px-0 text-[#505050]  p-16 ">
           La Plaza de Toros La Esperanza fue inaugurada en el año 2009, siendo
           un ruedo sin graderías, el punto de encuentro y lugar donde se incubó
           la nueva generación de aficionados prácticos, llenando aquel año cada
@@ -197,10 +197,10 @@ const Home: NextPage = () => {
           </div>
           <div className=" w-full flex-1 flex items-center  bg-primarydark">
             <div className="flex flex-col md:items-end gap-10">
-              <p className="text-3xl md:text-5xl text-secondary font-bold lg:px-5">
+              <h2 className="text-3xl md:text-5xl text-secondary font-bold lg:ml-7">
                 VENTA DE ENTRADAS
-              </p>
-              <p className="text-gray-300 text-lg lg:px-5 md:text-right ">
+              </h2>
+              <p className="text-gray-100 text-lg lg:ml-7 md:text-right ">
                 Las fiestas de toros es considerada un arte que sólo los
                 entendidos pueden apreciar. A partir de las reflexiones del
                 filósofo Francis Wolff, se emprende un recorrido histórico y
