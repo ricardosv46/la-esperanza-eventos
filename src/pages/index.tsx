@@ -9,6 +9,7 @@ import Image from "next/image";
 import OpenGraph from "../components/openGraph";
 import { useRouter } from "next/router";
 import IconMano from "../../public/icons/IconMano";
+import { eventos } from "../data/eventos";
 
 const banners = [
   "banner-home1",
@@ -206,6 +207,118 @@ const Home: NextPage = () => {
           </div>
         </div>
       </Container>
+      <div className="bg-fondo relative">
+        <div className="absolute top-0 left-0 ">
+          <div className="">
+            <Image
+              src={`/imgs/logos/logo-fondo.png`}
+              alt="Picture of the author"
+              width={100}
+              height={100}
+              className="object-cover rounded-md"
+            />
+          </div>
+        </div>
+
+        <div className="  flex flex-col  max-w-[1200px]  mx-auto px-5 py-20 ">
+          <h1 className="text-5xl text-primary font-bold text-center mb-20 uppercase">
+            Noticias
+          </h1>
+
+          <div className="grid pb-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-20 text-center text-[#505050] ">
+            <article
+              style={{ boxShadow: "-14px 14px 14px -5px rgba(0,0,0,0.42)" }}
+              className="max-w-[300px] mx-auto sm:mx-0 sm:max-w-none bg-white  rounded-2xl shadow-md"
+            >
+              <div className="">
+                <Image
+                  src={`/imgs/eventos/flyers/flyer-web-esperanza.jpg`}
+                  alt="Picture of the author"
+                  width={500}
+                  height={250}
+                  className="object-cover rounded-md"
+                />
+              </div>
+              <div className="py-5 px-5">
+                <h2 className="text-xl text-left  text-secondary font-bold">
+                  La Mitideología
+                </h2>
+                <p className="text-xs text-left text-[#adadad]">
+                  18 de abril de 2022
+                </p>
+                <p className=" text-justify  text-[14px] text-[#777] my-3">
+                  Ingresa La Mitideología La tauromaquia, como muchos otros
+                  festejos taurinos, se encuentran entre el rito y el juego;
+                  entre el espectáculo y la hazaña
+                </p>
+                <p className="text-primary text-left text-xs font-semibold">
+                  Leer más »
+                </p>
+              </div>
+            </article>
+            <article
+              style={{ boxShadow: "-14px 14px 14px -5px rgba(0,0,0,0.42)" }}
+              className="max-w-[300px] mx-auto sm:mx-0 sm:max-w-none bg-white  rounded-2xl shadow-md"
+            >
+              <div className="">
+                <Image
+                  src={`/imgs/home/home2.jpg`}
+                  alt="Picture of the author"
+                  width={500}
+                  height={250}
+                  className="object-cover rounded-md"
+                />
+              </div>
+              <div className="py-5 px-5">
+                <h2 className="text-xl text-left  text-secondary font-bold">
+                  LA TAUROMAQUIA
+                </h2>
+                <p className="text-xs text-left text-[#adadad]">
+                  8 de abril de 2022
+                </p>
+                <p className=" text-justify  text-[14px] text-[#777] my-3">
+                  Ingresa LA TAUROMAQUIA La tauromaquia, como muchos otros
+                  festejos taurinos, se encuentran entre el rito y el juego;
+                  entre el espectáculo y la hazaña
+                </p>
+                <p className="text-primary text-left text-xs font-semibold">
+                  Leer más »
+                </p>
+              </div>
+            </article>
+            <article
+              style={{ boxShadow: "-14px 14px 14px -5px rgba(0,0,0,0.42)" }}
+              className="max-w-[300px] mx-auto sm:mx-0 sm:max-w-none bg-white  rounded-2xl shadow-md"
+            >
+              <div className="">
+                <Image
+                  src={`/imgs/banners/banner3.webp`}
+                  alt="Picture of the author"
+                  width={500}
+                  height={250}
+                  className="object-cover rounded-md"
+                />
+              </div>
+              <div className="py-5 px-5">
+                <h2 className="text-xl text-left  text-secondary font-bold">
+                  FESTEJOS TAURINOS
+                </h2>
+                <p className="text-xs text-left text-[#adadad]">
+                  8 de abril de 2022
+                </p>
+                <p className=" text-justify  text-[14px] text-[#777] my-3">
+                  Ingresa FESTEJOS TAURINOS Con los primeros rayos del sol un
+                  anciano señala con un par de plumas de águila hacia el
+                  oriente. En su
+                </p>
+                <p className="text-primary text-left text-xs font-semibold">
+                  Leer más »
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
