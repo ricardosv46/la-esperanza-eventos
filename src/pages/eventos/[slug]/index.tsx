@@ -1,20 +1,20 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import IconCalendar from "../../../public/icons/IconCalendar";
-import IconHour from "../../../public/icons/IconHour";
-import Container from "../../components/container";
-import ModalTendido1 from "../../components/modal/eventos/ModalTendido1";
-import ModalTendido2Bajo from "../../components/modal/eventos/ModalTendido2Bajo";
-import ModalTendido2Sol from "../../components/modal/eventos/ModalTendido2Sol";
-import ModalTendido3ASol from "../../components/modal/eventos/ModalTendido3ASol";
-import ModalTendido3B from "../../components/modal/eventos/ModalTendido3B";
-import ModalTendido3Sol from "../../components/modal/eventos/ModalTendido3Sol";
-import { eventos } from "../../data/eventos";
+import IconCalendar from "../../../../public/icons/IconCalendar";
+import IconHour from "../../../../public/icons/IconHour";
+import Container from "../../../components/container";
+import ModalTendido1 from "../../../components/modal/eventos/ModalTendido1";
+import ModalTendido2Bajo from "../../../components/modal/eventos/ModalTendido2Bajo";
+import ModalTendido2Sol from "../../../components/modal/eventos/ModalTendido2Sol";
+import ModalTendido3ASol from "../../../components/modal/eventos/ModalTendido3ASol";
+import ModalTendido3B from "../../../components/modal/eventos/ModalTendido3B";
+import ModalTendido3Sol from "../../../components/modal/eventos/ModalTendido3Sol";
+import { eventos } from "../../../data/eventos";
 
 const colors = [
   "bg-[#F89F59]",
-  " bg-[#FFD066]",
+  "bg-[#FFD066]",
   "bg-[#FFDA99]",
   "bg-[#D03B3E]",
   "bg-[#E7565C]",
@@ -30,28 +30,29 @@ const Compra = () => {
   const [showModalTenido3B, setShowModalTenido3B] = useState(false);
 
   const { slug } = useRouter().query;
-
+  const router = useRouter();
   const evento = eventos.filter((evento) => evento.img === slug)[0];
 
   const handleModal = (id: number) => {
-    if (id === 1) {
-      setShowModalTenido1(true);
-    }
-    if (id === 2) {
-      setShowModalTenido2Sol(true);
-    }
-    if (id === 3) {
-      setShowModalTenido2Bajo(true);
-    }
-    if (id === 4) {
-      setShowModalTenido3Sol(true);
-    }
-    if (id === 5) {
-      setShowModalTenido3ASol(true);
-    }
-    if (id === 6) {
-      setShowModalTenido3B(true);
-    }
+    router.push(`/eventos/${slug}/${id}`);
+    // if (id === 1) {
+    //   setShowModalTenido1(true)
+    // }
+    // if (id === 2) {
+    //   setShowModalTenido2Sol(true)
+    // }
+    // if (id === 3) {
+    //   setShowModalTenido2Bajo(true)
+    // }
+    // if (id === 4) {
+    //   setShowModalTenido3Sol(true)
+    // }
+    // if (id === 5) {
+    //   setShowModalTenido3ASol(true)
+    // }
+    // if (id === 6) {
+    //   setShowModalTenido3B(true)
+    // }
   };
 
   return (

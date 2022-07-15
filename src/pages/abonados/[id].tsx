@@ -1,49 +1,39 @@
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import React, { useMemo, useState } from 'react'
-import Modal from '.'
+import React, { useEffect, useState } from 'react'
 import IconDate from '../../../public/icons/IconDate'
+import Asientos, { IColums } from '../../components/asientos'
+import Container from '../../components/container'
 import { usePaymentContext } from '../../context/payment/PaymentState'
-import { eventos } from '../../data/eventos'
-import Asientos, { IColums } from '../asientos'
+import { genAsientos } from '../../data/asientos'
 
-interface Props {
-  onClose: () => void
-  isOpen: boolean
-}
-
-const ModalTendido1 = ({ isOpen, onClose }: Props) => {
+const Detalle = () => {
   const navigation = useRouter()
+  const [dataAsientos, setDataAsientos] = useState({
+    data: [],
+    nombreFilas: [],
+    desabilitados: []
+  })
+  const { data, nombreFilas, desabilitados } = dataAsientos
+
+  console.log(data)
   const { EnviarPago } = usePaymentContext()
   const [seleccionados, setSeleccionados] = useState<IColums[]>([])
+  const { id } = useRouter().query as any
 
-  const data = [
-    { fila: 'T1-F3-', columnas: 53, precio: 50 },
-    { fila: 'T1-CB-', columnas: 48, precio: 100 },
-    { fila: 'T1-B-', columnas: 46, precio: 150 }
-  ]
+  useEffect(() => {
+    const _data = genAsientos(id) as any
+    setDataAsientos(_data)
+  }, [id])
 
   const total = seleccionados.reduce(
     (previousValue, currentValue) => previousValue + currentValue.precio,
     0
   )
 
-  const desabilitados = ['T1-F3-10', 'T1-F3-15', 'T1-F3-20']
-  const nombreFilas = ['F03', 'CONTRA BARRERA', 'BARRERA']
-
   return (
-    <Modal
-      isOpen={isOpen}
-      onClose={onClose}
-      className='h-full md:h-auto w-full md:w-auto p-3 overflow-y-scroll no-scrollbar '
-    >
-      <section className='bg-white  rounded-lg pt-5 relative overflow-hidden'>
-        <button
-          onClick={onClose}
-          className='absolute top-2 right-4 text-primary font-bold cursor-pointer'
-        >
-          X
-        </button>
+    <div className='flex flex-col items-center justify-center w-full'>
+      <section className='bg-white pt-5 w-auto'>
         <div className='flex justify-center mb-5'>
           <Image
             objectFit='scale-down'
@@ -57,7 +47,7 @@ const ModalTendido1 = ({ isOpen, onClose }: Props) => {
         <p className='text-center text-3xl text-primary font-bold'>
           SELECCIONA TUS ASIENTOS
         </p>
-        <div className='flex flex-col justify-center border-b-2 border-t-2 border-primary py-5 mt-5 '>
+        <div className='flex flex-col justify-center border-b-2 border-t-2 border-primary py-5 mt-5'>
           <div className='flex justify-between items-center lg:px-8'>
             <p className=' text-base text-primary font-bold lg:text-xl'>
               Tendido 1 SOMBRA
@@ -69,16 +59,21 @@ const ModalTendido1 = ({ isOpen, onClose }: Props) => {
               </p>
             </div>
           </div>
-
-          <Asientos
-            {...{
-              data,
-              desabilitados,
-              seleccionados,
-              setSeleccionados,
-              nombreFilas
-            }}
-          />
+          {data.length > 0 && (
+            <Asientos
+              {...{
+                data,
+                desabilitados,
+                seleccionados,
+                setSeleccionados,
+                nombreFilas
+              }}
+              doble={
+                id === '2' ? 'Tendido2' : id === '4' ? 'Tendido3' : 'Ruedo'
+              }
+              direccion={id === '5' ? 'end' : id === '6' ? 'start' : 'center'}
+            />
+          )}
         </div>
         <div className='p-5 flex gap-3 text-sm lg:text-base'>
           <div className='flex gap-2 items-center'>
@@ -94,7 +89,9 @@ const ModalTendido1 = ({ isOpen, onClose }: Props) => {
             <p className='text-tertiary'>No disponibles</p>
           </div>
         </div>
-        <div className='py-10 px-5 bg-secondary flex flex-col lg:flex-row justify-between'>
+      </section>
+      <div className=' bg-secondary  w-full flex justify-center'>
+        <div className='py-10 px-5 max-w-[1200px] flex flex-col lg:flex-row justify-between w-full'>
           <div className='flex flex-col lg:flex-row gap-5 items-center'>
             <p className='text-primary font-bold'>Seleccionados:</p>
             <div className='flex flex-wrap lg:grid lg:grid-cols-10 leading-none gap-2'>
@@ -121,9 +118,9 @@ const ModalTendido1 = ({ isOpen, onClose }: Props) => {
             </button>
           </div>
         </div>
-      </section>
-    </Modal>
+      </div>
+    </div>
   )
 }
 
-export default ModalTendido1
+export default Detalle

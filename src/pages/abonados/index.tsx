@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import IconCalendar from "../../../public/icons/IconCalendar";
 import IconHour from "../../../public/icons/IconHour";
@@ -40,26 +41,27 @@ const Abonados = () => {
   const abonado = abonados.filter((abonado) => abonado.img === "flyer1.jpg")[0];
 
   console.log(abonado);
-
+  const router = useRouter();
   const handleModal = (id: number) => {
-    if (id === 1) {
-      setShowModalTenido1(true);
-    }
-    if (id === 2) {
-      setShowModalTenido2Sol(true);
-    }
-    if (id === 3) {
-      setShowModalTenido2Bajo(true);
-    }
-    if (id === 4) {
-      setShowModalTenido3Sol(true);
-    }
-    if (id === 5) {
-      setShowModalTenido3ASol(true);
-    }
-    if (id === 6) {
-      setShowModalTenido3B(true);
-    }
+    router.push(`/abonados/${id}`);
+    // if (id === 1) {
+    //   setShowModalTenido1(true);
+    // }
+    // if (id === 2) {
+    //   setShowModalTenido2Sol(true);
+    // }
+    // if (id === 3) {
+    //   setShowModalTenido2Bajo(true);
+    // }
+    // if (id === 4) {
+    //   setShowModalTenido3Sol(true);
+    // }
+    // if (id === 5) {
+    //   setShowModalTenido3ASol(true);
+    // }
+    // if (id === 6) {
+    //   setShowModalTenido3B(true);
+    // }
   };
   return (
     <>
