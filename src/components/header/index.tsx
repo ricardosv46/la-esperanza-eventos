@@ -40,12 +40,12 @@ const Header = () => {
 
   return (
     <header
-      className={`h-[70px] md:h-[100px] w-full fixed  top-0  z-10 flex-col justify-center items-center transition-colors duration-500 ease-in-out $ ${
+      className={`h-[70px] md:h-[80px] w-full fixed  top-0  z-10 flex-col justify-center items-center transition-colors duration-500 ease-in-out $ ${
         pathname === "/" ||
         pathname === "/plaza" ||
         pathname === `/eventos/[slug]`
           ? navbar
-            ? "bg-primary"
+            ? "bg-primary bg-opacity-80"
             : "bg-transparent"
           : "bg-primary  sticky"
       }`}
@@ -82,7 +82,7 @@ const Header = () => {
               ))}
             </ul>
           </div>
-          <div className="w-[20%] flex gap-10">
+          <div className="w-[20%] flex justify-end ">
             {/* <button
                 aria-label='Carrito'
                 className='relative p-1'
@@ -125,7 +125,7 @@ const Header = () => {
               />
             </div>
           </Link>
-          <div className="flex items-center gap-5">
+          <div className="flex  items-center gap-5">
             <button
               aria-label="Login"
               onClick={() => setShowModal(true)}

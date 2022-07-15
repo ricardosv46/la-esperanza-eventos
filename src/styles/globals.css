@@ -226,6 +226,23 @@ html {
   }
 }
 
+.banner-parallax-plaza {
+  background-image: url('/imgs/home/backsomos.png');
+  background-size: 700px 1500px;
+  background-position: calc(100%) calc(100% + 500px);
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+  background-attachment: fixed;
+
+}
+@media (max-width: 768px) {
+  .banner-parallax-plaza {
+    background-position: center;
+    height: 100%;
+  }
+}
+
 .banner-parallax::before {
   background-color: transparent;
 }

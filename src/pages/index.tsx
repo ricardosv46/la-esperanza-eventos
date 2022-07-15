@@ -8,6 +8,7 @@ import Container from "../components/container";
 import Image from "next/image";
 import OpenGraph from "../components/openGraph";
 import { useRouter } from "next/router";
+import IconMano from "../../public/icons/IconMano";
 
 const banners = [
   "banner-home1",
@@ -51,84 +52,72 @@ const Home: NextPage = () => {
           <SwiperSlide key={banner}>
             <div className={`banner ${banner}`}>
               <div className="mx-auto h-full my-0 w-[90%] xl:w-[1200px] flex justify-end items-center relative z-10">
-                <div className="text-white text-8xl font-bold flex flex-col items-end">
-                  <p>Vive la tradición</p>
-                  <p>Vive la magia</p>
-                  <button className="text-lg text-center font-bold rounded-lg bg-secondary px-4 py-2 mt-4 hover:bg-tertiary ease-in-out duration-300 transition-all shadow-2xl">
-                    Venta de entradas
-                  </button>
+                <div className="text-white text-5xl text-right sm:text-6xl lg:text-8xl font-bold flex flex-col items-end">
+                  <h2>Vive la tradición</h2>
+                  <h2>Vive la magia</h2>
+                  <div className=" mt-4">
+                    <button className="relative text-lg text-center font-bold rounded-l-md rounded-r-full bg-secondary pr-12 pl-6 py-2 mt-4 hover:bg-tertiary ease-in-out duration-300 transition-all shadow-2xl">
+                      <p className="font-extrabold"> Venta de entradas</p>
+                      <div className="absolute -bottom-3 -right-3">
+                        <IconMano width={45} height={45} fill="#fff" />
+                      </div>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </SwiperSlide>
         ))}
       </Swiper>
-      <Container bgColor="banner banner-home5">
-        <h1 className="text-5xl text-primary font-bold text-center pt-16">
-          LA PLAZA
-        </h1>
-        <p className="text-center px-0 text-[#505050]  p-16 ">
-          La Plaza de Toros La Esperanza fue inaugurada en el año 2009, siendo
-          un ruedo sin graderías, el punto de encuentro y lugar donde se incubó
-          la nueva generación de aficionados prácticos, llenando aquel año cada
-          sábado con encerronas taurinas y gratos momentos de confraternidad.{" "}
-          <br />
-          <br />
-          Buscando ser la casa del taurino de buena voluntad, se amplió en una
-          primera etapa dotándola de un callejón que permita el buen desarrollo
-          de un festejo taurino y cómodas butacas en las tres filas más cercanas
-          al ruedo. Bajo esa configuración se albergaron las primeras corridas
-          de toros formales brindando un lugar muy especial a la afición
-          taurina, que fue creando el ambiente y la identidad de La Esperanza,
-          en un espacio de campo con sabor criollo y fraternidad. <br />
-          <br />Y así, la necesidad de albergar más afición tras vivir esta
-          pandemia hizo que la plaza creciera mucho más, contando ahora con un
-          tendido fijo de 12 filas y 5 palcos, capaz de albergar en su totalidad
-          cerca de 3000 personas, manteniendo su coqueta identidad y esa
-          personalidad que invita a disfrutar una tarde de toros entre amigos.
-        </p>
-        <div className="flex lg:shadow-2xl flex-col justify-center items-center gap-5 lg:gap-0 lg:flex-row">
-          <div className="flex-1 flex">
-            <Image
-              objectFit="cover"
-              className="cursor-pointer"
-              src="/imgs/home/home1.jpg"
-              width={400}
-              height={265}
-              alt="logo"
-            />
-          </div>
-          <div className="flex-1 flex">
-            <Image
-              objectFit="cover"
-              className="cursor-pointer"
-              src="/imgs/home/home2.jpg"
-              width={400}
-              height={265}
-              alt="logo"
-            />
-          </div>
-          <div className="flex-1 flex">
-            <Image
-              objectFit="cover"
-              className="cursor-pointer"
-              src="/imgs/home/home3.jpg"
-              width={400}
-              height={265}
-              alt="logo"
-            />
+      <section className="bg-fondo  ">
+        <div className="banner-parallax-plaza">
+          <div className="mx-auto my-0 w-[90%] xl:w-[1200px]">
+            <div className=" flex flex-col md:flex-row  py-16">
+              <div className=" w-full   flex items-center ">
+                <div className="flex flex-col md:items-start gap-5 ">
+                  <h1 className="text-5xl text-primary font-bold text-center ">
+                    LA PLAZA
+                  </h1>
+                  <p className="text-justify px-0 text-[#505050] font-bold">
+                    La Plaza de Toros La Esperanza fue inaugurada en el año
+                    2009, siendo un ruedo sin graderías, el punto de encuentro y
+                    lugar donde se incubó la nueva generación de aficionados
+                    prácticos, llenando aquel año cada sábado con encerronas
+                    taurinas y gratos momentos de confraternidad. <br />
+                    <br />
+                    Buscando ser la casa del taurino de buena voluntad, se
+                    amplió en una primera etapa dotándola de un callejón que
+                    permita el buen desarrollo de un festejo taurino y cómodas
+                    butacas en las tres filas más cercanas al ruedo. Bajo esa
+                    configuración se albergaron las primeras corridas de toros
+                    formales brindando un lugar muy especial a la afición
+                    taurina, que fue creando el ambiente y la identidad de La
+                    Esperanza, en un espacio de campo con sabor criollo y
+                    fraternidad. <br />
+                    <br />Y así, la necesidad de albergar más afición tras vivir
+                    esta pandemia hizo que la plaza creciera mucho más, contando
+                    ahora con un tendido fijo de 12 filas y 5 palcos, capaz de
+                    albergar en su totalidad cerca de 3000 personas, manteniendo
+                    su coqueta identidad y esa personalidad que invita a
+                    disfrutar una tarde de toros entre amigos.
+                  </p>
+                  <button
+                    onClick={() => navigate.push("/eventos")}
+                    style={{ boxShadow: "-8px 6px 13px 0px rgba(0,0,0,0.42)" }}
+                    className="bg-tertiary px-6 py-2 rounded-sm text-white font-semibold cursor-pointer  shadow-primary"
+                  >
+                    <p className="font-bold">Conoce más</p>
+                  </button>
+                </div>
+              </div>
+              <div className="relative w-full pl-16 flex   sm:bg-transparent">
+                <div className="absolute right-0"></div>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="flex justify-center py-16 ">
-          <button
-            onClick={() => navigate.push("/plaza")}
-            style={{ boxShadow: "-8px 6px 13px 0px rgba(0,0,0,0.42)" }}
-            className="bg-tertiary px-8 py-2.5 rounded-sm text-white font-semibold cursor-pointer  shadow-primary"
-          >
-            Conoce más
-          </button>
-        </div>
-      </Container>
+      </section>
+
       <Container
         bgColor="banner banner-home6 "
         className="flex py-16 lg:py-20 flex-col justify-center items-center gap-14 lg:gap-0 lg:flex-row"
