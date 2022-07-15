@@ -66,7 +66,10 @@ const Compra = () => {
           className="-z-10 "
           alt="flyer"
         />
-        <Container bgColor="backdrop-blur-lg" className=" pt-36 pb-5">
+        <Container
+          bgColor="backdrop-blur-lg"
+          className=" pt-36 pb-5 text-[#4c000c] "
+        >
           <main className="lg:px-5 flex flex-col lg:flex-row gap-5">
             <section className="lg:relative w-full lg:w-[760px]  lg:h-[470px] gap-5  flex flex-col lg:flex-row">
               <div className="bg-white w-full h-full rounded-lg">
@@ -75,7 +78,7 @@ const Compra = () => {
                     <h1 className="text-3xl font-extrabold">
                       FERIA LA ESPERANZA
                     </h1>
-                    <h2 className="text-3xl font-extrabold">Compra tu Abono</h2>
+                    <p className="text-2xl ">Compra tu Abono</p>
                   </div>
                   <div className="flex gap-x-5 items-center mt-4">
                     <div className="flex gap-x-3">
@@ -107,15 +110,15 @@ const Compra = () => {
                 <h1 className="text-2xl lg:text-5xl text-primary font-bold ">
                   Vive la emoción de cerca!
                 </h1>
-                <p className="text-md text-primary font-semibold">
+                <p className="text-md text-primary ">
                   Este domingo 1 de Mayo se presentará Oscar Quiñonez en nuestra
                   casa. ¡¡Llenemos las tribunas, hagamos sentir la Tauromaquia!!
                 </p>
                 <p className="text-md text-primary font-bold">
                   Información adicional
                 </p>
-                <h3>Términos y condiciones:</h3>
-                <h3 className="-mt-5">ANTES DE COMPRAR:</h3>
+                <p>Términos y condiciones:</p>
+                <p className="-mt-5">ANTES DE COMPRAR:</p>
                 <p>
                   Por disposiciones sanitarias del MINSA, solo podrán acceder al
                   estadio las personas (niños y adultos) que cuenten con
@@ -161,8 +164,8 @@ const Compra = () => {
               </article>
             </section>
 
-            <section className="bg-white flex-1 rounded-lg p-5 lg:px-8 py-5 shadow-lg border">
-              <article className="flex flex-col gap-2">
+            <section className="bg-white flex-1 rounded-lg   shadow-lg border">
+              <article className="flex flex-col gap-2 p-3 lg:px-3 ">
                 <Image
                   src={`/imgs/flyers/flyer1.jpg`}
                   alt="Picture of the author"
@@ -170,7 +173,7 @@ const Compra = () => {
                   height={350}
                   className="object-cover"
                 />
-                <h2 className="text-2xl text-center mt-2 text-primary font-bold ">
+                <h2 className="text-[27px] text-center mt-2 text-primary font-bold ">
                   Feria La Esperanza
                 </h2>
                 <div className="flex gap-x-5 justify-center items-center">
@@ -188,34 +191,40 @@ const Compra = () => {
                     <div className="">1:56 am</div>
                   </div>
                 </div>
-                <p className="text-md text-text text-center">
+                <p className="text-md text-text text-center border-b border-black pb-5">
                   ¡Disfruta una emocionante tarde de toros en la comodidad de
                   nuestras butacas!
                 </p>
               </article>
-              <article className="my-5">
-                <h2 className="text-2xl text-primary font-bold ">Entradas</h2>
-                <section className="flex flex-col gap-2">
+              <article className="mb-5">
+                <p className="text-2xl text-primary font-bold px-3 pb-3">
+                  Entradas
+                </p>
+                <section className="flex flex-col">
                   {evento?.entradas.map((item, index) => (
                     <article
                       key={item.id}
-                      className="shadow-md rounded-lg bg-[#f9f9f9] border flex justify-between p-3 items-center "
+                      className={`${
+                        index % 2 === 0 ? "bg-[#F3F3F3]" : "bg-white"
+                      }    flex justify-between p-3 items-center`}
                     >
-                      <div>
-                        <p className="text-sm text-primary font-semibold leading-5">
-                          {item.title}
-                        </p>
-                        <p className="text-sm text-primary font-semibold leading-5">
-                          desde S/ {item.price}
+                      <div className="flex-1 text-[10px]">
+                        <p className=" text-primary  leading-5">{item.title}</p>
+                        <p className=" text-primary text-[9px] leading-5">
+                          desde
                         </p>
                       </div>
-
-                      <button
-                        onClick={() => handleModal(item.id)}
-                        className={`py-3 px-8 rounded-md text-white font-semibold ${colors[index]} `}
-                      >
-                        Asientos
-                      </button>
+                      <p className="flex-1 text-center text-[20px] font-semibold">
+                        S/ {item.price}
+                      </p>
+                      <div className="flex-1">
+                        <button
+                          onClick={() => handleModal(item.id)}
+                          className={` px-6 py-2 mt-2 text-sm rounded-sm text-white font-semibold cursor-pointer ${colors[index]} `}
+                        >
+                          <p>Comprar</p>
+                        </button>
+                      </div>
                     </article>
                   ))}
                 </section>

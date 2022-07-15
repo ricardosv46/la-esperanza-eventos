@@ -57,7 +57,10 @@ const Home: NextPage = () => {
                   <h2>Vive la tradición</h2>
                   <h2>Vive la magia</h2>
                   <div className=" mt-4">
-                    <button className="relative text-lg text-center font-bold rounded-l-md rounded-r-full bg-secondary pr-12 pl-6 py-2 mt-4 hover:bg-tertiary ease-in-out duration-300 transition-all shadow-2xl">
+                    <button
+                      onClick={() => navigate.push("/eventos")}
+                      className="relative text-lg text-center font-bold rounded-l-md rounded-r-full bg-secondary pr-12 pl-6 py-2 mt-4 hover:bg-tertiary ease-in-out duration-300 transition-all shadow-2xl"
+                    >
                       <p className="font-extrabold"> Venta de entradas</p>
                       <div className="absolute -bottom-3 -right-3">
                         <IconMano width={45} height={45} fill="#fff" />
