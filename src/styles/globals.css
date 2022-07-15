@@ -103,6 +103,22 @@
   src: url(/fonts/Noto_Serif_Display/NotoSerifDisplay-Thin.ttf) format('ttf');
 }
 
+/* Fuente Lato */
+
+@font-face {
+  font-family: Lato;
+  font-weight: 300;
+  font-display: swap;
+  src: url(/fonts/Lato/Lato-Light.ttf)
+}
+
+
+@layer base{
+  p{
+    @apply font-parrafo font-light
+  }
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -134,8 +150,8 @@ html {
 .banner {
   background-size: cover;
   width: 100%;
-  height: 100%;
-  height: 955px;
+  height: 100vh;
+ /*  height: 955px; */
   position: relative;
 }
 .banner::before {
@@ -145,6 +161,7 @@ html {
   position: absolute;
   width: 100%;
   height: 100%;
+  z-index: -1;
 }
 
 /* banner de para home */
@@ -187,6 +204,11 @@ html {
   background-color: transparent;
 }
 
+.bg-fondo{
+  background-color: transparent;
+  background-image: radial-gradient(at center center, #FFF2E6 50%, #F0D6BE 100%);
+}
+
 .banner-parallax {
   background-image: url('/imgs/home/torero.jpg');
   background-size: contain;
@@ -199,6 +221,23 @@ html {
 }
 @media (max-width: 768px) {
   .banner-parallax {
+    background-position: center;
+    height: 100%;
+  }
+}
+
+.banner-parallax-plaza {
+  background-image: url('/imgs/home/backsomos.png');
+  background-size: 700px 1500px;
+  background-position: calc(100%) calc(100% + 500px);
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+  background-attachment: fixed;
+
+}
+@media (max-width: 768px) {
+  .banner-parallax-plaza {
     background-position: center;
     height: 100%;
   }

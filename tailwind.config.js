@@ -372,7 +372,8 @@ module.exports = {
     },
     fontFamily: {
       sans: `"FrankRuhl", ${defaultTheme.fontFamily.sans.join(',')}`,
-      mono: `"NotoSerif", ${defaultTheme.fontFamily.mono.join(',')}`
+      mono: `"mono", ${defaultTheme.fontFamily.mono.join(',')}`,
+      parrafo: "Lato",
     },
     fontSize: {
       xs: ['0.75rem', { lineHeight: '1rem' }],
