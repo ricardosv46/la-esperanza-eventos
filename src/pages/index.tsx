@@ -78,7 +78,7 @@ const Home: NextPage = () => {
                   <h1 className="text-5xl text-primary font-bold text-center ">
                     LA PLAZA
                   </h1>
-                  <p className="text-justify px-0 text-[#505050] font-bold">
+                  <p className="text-justify px-0 text-[#505050] font-normal text-[16px] ">
                     La Plaza de Toros La Esperanza fue inaugurada en el año
                     2009, siendo un ruedo sin graderías, el punto de encuentro y
                     lugar donde se incubó la nueva generación de aficionados
@@ -102,9 +102,9 @@ const Home: NextPage = () => {
                     disfrutar una tarde de toros entre amigos.
                   </p>
                   <button
-                    onClick={() => navigate.push("/eventos")}
+                    onClick={() => navigate.push("/plaza")}
                     style={{ boxShadow: "-8px 6px 13px 0px rgba(0,0,0,0.42)" }}
-                    className="bg-tertiary px-6 py-2 rounded-sm text-white font-semibold cursor-pointer  shadow-primary"
+                    className="bg-tertiary px-6 py-2 rounded-sm text-white  cursor-pointer  shadow-primary"
                   >
                     <p className="font-bold">Conoce más</p>
                   </button>
@@ -120,18 +120,17 @@ const Home: NextPage = () => {
 
       <Container
         bgColor="banner banner-home6 "
-        className="flex py-16 lg:py-20 flex-col justify-center items-center gap-14 lg:gap-0 lg:flex-row"
+        className="flex py-16 lg:py-3 flex-col justify-center items-center gap-14 lg:gap-0 lg:flex-row"
       >
         <div className="w-full lg:w-1/2">
           <h2 className="text-5xl text-secondary font-bold lg:px-5 ">
             PRÓXIMOS EVENTOS
           </h2>
-          <p className="text-white font-semibold text-md lg:px-5 pt-10">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry’s standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic.
+          <p className="text-gray-50 font-light text-[18px] lg:px-5 pt-5">
+            <strong>Lorem Ipsum </strong>is simply dummy text of the printing
+            and typesetting industry. Lorem Ipsum has been the industry’s
+            standard dummy text ever since the 1500s, when an unknown printer
+            took a galley of type and scrambled it to make a type specimen book.
           </p>
         </div>
         <div className="w-full lg:w-1/2">
@@ -160,11 +159,11 @@ const Home: NextPage = () => {
                     />
                     <button
                       onClick={() => navigate.push(`/eventos/${flyer.img}`)}
-                      className={`bottom-7 lg:bottom-10 right-5 lg:right-20 absolute px-4 lg:px-6 py-2 lg:py-2.5  bg-secondary border-2 border-secondary hover:bg-transparent transition-all ease-in-out duration-500 text-white font-semibold text-sm lg:text-lg rounded   ${
+                      className={`bottom-7 lg:bottom-10 right-5 lg:right-20 absolute px-1 lg:px-5 py-[6px]  bg-secondary border-2 border-secondary hover:bg-transparent transition-all ease-in-out duration-500 text-white font-semibold text-xs lg:text-[13px] rounded-sm  ${
                         isActive ? "animate-fade" : "animate-fade-out"
                       }`}
                     >
-                      Comprar entradas
+                      <p>Comprar entradas</p>
                     </button>
                   </div>
                 )}
@@ -185,11 +184,11 @@ const Home: NextPage = () => {
             />
           </div>
           <div className=" w-full flex-1 flex items-center  bg-primarydark">
-            <div className="flex flex-col md:items-end gap-10">
+            <div className="flex flex-col md:items-end gap-5">
               <h2 className="text-3xl md:text-5xl text-secondary font-bold lg:ml-7">
                 VENTA DE ENTRADAS
               </h2>
-              <p className="text-gray-100 text-lg lg:ml-7 md:text-right ">
+              <p className="text-gray-50 font-light text-[18px] lg:ml-7 md:text-right ">
                 Las fiestas de toros es considerada un arte que sólo los
                 entendidos pueden apreciar. A partir de las reflexiones del
                 filósofo Francis Wolff, se emprende un recorrido histórico y
@@ -199,9 +198,9 @@ const Home: NextPage = () => {
               <button
                 onClick={() => navigate.push("/eventos")}
                 style={{ boxShadow: "-8px 6px 13px 0px rgba(0,0,0,0.42)" }}
-                className="bg-tertiary px-8 py-2.5 rounded-sm text-white font-semibold cursor-pointer  shadow-primary"
+                className="bg-tertiary px-6 py-2 rounded-sm text-white  font-semibold cursor-pointer  shadow-primary"
               >
-                Comprar aquí
+                <p>Comprar aquí</p>
               </button>
             </div>
           </div>
