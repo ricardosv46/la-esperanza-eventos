@@ -98,22 +98,16 @@ const Plaza = () => {
                       grabCursor={true}
                       pagination={true}
                       slidesPerView={1}
-                      breakpoints={{
-                        640: {
-                          slidesPerView: 2,
-                          spaceBetween: 20,
-                        },
-                      }}
                       modules={[Autoplay, Pagination]}
                       className="mySwiper"
                     >
                       <SwiperSlide>
-                        <div className="flex justify-center items-center ">
+                        <div className="w-full flex justify-center items-center ">
                           <Image
                             className="cursor-pointer relative"
                             src={`/imgs/la-esperanza/la-esperanza-02.jpg`}
-                            width={520}
-                            height={344}
+                            width={820}
+                            height={500}
                             alt="logo"
                           />
                         </div>
@@ -123,8 +117,8 @@ const Plaza = () => {
                           <Image
                             className="cursor-pointer relative"
                             src={`/imgs/la-esperanza/la-esperanza-03.jpg`}
-                            width={520}
-                            height={344}
+                            width={820}
+                            height={500}
                             alt="logo"
                           />
                         </div>
@@ -134,8 +128,8 @@ const Plaza = () => {
                           <Image
                             className="cursor-pointer relative"
                             src={`/imgs/la-esperanza/la-esperanza-01.jpg`}
-                            width={520}
-                            height={344}
+                            width={820}
+                            height={500}
                             alt="logo"
                           />
                         </div>

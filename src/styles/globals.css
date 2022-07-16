@@ -235,7 +235,7 @@ html {
 .banner-parallax-plaza {
   background-image: url('/imgs/home/backsomos.png');
   background-size: 700px 1500px;
-  background-position: calc(100%) calc(100% + 500px);
+  background-position: calc(100%) calc(100% + 250px);
   background-repeat: no-repeat;
   width: 100%;
   height: 100%;
