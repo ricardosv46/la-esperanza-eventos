@@ -1,35 +1,47 @@
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import IconDate from '../../../public/icons/IconDate'
 import Asientos, { IColums } from '../../components/asientos'
 import Container from '../../components/container'
 import { usePaymentContext } from '../../context/payment/PaymentState'
-import { genAsientos } from '../../data/asientos'
+import { genNombreFilas } from '../../data/asientos'
+import { useAsientosAbonado } from '../../services/useAsientosAbonado'
+
+import { useButacasAbonado } from '../../services/useButacasAbonado'
 
 const Detalle = () => {
   const navigation = useRouter()
-  const [dataAsientos, setDataAsientos] = useState({
-    data: [],
-    nombreFilas: [],
-    desabilitados: []
-  })
-  const { data, nombreFilas, desabilitados } = dataAsientos
-
-  console.log(data)
   const { EnviarPago } = usePaymentContext()
+
   const [seleccionados, setSeleccionados] = useState<IColums[]>([])
   const { id } = useRouter().query as any
+  const { butacas, loading, refetch } = useButacasAbonado(id)
+
+  const { asientos, refetch: refetchAsientos } = useAsientosAbonado({ feriaId: 1, tendido: id })
+  console.log(butacas)
+
+  const dataAientos = useMemo(() => {
+    if (butacas.length && !loading) {
+      return butacas.map((item, i) => ({
+        tendido: item?.tendido || '',
+        butacaId: item?.butacaId || '',
+        codigo: item?.codigo || '',
+        cantidad: item?.cantidad || 0,
+        precio: item?.precio || 0
+      }))
+    }
+  }, [butacas, loading])
 
   useEffect(() => {
-    const _data = genAsientos(id) as any
-    setDataAsientos(_data)
+    refetch()
+    refetchAsientos()
   }, [id])
 
-  const total = seleccionados.reduce(
-    (previousValue, currentValue) => previousValue + currentValue.precio,
-    0
-  )
+  console.log('elmo', dataAientos)
+  console.log('desa', asientos)
+
+  const total = seleccionados.reduce((previousValue, currentValue) => previousValue + currentValue.precio, 0)
 
   return (
     <div className='flex flex-col items-center justify-center w-full'>
@@ -44,33 +56,25 @@ const Detalle = () => {
             alt='logo'
           />
         </div>
-        <p className='text-center text-3xl text-primary font-bold'>
-          SELECCIONA TUS ASIENTOS
-        </p>
+        <p className='text-center text-3xl text-primary font-bold'>SELECCIONA TUS ASIENTOS</p>
         <div className='flex flex-col justify-center border-b-2 border-t-2 border-primary py-5 mt-5'>
           <div className='flex justify-between items-center lg:px-8'>
-            <p className=' text-base text-primary font-bold lg:text-xl'>
-              Tendido 1 SOMBRA
-            </p>
+            <p className=' text-base text-primary font-bold lg:text-xl'>Tendido 1 SOMBRA</p>
             <div className='flex gap-3 items-center'>
               <IconDate fill='#4C000C' width={20} height={20} />
-              <p className='text-primary font-bold lg:text-base text-xs'>
-                Sábado 23 de julio
-              </p>
+              <p className='text-primary font-bold lg:text-base text-xs'>Sábado 23 de julio</p>
             </div>
           </div>
-          {data.length > 0 && (
+          {dataAientos?.length && (
             <Asientos
               {...{
-                data,
-                desabilitados,
+                data: dataAientos,
+                desabilitados: asientos,
                 seleccionados,
                 setSeleccionados,
-                nombreFilas
+                nombreFilas: genNombreFilas(id)
               }}
-              doble={
-                id === '2' ? 'Tendido2' : id === '4' ? 'Tendido3' : 'Ruedo'
-              }
+              doble={id === '2' ? 'Tendido2' : id === '4' ? 'Tendido3' : 'Ruedo'}
               direccion={id === '5' ? 'end' : id === '6' ? 'start' : 'center'}
             />
           )}
@@ -112,8 +116,7 @@ const Detalle = () => {
                   query: { name: 'abono' }
                 })
                 EnviarPago(seleccionados)
-              }}
-            >
+              }}>
               COMPRAR: S/.{total.toFixed(2)}
             </button>
           </div>

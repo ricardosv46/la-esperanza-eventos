@@ -1,8 +1,11 @@
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import FormLogin from '../forms/formLogin'
 import FormRegister from '../forms/formRegister'
 import Modal from '.'
+import useForm from '../../hooks/useForm'
+import { signIn, useSession } from 'next-auth/react'
+import { useUsuario } from '../../services/useUsuario'
 
 interface Props {
   isOpen: boolean
@@ -10,15 +13,39 @@ interface Props {
 }
 
 const ModalUser = ({ isOpen, onClose }: Props) => {
-  const [tipoForm, setTipoForm] = useState('registrate')
+  const [tipoForm, setTipoForm] = useState('ingresar')
+  const { createUsuario, loadingCreate } = useUsuario()
+  const { status, data } = useSession() as {
+    status: string
+    data: { user: any }
+  }
+  console.log('data', data)
+  const [error, setError] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
+  const { nombres, apellidos, email, password, onChange, resetForm } = useForm({
+    nombres: '',
+    apellidos: '',
+    email: '',
+    password: ''
+  })
 
   const asignarFormulario = () => {
     let component = null
 
     if (tipoForm === 'ingresar') {
-      component = <FormLogin onClose={onClose} />
+      component = (
+        <FormLogin email={email} password={password} onChange={onChange} />
+      )
     } else if (tipoForm === 'registrate') {
-      component = <FormRegister />
+      component = (
+        <FormRegister
+          nombre={nombres}
+          apellido={apellidos}
+          email={email}
+          password={password}
+          onChange={onChange}
+        />
+      )
     }
 
     return component
@@ -26,9 +53,15 @@ const ModalUser = ({ isOpen, onClose }: Props) => {
 
   const cambiarFormulario = () => {
     if (tipoForm === 'ingresar') {
+      resetForm()
       setTipoForm('registrate')
+      setErrorMessage('')
+      setError(false)
     } else if (tipoForm === 'registrate') {
+      resetForm()
       setTipoForm('ingresar')
+      setErrorMessage('')
+      setError(false)
     }
   }
 
@@ -50,16 +83,46 @@ const ModalUser = ({ isOpen, onClose }: Props) => {
     return textos
   }
 
-  const variants = {
-    open: {
-      scale: 1,
-      opacity: 1,
-      transition: { ease: 'easeInOut' }
-    },
-    closed: {
-      scale: 0.9,
-      opacity: 0,
-      transition: { ease: 'easeOut' }
+  const handleClick = async (e: ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    if (tipoForm === 'registrate') {
+      createUsuario({ email, password, nombres, apellidos }).then((res) => {
+        if (res?.ok) {
+          setTipoForm('ingresar')
+          setErrorMessage('')
+        } else {
+          setError(true)
+          setErrorMessage(res.error)
+          setTimeout(() => {
+            setError(false)
+            setErrorMessage('')
+          }, 5000)
+        }
+      })
+    }
+    if (tipoForm === 'ingresar') {
+      await signIn('credentials', {
+        redirect: false,
+        email,
+        password
+      })
+        .then((res) => {
+          console.log('res', res)
+          if (res?.ok) {
+            onClose()
+            localStorage.setItem('token', data?.user?.apiToken)
+            setErrorMessage('')
+          } else {
+            setError(true)
+            setErrorMessage(res?.error || '')
+            setTimeout(() => {
+              setError(false)
+              setErrorMessage('')
+            }, 5000)
+          }
+        })
+        .catch((err) => console.log('err', err))
     }
   }
 
@@ -67,8 +130,7 @@ const ModalUser = ({ isOpen, onClose }: Props) => {
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      className='w-[95%] md:w-[800px] md:h-[540px] flex rounded-xl shadow-lg overflow-hidden'
-    >
+      className='w-[95%] md:w-[800px] md:h-[540px] flex rounded-xl shadow-lg overflow-hidden'>
       <div className='w-full hidden md:block lg:w-1/2'>
         <Image
           src='/imgs/home/torero.jpg'
@@ -91,15 +153,30 @@ const ModalUser = ({ isOpen, onClose }: Props) => {
           />
         </div>
 
-        {asignarFormulario()}
+        <form onSubmit={handleClick}>
+          {asignarFormulario()}
 
-        <div className='mt-7'>
+          <div className='mt-7 flex justify-end'>
+            <button
+              type='submit'
+              className=' bg-primary text-white cursor-pointer w-full  py-3 rounded-lg'>
+              {textoBtnCambiarForm()[3]}
+            </button>
+          </div>
+        </form>
+
+        {error && (
+          <p className='text-center font-bold text-red-500 mt-3'>
+            {errorMessage}
+          </p>
+        )}
+
+        <div className={`${error ? 'mt-2' : 'mt-7'}`}>
           <p className='text-base text-gray-400'>
             {textoBtnCambiarForm()[0]}
             <span
               className='text-primary cursor-pointer'
-              onClick={cambiarFormulario}
-            >
+              onClick={cambiarFormulario}>
               {textoBtnCambiarForm()[1]}
             </span>{' '}
           </p>
