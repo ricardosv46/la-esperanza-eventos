@@ -51,7 +51,11 @@ const Header = () => {
   return (
     <header
       className={`h-[70px] md:h-[80px] w-full fixed  top-0  z-10 flex-col justify-center items-center transition-colors duration-500 ease-in-out $ ${
+<<<<<<< HEAD
         pathname === '/' || pathname === '/plaza' || pathname === `/eventos/[slug]`
+=======
+        pathname === "/" || pathname === `/eventos/[slug]`
+>>>>>>> 9ee61678c5e908a0477dc268703d3cbc7d6fb92d
           ? navbar
             ? 'bg-primary bg-opacity-80'
             : 'bg-transparent'
