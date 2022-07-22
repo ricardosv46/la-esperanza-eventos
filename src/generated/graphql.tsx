@@ -27,6 +27,7 @@ export type Asiento = {
   codigo?: Maybe<Scalars['String']>;
   eventoId?: Maybe<Scalars['Int']>;
   feriaId?: Maybe<Scalars['Int']>;
+  reservado?: Maybe<Scalars['String']>;
   tendido?: Maybe<Scalars['String']>;
 };
 
@@ -429,7 +430,7 @@ export type GetAllAsientosAbonadosQueryVariables = Exact<{
 }>;
 
 
-export type GetAllAsientosAbonadosQuery = { __typename?: 'Query', GetAllAsientosAbonados?: Array<{ __typename?: 'Asiento', asientoId?: string | null, tendido?: string | null, codigo?: string | null, asiento?: string | null, feriaId?: number | null } | null> | null };
+export type GetAllAsientosAbonadosQuery = { __typename?: 'Query', GetAllAsientosAbonados?: Array<{ __typename?: 'Asiento', asientoId?: string | null, tendido?: string | null, codigo?: string | null, reservado?: string | null, asiento?: string | null, feriaId?: number | null } | null> | null };
 
 export type GetAllButacasQueryVariables = Exact<{
   tendido?: InputMaybe<Scalars['String']>;
@@ -540,6 +541,7 @@ export const GetAllAsientosAbonadosDocument = gql`
     asientoId
     tendido
     codigo
+    reservado
     asiento
     feriaId
   }

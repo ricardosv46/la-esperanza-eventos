@@ -93,9 +93,7 @@ const Asientos = ({
                             if (index < asiento) {
                               const isActive = seleccionados.some((seleccionado) => seleccionado.id === id)
                               console.log(id)
-                              const disabled = desabilitados.some(
-                                (_item) => _item?.codigo + '-' + _item?.asiento === id
-                              )
+                              const disabled = desabilitados.some((_item) => _item?.reservado === id)
                               return (
                                 <button
                                   id={id}

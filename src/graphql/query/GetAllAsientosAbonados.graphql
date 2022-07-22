@@ -3,6 +3,7 @@ query GetAllAsientosAbonados($tendido: String, $feriaId: Int) {
     asientoId
     tendido
     codigo
+    reservado
     asiento
     feriaId
   }
