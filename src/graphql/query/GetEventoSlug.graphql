@@ -13,6 +13,7 @@ query GetEventoSlug($slug: String) {
     ubicacion
     fecha
     hora
+    terminosCondiciones
     fechaInicial
     horaInicial
     fechaFinal

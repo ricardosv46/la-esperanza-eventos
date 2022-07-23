@@ -9,13 +9,15 @@ import Container from '../../components/container'
 import InputFloat from '../../components/inputs/InputFloat'
 import { usePaymentContext } from '../../context/payment/PaymentState'
 import useForm from '../../hooks/useForm'
-import { usePedido } from '../../services/usePedido'
 
 import * as Yup from 'yup'
 import { useSession } from 'next-auth/react'
+import { usePedidoAbonado } from '../../services/usePedidoAbonado'
+import { usePedidoEvento } from '../../services/usePedidoEvento'
 
 const CheckOut = () => {
-  const { createPedido } = usePedido()
+  const { createPedidoAbonado } = usePedidoAbonado()
+  const { createPedidoEvento } = usePedidoEvento()
   const { status, data } = useSession() as any
 
   const [pagado, setPagado] = useState(false)
@@ -70,25 +72,49 @@ const CheckOut = () => {
                   .matches(/^[0-9]+$/, 'Debe ser solo números')
               })}
               onSubmit={(values) => {
-                createPedido({
-                  input1: {
-                    fechaPedido: '2022-07-22',
-                    numeroComprobante: values.documento,
-                    precioTotal: total,
-                    tipoComprobante: values.tipoComprobante
-                  },
-                  input2: pago,
-                  input3: {}
-                }).then((res) => {
-                  if (res?.ok) {
-                    setPagado(true)
-                  } else {
-                    setErrores(res?.error)
-                    setTimeout(() => {
-                      setErrores('')
-                    }, 5000)
-                  }
-                })
+                if (query.name === 'abono') {
+                  createPedidoAbonado({
+                    input1: {
+                      fechaPedido: '2022-07-22',
+                      numeroComprobante: values.documento,
+                      precioTotal: total,
+                      tipoComprobante: values.tipoComprobante
+                    },
+                    input2: pago,
+                    input3: {}
+                  }).then((res) => {
+                    if (res?.ok) {
+                      setPagado(true)
+                    } else {
+                      setErrores(res?.error)
+                      setTimeout(() => {
+                        setErrores('')
+                      }, 5000)
+                    }
+                  })
+                }
+
+                if (query.name === 'evento') {
+                  createPedidoEvento({
+                    input1: {
+                      fechaPedido: '2022-07-22',
+                      numeroComprobante: values.documento,
+                      precioTotal: total,
+                      tipoComprobante: values.tipoComprobante
+                    },
+                    input2: pago,
+                    input3: {}
+                  }).then((res) => {
+                    if (res?.ok) {
+                      setPagado(true)
+                    } else {
+                      setErrores(res?.error)
+                      setTimeout(() => {
+                        setErrores('')
+                      }, 5000)
+                    }
+                  })
+                }
               }}>
               {({ values, handleChange, handleBlur, handleSubmit, errors, touched }) => (
                 <form onSubmit={handleSubmit} className='grid grid-cols-1 lg:grid-cols-2 gap-3 mt-8'>
@@ -191,30 +217,59 @@ const CheckOut = () => {
                 email: Yup.string().email('Debe ser un Email valido').required(`El Email es requerido`)
               })}
               onSubmit={(values) => {
-                createPedido({
-                  input1: {
-                    fechaPedido: '2022-07-22',
-                    numeroComprobante: values.documento,
-                    precioTotal: total,
-                    tipoComprobante: values.tipoComprobante
-                  },
-                  input2: pago,
-                  input3: {
-                    nombres: values.nombres,
-                    apellidos: values.apellidos,
-                    celular: values.celular,
-                    email: values.email
-                  }
-                }).then((res) => {
-                  if (res?.ok) {
-                    setPagado(true)
-                  } else {
-                    setErrores(res?.error)
-                    setTimeout(() => {
-                      setErrores('')
-                    }, 5000)
-                  }
-                })
+                if (query.name === 'abono') {
+                  createPedidoEvento({
+                    input1: {
+                      fechaPedido: '2022-07-22',
+                      numeroComprobante: values.documento,
+                      precioTotal: total,
+                      tipoComprobante: values.tipoComprobante
+                    },
+                    input2: pago,
+                    input3: {
+                      nombres: values.nombres,
+                      apellidos: values.apellidos,
+                      celular: values.celular,
+                      email: values.email
+                    }
+                  }).then((res) => {
+                    if (res?.ok) {
+                      setPagado(true)
+                    } else {
+                      setErrores(res?.error)
+                      setTimeout(() => {
+                        setErrores('')
+                      }, 5000)
+                    }
+                  })
+                }
+
+                if (query.name === 'evento') {
+                  createPedidoEvento({
+                    input1: {
+                      fechaPedido: '2022-07-22',
+                      numeroComprobante: values.documento,
+                      precioTotal: total,
+                      tipoComprobante: values.tipoComprobante
+                    },
+                    input2: pago,
+                    input3: {
+                      nombres: values.nombres,
+                      apellidos: values.apellidos,
+                      celular: values.celular,
+                      email: values.email
+                    }
+                  }).then((res) => {
+                    if (res?.ok) {
+                      setPagado(true)
+                    } else {
+                      setErrores(res?.error)
+                      setTimeout(() => {
+                        setErrores('')
+                      }, 5000)
+                    }
+                  })
+                }
               }}>
               {({ values, handleChange, handleBlur, handleSubmit, errors, touched }) => (
                 <form onSubmit={handleSubmit} className='grid grid-cols-1 lg:grid-cols-2 gap-3 mt-8'>

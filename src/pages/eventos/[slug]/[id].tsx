@@ -12,6 +12,7 @@ import { useEventoSlug } from '../../../services/useEventoSlug'
 
 const Detalle = () => {
   const navigation = useRouter()
+  const { EnviarPago } = usePaymentContext()
   const [seleccionados, setSeleccionados] = useState<IColums[]>([])
   const { id, slug } = useRouter().query as any
   const { butacas, loading, refetch } = useButacas(id)
@@ -84,6 +85,8 @@ const Detalle = () => {
                 setSeleccionados,
                 nombreFilas: genNombreFilas(id)
               }}
+              tipo='evento'
+              evento={Number(eventoSlug?.eventoId)}
               doble={id === 'T2S' ? 'Tendido2' : id === 'T3' ? 'Tendido3' : 'Ruedo'}
               direccion={id === 'T3A' ? 'end' : id === 'T3B' ? 'start' : 'center'}
             />
@@ -123,9 +126,9 @@ const Detalle = () => {
               onClick={() => {
                 navigation.push({
                   pathname: '/check-out/',
-                  query: { name: 'abono' }
+                  query: { name: 'evento' }
                 })
-                // EnviarPago(seleccionados)
+                EnviarPago(seleccionados)
               }}>
               COMPRAR: S/.{total.toFixed(2)}
             </button>

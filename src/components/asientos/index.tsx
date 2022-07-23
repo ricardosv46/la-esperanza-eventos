@@ -12,7 +12,9 @@ interface IProps {
   desabilitados: any[]
   nombreFilas: string[]
   doble?: 'Ruedo' | 'Tendido2' | 'Tendido3'
-  direccion?: 'start' | 'center' | 'end' // default: "center"  start: es al final por el reverse y end: es al inicio
+  direccion?: 'start' | 'center' | 'end'
+  tipo: 'abono' | 'evento'
+  evento?: number
 }
 
 interface Filas {
@@ -30,6 +32,7 @@ export interface IColums {
   codigo: string
   tendido: string
   feriaId: number
+  eventoId?: number
 }
 
 const Asientos = ({
@@ -39,7 +42,9 @@ const Asientos = ({
   desabilitados,
   nombreFilas,
   direccion = 'center',
-  doble = 'Ruedo'
+  doble = 'Ruedo',
+  tipo,
+  evento
 }: IProps) => {
   const filas = useMemo(() => {
     let tfilas: any = {}
@@ -55,7 +60,8 @@ const Asientos = ({
         codigo: fila,
         asiento: i + 1,
         precio: precio,
-        feriaId: 1
+        feriaId: 1,
+        eventoId: evento ? evento : 0
       }))
     }
     return tfilas
@@ -93,7 +99,10 @@ const Asientos = ({
                         </div>
                         <div className={`flex flex-row-reverse justify-${direccion} items-center gap-1 flex-1`}>
                           {filas[`${fila.toString()}`].map(
-                            ({ reservado, precio, asiento, codigo, feriaId, tendido }: IColums, index: any) => {
+                            (
+                              { reservado, precio, asiento, codigo, feriaId, tendido, eventoId }: IColums,
+                              index: any
+                            ) => {
                               if (index < asiento) {
                                 const isActive = seleccionados.some(
                                   (seleccionado) => seleccionado.reservado === reservado
@@ -104,16 +113,29 @@ const Asientos = ({
                                   <button
                                     id={reservado}
                                     key={reservado}
-                                    onClick={() =>
-                                      selectId({
-                                        reservado,
-                                        precio,
-                                        asiento: asiento.toString(),
-                                        codigo,
-                                        feriaId,
-                                        tendido
-                                      })
-                                    }
+                                    onClick={() => {
+                                      if (tipo === 'abono') {
+                                        selectId({
+                                          reservado,
+                                          precio,
+                                          asiento: asiento.toString(),
+                                          codigo,
+                                          feriaId,
+                                          tendido
+                                        })
+                                      }
+                                      if (tipo === 'evento') {
+                                        selectId({
+                                          reservado,
+                                          precio,
+                                          asiento: asiento.toString(),
+                                          codigo,
+                                          feriaId,
+                                          tendido,
+                                          eventoId
+                                        })
+                                      }
+                                    }}
                                     disabled={disabled}
                                     className={`
                                   ${

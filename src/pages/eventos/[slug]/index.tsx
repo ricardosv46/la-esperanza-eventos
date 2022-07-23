@@ -15,10 +15,20 @@ const colors = ['bg-[#F89F59]', 'bg-[#FFD066]', 'bg-[#FFDA99]', 'bg-[#D03B3E]', 
 const Compra = () => {
   const { slug } = useRouter().query as { slug: string }
   const router = useRouter()
+
   const { eventoSlug, loading, refetch } = useEventoSlug(slug)
   const handleClick = (id: string) => {
     router.push(`/eventos/${slug}/${id}`)
   }
+
+  useEffect(() => {
+    if (!loading) {
+      if (eventoSlug?.eventoId) {
+      } else {
+        router.push('/eventos')
+      }
+    }
+  }, [loading])
 
   const { precios } = usePreciosRefs()
 
@@ -32,15 +42,17 @@ const Compra = () => {
         <Spinner />
       ) : (
         <div className='w-full  relative '>
-          <Image
-            src={eventoSlug?.imagenPrincipal?.url!}
-            width={'100%'}
-            height={'100%'}
-            layout='fill'
-            objectFit='cover'
-            className='-z-10'
-            alt='flyer'
-          />
+          {eventoSlug?.imagenPrincipal?.url && (
+            <Image
+              src={eventoSlug?.imagenPrincipal?.url}
+              width={'100%'}
+              height={'100%'}
+              layout='fill'
+              objectFit='cover'
+              className='-z-10'
+              alt='flyer'
+            />
+          )}
           <Container bgColor='backdrop-blur-lg' className=' pt-36 pb-5 text-[#4c000c] '>
             <main className='lg:px-5 flex flex-col lg:flex-row gap-5'>
               <section className='lg:relative w-full lg:w-[760px]  lg:h-[780px] gap-5  flex flex-col lg:flex-row'>
@@ -74,13 +86,17 @@ const Compra = () => {
 
               <section className='bg-white flex-1 rounded-lg   shadow-lg border'>
                 <article className='flex flex-col gap-2 p-3 lg:px-3 '>
-                  <Image
-                    src={eventoSlug?.imagenPrincipal?.url!}
-                    alt='Picture of the author'
-                    width={500}
-                    height={350}
-                    className='object-cover'
-                  />
+                  {eventoSlug?.imagenPrincipal?.url && (
+                    <Image
+                      src={eventoSlug?.imagenPrincipal?.url}
+                      alt='Picture of the author'
+                      loading='lazy'
+                      width={500}
+                      height={350}
+                      className='object-cover'
+                    />
+                  )}
+
                   <h2 className='text-[27px] text-center mt-2 text-primary font-bold '>{eventoSlug?.titulo}</h2>
                   <div className='flex gap-x-5 justify-center items-center'>
                     <div className='flex gap-x-3'>
@@ -111,8 +127,10 @@ const Compra = () => {
                           index % 2 === 0 ? 'bg-[#F3F3F3]' : 'bg-white'
                         }    flex justify-between p-3 items-center`}>
                         <div className='flex-1 text-[10px]'>
-                          <p className=' text-primary text-base leading-5'>{item?.titulo}</p>
-                          <p className=' text-primary text-[9px] leading-5'>desde</p>
+                          <div>
+                            <p className='text-sm text-primary font-semibold leading-5'>{item?.titulo}</p>
+                            <p className='text-sm text-primary font-semibold leading-5'>desde </p>
+                          </div>
                         </div>
                         <p className='flex-1 text-center text-[20px] font-semibold'>S/ {item?.precio}</p>
                         <div className='flex-1'>
@@ -136,40 +154,8 @@ const Compra = () => {
               <p className='text-md text-primary font-bold'>Información adicional</p>
               <p>Términos y condiciones:</p>
               <p className='-mt-5'>ANTES DE COMPRAR:</p>
-              <p>
-                Por disposiciones sanitarias del MINSA, solo podrán acceder al estadio las personas (niños y adultos)
-                que cuenten con constancia de vacunación completa con el COVID 19.
-              </p>
-              <p>Mascarilla KN95 o Doble Mascarilla (En caso sean quirúrgicas o de tela)</p>
-              <p>
-                Constancia digital o física de esquema de vacunación completo:
-                <br />
-                Ingreso para menores de edad con 2 dosis
-                <br />
-                Ingreso para mayores de 18 años a más con 2 dosis y dosis de refuerzo
-              </p>
 
-              <p>
-                Documento Nacional de Identidad
-                <br />
-                Entrada Impresa
-              </p>
-
-              <p>
-                No hay Reembolso o devolución por entradas adquiridas
-                <br />
-                Cada entrada debe tener el nombre y DNI de la persona que hará uso de la misma
-                <br />
-                No se permiten cambios de tribuna, tipo de entrada o de partido
-                <br />
-                Los menores de edad deben ingresar acompañados por un adulto
-                <br />
-              </p>
-              <p>
-                Recuerda que, si el partido sufre de inconvenientes causados por circunstancias externas a la
-                organización, el partido o el ingreso al estadio puede anularse o verse restringido sin opción a
-                devolución o reembolso.
-              </p>
+              <p>{eventoSlug?.terminosCondiciones}</p>
             </article>
 
             <section className='py-5 flex justify-center items-start lg:justify-end z-0'>
@@ -189,12 +175,6 @@ const Compra = () => {
           </Container>
         </div>
       )}
-
-      {/* <ModalCompra
-        onClick={handleClickModal}
-        isOpen={showModal}
-        onClose={() => setShowModal(false)}
-      /> */}
     </>
   )
 }

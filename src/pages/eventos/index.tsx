@@ -7,7 +7,6 @@ import OpenGraph from '../../components/openGraph'
 import Spinner from '../../components/spinner'
 import { useAbonado } from '../../services/useAbonado'
 import { useEventos } from '../../services/useEventos'
-import { useEventoSlug } from '../../services/useEventoSlug'
 
 const Eventos = () => {
   const navigate = useRouter()
@@ -59,7 +58,7 @@ const Eventos = () => {
                   <div className='absolute w-full  bottom-5 md:bottom-10 '>
                     <div className='w-full flex flex-col gap-1 md:gap-y-2 items-center'>
                       <h2 className='text-xs sm:text-3xl md:text-4xl text-yellow-500 font-semibold'>{abono?.titulo}</h2>
-                      <p className='text-white'>{abono?.descripcion}</p>
+                      <p className='text-white'>{abono?.descripcionCorta}</p>
                     </div>
                   </div>
                 </div>
@@ -74,7 +73,7 @@ const Eventos = () => {
                   />
                   <div className='absolute w-full px-10 bottom-10 left-1/2 -translate-x-1/2  text-center'>
                     <h2 className='text-2xl text-yellow-500'> {abono?.titulo}</h2>
-                    <p className='text-white'>{abono?.descripcion}</p>
+                    <p className='text-white'>{abono?.descripcionCorta}</p>
                   </div>
                 </div>
               </div>

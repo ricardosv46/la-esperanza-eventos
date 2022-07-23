@@ -24,15 +24,6 @@ const flyers = [
 const Home: NextPage = () => {
   const navigate = useRouter()
 
-  useEffect(() => {
-    const sesion = async () => {
-      const res = await getSession()
-      console.log('sesion', res)
-    }
-
-    sesion()
-  }, [])
-
   return (
     <>
       <OpenGraph

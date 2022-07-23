@@ -27,8 +27,6 @@ const Header = () => {
   const [cerrar, setCerrar] = useState(false)
   const { status, data } = useSession() as any
 
-  console.log(data?.user?.nombres)
-
   const changeBackground = () => {
     if (window.scrollY >= 80) {
       setNavbar(true)

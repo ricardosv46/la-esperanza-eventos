@@ -71,6 +71,7 @@ const Detalle = () => {
                 setSeleccionados,
                 nombreFilas: genNombreFilas(id)
               }}
+              tipo='abono'
               doble={id === 'T2S' ? 'Tendido2' : id === 'T3' ? 'Tendido3' : 'Ruedo'}
               direccion={id === 'T3A' ? 'end' : id === 'T3B' ? 'start' : 'center'}
             />

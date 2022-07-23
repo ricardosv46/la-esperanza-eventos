@@ -1,9 +1,11 @@
 query GetFeria {
   GetFeria {
     feriaId
-    descripcion
+    descripcionCorta
+    descripcionLarga
     descuento
     titulo
+    terminosCondiciones
     imagenPrincipal {
       id
       titulo
