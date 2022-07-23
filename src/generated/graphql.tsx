@@ -53,7 +53,7 @@ export type DetallePedido = {
   eventoId?: Maybe<Scalars['Int']>;
   feriaId?: Maybe<Scalars['Int']>;
   pedidoId?: Maybe<Scalars['Int']>;
-  precio?: Maybe<Scalars['String']>;
+  precio?: Maybe<Scalars['Float']>;
   tendido?: Maybe<Scalars['String']>;
 };
 
@@ -62,7 +62,8 @@ export type DetallePedidoInput = {
   codigo?: InputMaybe<Scalars['String']>;
   eventoId?: InputMaybe<Scalars['Int']>;
   feriaId?: InputMaybe<Scalars['Int']>;
-  precio?: InputMaybe<Scalars['String']>;
+  precio?: InputMaybe<Scalars['Float']>;
+  reservado?: InputMaybe<Scalars['String']>;
   tendido?: InputMaybe<Scalars['String']>;
 };
 
@@ -81,6 +82,8 @@ export type Evento = {
   horaFinal?: Maybe<Scalars['String']>;
   horaInicial?: Maybe<Scalars['String']>;
   imagenPrincipal?: Maybe<Imagen>;
+  slug?: Maybe<Scalars['String']>;
+  terminosCondiciones?: Maybe<Scalars['String']>;
   titulo?: Maybe<Scalars['String']>;
   ubicacion?: Maybe<Scalars['String']>;
 };
@@ -89,7 +92,6 @@ export type EventoInput = {
   descripcionCorta?: InputMaybe<Scalars['String']>;
   descripcionLarga?: InputMaybe<Scalars['String']>;
   direccion?: InputMaybe<Scalars['String']>;
-  estado?: InputMaybe<Scalars['String']>;
   eventoId?: InputMaybe<Scalars['ID']>;
   fecha?: InputMaybe<Scalars['Date']>;
   fechaFinal?: InputMaybe<Scalars['Date']>;
@@ -98,6 +100,7 @@ export type EventoInput = {
   horaFinal?: InputMaybe<Scalars['String']>;
   horaInicial?: InputMaybe<Scalars['String']>;
   imagenPrincipal?: InputMaybe<Scalars['Int']>;
+  terminosCondiciones?: InputMaybe<Scalars['String']>;
   titulo?: InputMaybe<Scalars['String']>;
   ubicacion?: InputMaybe<Scalars['String']>;
 };
@@ -113,6 +116,7 @@ export type Feria = {
   horaInicial?: Maybe<Scalars['String']>;
   imagenPrincipal?: Maybe<Imagen>;
   imagenSecundaria?: Maybe<Imagen>;
+  terminosCondiciones?: Maybe<Scalars['String']>;
   titulo?: Maybe<Scalars['String']>;
 };
 
@@ -126,6 +130,7 @@ export type FeriaInput = {
   horaInicial?: InputMaybe<Scalars['String']>;
   imagenPrincipal?: InputMaybe<Scalars['Int']>;
   imagenSecundaria?: InputMaybe<Scalars['Int']>;
+  terminosCondiciones?: InputMaybe<Scalars['String']>;
   titulo?: InputMaybe<Scalars['String']>;
 };
 
@@ -181,6 +186,7 @@ export type Mutation = {
   DeleteEvento?: Maybe<Scalars['String']>;
   DeleteImagen: Scalars['String'];
   Login?: Maybe<User>;
+  UpdateEstadoEvento?: Maybe<Evento>;
   UpdateEvento?: Maybe<Evento>;
   UpdateImagen: Imagen;
   UpdatePrecio: Butaca;
@@ -229,6 +235,11 @@ export type MutationDeleteImagenArgs = {
 
 export type MutationLoginArgs = {
   input: LoginInput;
+};
+
+
+export type MutationUpdateEstadoEventoArgs = {
+  input: UpdateEstadoEventoInput;
 };
 
 
@@ -330,6 +341,8 @@ export type Query = {
   GetAllEventos?: Maybe<GetAllEventos>;
   GetAllImagenes?: Maybe<GetAllImagenes>;
   GetAllPedidos?: Maybe<GetAllPedidos>;
+  GetAllPrecioReferencial?: Maybe<Array<Maybe<Referencial>>>;
+  GetEventoSlug?: Maybe<Evento>;
   GetFeria?: Maybe<Feria>;
 };
 
@@ -368,6 +381,18 @@ export type QueryGetAllPedidosArgs = {
   pagina?: InputMaybe<Scalars['Int']>;
 };
 
+
+export type QueryGetEventoSlugArgs = {
+  slug?: InputMaybe<Scalars['String']>;
+};
+
+export type Referencial = {
+  __typename?: 'Referencial';
+  precio?: Maybe<Scalars['Float']>;
+  tendido?: Maybe<Scalars['String']>;
+  titulo?: Maybe<Scalars['String']>;
+};
+
 /** The available directions for ordering a list of records. */
 export enum SortOrder {
   /** Sort records in ascending order. */
@@ -385,6 +410,11 @@ export enum Trashed {
   /** Only return non-trashed results. */
   Without = 'WITHOUT'
 }
+
+export type UpdateEstadoEventoInput = {
+  estado?: InputMaybe<Scalars['String']>;
+  eventoId?: InputMaybe<Scalars['ID']>;
+};
 
 export type User = {
   __typename?: 'User';
@@ -424,6 +454,23 @@ export type LoginMutationVariables = Exact<{
 
 export type LoginMutation = { __typename?: 'Mutation', Login?: { __typename?: 'User', id?: string | null, email?: string | null, tipoUsuario?: number | null, tipoDocumento?: string | null, numeroDocumento?: string | null, nombres?: string | null, apellidos?: string | null, celular?: string | null, apiToken?: string | null } | null };
 
+export type CreatePedidoAbonadoMutationVariables = Exact<{
+  input1: PedidoInput;
+  input2?: InputMaybe<Array<DetallePedidoInput> | DetallePedidoInput>;
+  input3?: InputMaybe<UserInput>;
+}>;
+
+
+export type CreatePedidoAbonadoMutation = { __typename?: 'Mutation', CreatePedidoAbonado: { __typename?: 'Pedido', pedidoId?: string | null, tipoComprobante?: string | null } };
+
+export type GetAllAsientosQueryVariables = Exact<{
+  tendido?: InputMaybe<Scalars['String']>;
+  eventoId?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type GetAllAsientosQuery = { __typename?: 'Query', GetAllAsientos?: Array<{ __typename?: 'Asiento', asientoId?: string | null, tendido?: string | null, codigo?: string | null, asiento?: string | null, reservado?: string | null } | null> | null };
+
 export type GetAllAsientosAbonadosQueryVariables = Exact<{
   tendido?: InputMaybe<Scalars['String']>;
   feriaId?: InputMaybe<Scalars['Int']>;
@@ -445,7 +492,19 @@ export type GetAllEventosQueryVariables = Exact<{
 }>;
 
 
-export type GetAllEventosQuery = { __typename?: 'Query', GetAllEventos?: { __typename?: 'GetAllEventos', numeroTotal?: number | null, data?: Array<{ __typename?: 'Evento', eventoId?: string | null, titulo?: string | null, descripcionCorta?: string | null, descripcionLarga?: string | null, direccion?: string | null, ubicacion?: string | null, fecha?: any | null, hora?: string | null, fechaInicial?: any | null, horaInicial?: string | null, fechaFinal?: any | null, horaFinal?: string | null, estado?: string | null, feriaId?: number | null, imagenPrincipal?: { __typename?: 'Imagen', id?: string | null, titulo?: string | null, url?: string | null } | null }> | null } | null };
+export type GetAllEventosQuery = { __typename?: 'Query', GetAllEventos?: { __typename?: 'GetAllEventos', numeroTotal?: number | null, data?: Array<{ __typename?: 'Evento', eventoId?: string | null, titulo?: string | null, descripcionCorta?: string | null, descripcionLarga?: string | null, direccion?: string | null, ubicacion?: string | null, fecha?: any | null, hora?: string | null, fechaInicial?: any | null, horaInicial?: string | null, fechaFinal?: any | null, horaFinal?: string | null, estado?: string | null, slug?: string | null, feriaId?: number | null, imagenPrincipal?: { __typename?: 'Imagen', id?: string | null, titulo?: string | null, url?: string | null } | null }> | null } | null };
+
+export type GetAllPrecioReferencialQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllPrecioReferencialQuery = { __typename?: 'Query', GetAllPrecioReferencial?: Array<{ __typename?: 'Referencial', tendido?: string | null, precio?: number | null, titulo?: string | null } | null> | null };
+
+export type GetEventoSlugQueryVariables = Exact<{
+  slug?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type GetEventoSlugQuery = { __typename?: 'Query', GetEventoSlug?: { __typename?: 'Evento', eventoId?: string | null, titulo?: string | null, descripcionCorta?: string | null, descripcionLarga?: string | null, direccion?: string | null, ubicacion?: string | null, fecha?: any | null, hora?: string | null, fechaInicial?: any | null, horaInicial?: string | null, fechaFinal?: any | null, horaFinal?: string | null, estado?: string | null, imagenPrincipal?: { __typename?: 'Imagen', id?: string | null, titulo?: string | null, url?: string | null } | null } | null };
 
 export type GetFeriaQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -535,6 +594,82 @@ export function useLoginMutation(baseOptions?: Apollo.MutationHookOptions<LoginM
 export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
 export type LoginMutationResult = Apollo.MutationResult<LoginMutation>;
 export type LoginMutationOptions = Apollo.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
+export const CreatePedidoAbonadoDocument = gql`
+    mutation CreatePedidoAbonado($input1: PedidoInput!, $input2: [DetallePedidoInput!], $input3: UserInput) {
+  CreatePedidoAbonado(input1: $input1, input2: $input2, input3: $input3) {
+    pedidoId
+    tipoComprobante
+  }
+}
+    `;
+export type CreatePedidoAbonadoMutationFn = Apollo.MutationFunction<CreatePedidoAbonadoMutation, CreatePedidoAbonadoMutationVariables>;
+
+/**
+ * __useCreatePedidoAbonadoMutation__
+ *
+ * To run a mutation, you first call `useCreatePedidoAbonadoMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreatePedidoAbonadoMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createPedidoAbonadoMutation, { data, loading, error }] = useCreatePedidoAbonadoMutation({
+ *   variables: {
+ *      input1: // value for 'input1'
+ *      input2: // value for 'input2'
+ *      input3: // value for 'input3'
+ *   },
+ * });
+ */
+export function useCreatePedidoAbonadoMutation(baseOptions?: Apollo.MutationHookOptions<CreatePedidoAbonadoMutation, CreatePedidoAbonadoMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreatePedidoAbonadoMutation, CreatePedidoAbonadoMutationVariables>(CreatePedidoAbonadoDocument, options);
+      }
+export type CreatePedidoAbonadoMutationHookResult = ReturnType<typeof useCreatePedidoAbonadoMutation>;
+export type CreatePedidoAbonadoMutationResult = Apollo.MutationResult<CreatePedidoAbonadoMutation>;
+export type CreatePedidoAbonadoMutationOptions = Apollo.BaseMutationOptions<CreatePedidoAbonadoMutation, CreatePedidoAbonadoMutationVariables>;
+export const GetAllAsientosDocument = gql`
+    query GetAllAsientos($tendido: String, $eventoId: Int) {
+  GetAllAsientos(tendido: $tendido, eventoId: $eventoId) {
+    asientoId
+    tendido
+    codigo
+    asiento
+    reservado
+  }
+}
+    `;
+
+/**
+ * __useGetAllAsientosQuery__
+ *
+ * To run a query within a React component, call `useGetAllAsientosQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllAsientosQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllAsientosQuery({
+ *   variables: {
+ *      tendido: // value for 'tendido'
+ *      eventoId: // value for 'eventoId'
+ *   },
+ * });
+ */
+export function useGetAllAsientosQuery(baseOptions?: Apollo.QueryHookOptions<GetAllAsientosQuery, GetAllAsientosQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAllAsientosQuery, GetAllAsientosQueryVariables>(GetAllAsientosDocument, options);
+      }
+export function useGetAllAsientosLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllAsientosQuery, GetAllAsientosQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAllAsientosQuery, GetAllAsientosQueryVariables>(GetAllAsientosDocument, options);
+        }
+export type GetAllAsientosQueryHookResult = ReturnType<typeof useGetAllAsientosQuery>;
+export type GetAllAsientosLazyQueryHookResult = ReturnType<typeof useGetAllAsientosLazyQuery>;
+export type GetAllAsientosQueryResult = Apollo.QueryResult<GetAllAsientosQuery, GetAllAsientosQueryVariables>;
 export const GetAllAsientosAbonadosDocument = gql`
     query GetAllAsientosAbonados($tendido: String, $feriaId: Int) {
   GetAllAsientosAbonados(tendido: $tendido, feriaId: $feriaId) {
@@ -641,6 +776,7 @@ export const GetAllEventosDocument = gql`
       fechaFinal
       horaFinal
       estado
+      slug
       feriaId
     }
   }
@@ -675,6 +811,94 @@ export function useGetAllEventosLazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
 export type GetAllEventosQueryHookResult = ReturnType<typeof useGetAllEventosQuery>;
 export type GetAllEventosLazyQueryHookResult = ReturnType<typeof useGetAllEventosLazyQuery>;
 export type GetAllEventosQueryResult = Apollo.QueryResult<GetAllEventosQuery, GetAllEventosQueryVariables>;
+export const GetAllPrecioReferencialDocument = gql`
+    query GetAllPrecioReferencial {
+  GetAllPrecioReferencial {
+    tendido
+    precio
+    titulo
+  }
+}
+    `;
+
+/**
+ * __useGetAllPrecioReferencialQuery__
+ *
+ * To run a query within a React component, call `useGetAllPrecioReferencialQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllPrecioReferencialQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllPrecioReferencialQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAllPrecioReferencialQuery(baseOptions?: Apollo.QueryHookOptions<GetAllPrecioReferencialQuery, GetAllPrecioReferencialQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAllPrecioReferencialQuery, GetAllPrecioReferencialQueryVariables>(GetAllPrecioReferencialDocument, options);
+      }
+export function useGetAllPrecioReferencialLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllPrecioReferencialQuery, GetAllPrecioReferencialQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAllPrecioReferencialQuery, GetAllPrecioReferencialQueryVariables>(GetAllPrecioReferencialDocument, options);
+        }
+export type GetAllPrecioReferencialQueryHookResult = ReturnType<typeof useGetAllPrecioReferencialQuery>;
+export type GetAllPrecioReferencialLazyQueryHookResult = ReturnType<typeof useGetAllPrecioReferencialLazyQuery>;
+export type GetAllPrecioReferencialQueryResult = Apollo.QueryResult<GetAllPrecioReferencialQuery, GetAllPrecioReferencialQueryVariables>;
+export const GetEventoSlugDocument = gql`
+    query GetEventoSlug($slug: String) {
+  GetEventoSlug(slug: $slug) {
+    eventoId
+    titulo
+    descripcionCorta
+    descripcionLarga
+    imagenPrincipal {
+      id
+      titulo
+      url
+    }
+    direccion
+    ubicacion
+    fecha
+    hora
+    fechaInicial
+    horaInicial
+    fechaFinal
+    horaFinal
+    estado
+  }
+}
+    `;
+
+/**
+ * __useGetEventoSlugQuery__
+ *
+ * To run a query within a React component, call `useGetEventoSlugQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetEventoSlugQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetEventoSlugQuery({
+ *   variables: {
+ *      slug: // value for 'slug'
+ *   },
+ * });
+ */
+export function useGetEventoSlugQuery(baseOptions?: Apollo.QueryHookOptions<GetEventoSlugQuery, GetEventoSlugQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetEventoSlugQuery, GetEventoSlugQueryVariables>(GetEventoSlugDocument, options);
+      }
+export function useGetEventoSlugLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetEventoSlugQuery, GetEventoSlugQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetEventoSlugQuery, GetEventoSlugQueryVariables>(GetEventoSlugDocument, options);
+        }
+export type GetEventoSlugQueryHookResult = ReturnType<typeof useGetEventoSlugQuery>;
+export type GetEventoSlugLazyQueryHookResult = ReturnType<typeof useGetEventoSlugLazyQuery>;
+export type GetEventoSlugQueryResult = Apollo.QueryResult<GetEventoSlugQuery, GetEventoSlugQueryVariables>;
 export const GetFeriaDocument = gql`
     query GetFeria {
   GetFeria {

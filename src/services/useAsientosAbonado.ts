@@ -1,4 +1,4 @@
-import { useGetAllAsientosAbonadosQuery, useGetAllButacasQuery } from '../generated/graphql'
+import { useGetAllAsientosAbonadosQuery } from '../generated/graphql'
 
 // Obtenemos todas los abonos
 export const useAsientosAbonado = (input = { feriaId: 1, tendido: 'T1' }) => {

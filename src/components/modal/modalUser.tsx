@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import FormLogin from '../forms/formLogin'
 import FormRegister from '../forms/formRegister'
 import Modal from '.'
@@ -15,11 +15,8 @@ interface Props {
 const ModalUser = ({ isOpen, onClose }: Props) => {
   const [tipoForm, setTipoForm] = useState('ingresar')
   const { createUsuario, loadingCreate } = useUsuario()
-  const { status, data } = useSession() as {
-    status: string
-    data: { user: any }
-  }
-  console.log('data', data)
+  const { status, data } = useSession() as any
+  console.log('datafasfasf', data)
   const [error, setError] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
   const { nombres, apellidos, email, password, onChange, resetForm } = useForm({
@@ -33,18 +30,10 @@ const ModalUser = ({ isOpen, onClose }: Props) => {
     let component = null
 
     if (tipoForm === 'ingresar') {
-      component = (
-        <FormLogin email={email} password={password} onChange={onChange} />
-      )
+      component = <FormLogin email={email} password={password} onChange={onChange} />
     } else if (tipoForm === 'registrate') {
       component = (
-        <FormRegister
-          nombre={nombres}
-          apellido={apellidos}
-          email={email}
-          password={password}
-          onChange={onChange}
-        />
+        <FormRegister nombre={nombres} apellido={apellidos} email={email} password={password} onChange={onChange} />
       )
     }
 
@@ -111,7 +100,7 @@ const ModalUser = ({ isOpen, onClose }: Props) => {
           console.log('res', res)
           if (res?.ok) {
             onClose()
-            localStorage.setItem('token', data?.user?.apiToken)
+
             setErrorMessage('')
           } else {
             setError(true)
@@ -157,26 +146,18 @@ const ModalUser = ({ isOpen, onClose }: Props) => {
           {asignarFormulario()}
 
           <div className='mt-7 flex justify-end'>
-            <button
-              type='submit'
-              className=' bg-primary text-white cursor-pointer w-full  py-3 rounded-lg'>
+            <button type='submit' className=' bg-primary text-white cursor-pointer w-full  py-3 rounded-lg'>
               {textoBtnCambiarForm()[3]}
             </button>
           </div>
         </form>
 
-        {error && (
-          <p className='text-center font-bold text-red-500 mt-3'>
-            {errorMessage}
-          </p>
-        )}
+        {error && <p className='text-center font-bold text-red-500 mt-3'>{errorMessage}</p>}
 
         <div className={`${error ? 'mt-2' : 'mt-7'}`}>
           <p className='text-base text-gray-400'>
             {textoBtnCambiarForm()[0]}
-            <span
-              className='text-primary cursor-pointer'
-              onClick={cambiarFormulario}>
+            <span className='text-primary cursor-pointer' onClick={cambiarFormulario}>
               {textoBtnCambiarForm()[1]}
             </span>{' '}
           </p>

@@ -20,6 +20,7 @@ query GetAllEventos($feriaId: Int, $estado: String) {
       fechaFinal
       horaFinal
       estado
+      slug
       feriaId
     }
   }

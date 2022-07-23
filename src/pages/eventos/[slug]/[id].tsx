@@ -1,29 +1,55 @@
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import IconDate from '../../../../public/icons/IconDate'
 import Asientos, { IColums } from '../../../components/asientos'
 import Container from '../../../components/container'
 import { usePaymentContext } from '../../../context/payment/PaymentState'
+import { genNombreFilas } from '../../../data/asientos'
+import { useAsientosEventos } from '../../../services/useAsientosEventos'
+import { useButacas } from '../../../services/useButacas'
+import { useEventoSlug } from '../../../services/useEventoSlug'
 
 const Detalle = () => {
   const navigation = useRouter()
-  const [dataAsientos, setDataAsientos] = useState({
-    data: [],
-    nombreFilas: [],
-    desabilitados: []
-  })
-  const { data, nombreFilas, desabilitados } = dataAsientos
-
-  console.log(data)
-  const { EnviarPago } = usePaymentContext()
   const [seleccionados, setSeleccionados] = useState<IColums[]>([])
-  const { id } = useRouter().query as any
+  const { id, slug } = useRouter().query as any
+  const { butacas, loading, refetch } = useButacas(id)
+  const { eventoSlug, loading: loadingEvento, refetch: refetchEvento } = useEventoSlug(slug)
+  console.log(id, slug)
 
   useEffect(() => {
-    // const _data = genAsientos(id) as any
-    // setDataAsientos(_data)
-  }, [id])
+    if (!loading && !loadingEvento) {
+      if (eventoSlug.eventoId && butacas.length > 0) {
+      } else {
+        navigation.push('/eventos')
+      }
+    }
+  }, [loading, loadingEvento])
+
+  const { asientos, refetch: refetchAsientos } = useAsientosEventos({
+    eventoId: Number(eventoSlug?.eventoId),
+    tendido: id
+  })
+  console.log(asientos)
+
+  const dataAsientos = useMemo(() => {
+    if (butacas.length && !loading) {
+      return butacas.map((item, i) => ({
+        tendido: item?.tendido || '',
+        butacaId: item?.butacaId || '',
+        codigo: item?.codigo || '',
+        cantidad: item?.cantidad || 0,
+        precio: item?.precio || 0
+      }))
+    }
+  }, [butacas, loading])
+
+  useEffect(() => {
+    refetch()
+    refetchAsientos()
+    refetchAsientos()
+  }, [id, slug])
 
   const total = seleccionados.reduce((previousValue, currentValue) => previousValue + currentValue.precio, 0)
 
@@ -46,20 +72,20 @@ const Detalle = () => {
             <p className=' text-base text-primary font-bold lg:text-xl'>Tendido 1 SOMBRA</p>
             <div className='flex gap-3 items-center'>
               <IconDate fill='#4C000C' width={20} height={20} />
-              <p className='text-primary font-bold lg:text-base text-xs'>Sábado 23 de julio</p>
+              <p className='text-primary font-bold lg:text-base text-xs'>{eventoSlug?.fecha}</p>
             </div>
           </div>
-          {data.length > 0 && (
+          {dataAsientos?.length && (
             <Asientos
               {...{
-                data,
-                desabilitados,
+                data: dataAsientos,
+                desabilitados: asientos,
                 seleccionados,
                 setSeleccionados,
-                nombreFilas
+                nombreFilas: genNombreFilas(id)
               }}
-              doble={id === '2' ? 'Tendido2' : id === '4' ? 'Tendido3' : 'Ruedo'}
-              direccion={id === '5' ? 'end' : id === '6' ? 'start' : 'center'}
+              doble={id === 'T2S' ? 'Tendido2' : id === 'T3' ? 'Tendido3' : 'Ruedo'}
+              direccion={id === 'T3A' ? 'end' : id === 'T3B' ? 'start' : 'center'}
             />
           )}
         </div>
@@ -84,8 +110,8 @@ const Detalle = () => {
             <p className='text-primary font-bold'>Seleccionados:</p>
             <div className='flex flex-wrap lg:grid lg:grid-cols-10 leading-none gap-2'>
               {seleccionados.map((item) => (
-                <p key={item.id} className='text-primary text-xs font-bold'>
-                  {item.id}
+                <p key={item.reservado} className='text-primary text-xs font-bold'>
+                  {item.reservado}
                 </p>
               ))}
             </div>
@@ -99,7 +125,7 @@ const Detalle = () => {
                   pathname: '/check-out/',
                   query: { name: 'abono' }
                 })
-                EnviarPago(seleccionados)
+                // EnviarPago(seleccionados)
               }}>
               COMPRAR: S/.{total.toFixed(2)}
             </button>

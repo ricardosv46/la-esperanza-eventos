@@ -24,9 +24,12 @@ interface Filas {
 }
 
 export interface IColums {
-  id: string
-  asiento: number
+  reservado: string
+  asiento: string
   precio: number
+  codigo: string
+  tendido: string
+  feriaId: number
 }
 
 const Asientos = ({
@@ -46,7 +49,7 @@ const Asientos = ({
       const tendido = data[i].tendido
 
       tfilas[data[i].codigo] = new Array(data[i].cantidad).fill(null).map((_, i) => ({
-        id: `${fila}-${i + 1}`,
+        reservado: `${fila}-${i + 1}`,
         asientoId: (i + 1).toString(),
         tendido: tendido,
         codigo: fila,
@@ -63,9 +66,9 @@ const Asientos = ({
   console.log('desabili', desabilitados)
 
   const selectId = (itemselected: IColums) => {
-    const validar = seleccionados.some((item) => item.id === itemselected.id)
+    const validar = seleccionados.some((item) => item.reservado === itemselected.reservado)
     if (validar) {
-      const newids = seleccionados.filter((item) => item.id !== itemselected.id)
+      const newids = seleccionados.filter((item) => item.reservado !== itemselected.reservado)
       setSeleccionados(newids)
     } else {
       setSeleccionados([...seleccionados, itemselected])
@@ -89,18 +92,30 @@ const Asientos = ({
                           <p className=' text-base lg:text-[10px] text-primary font-semibold'>{nombreFilas[index]}</p>
                         </div>
                         <div className={`flex flex-row-reverse justify-${direccion} items-center gap-1 flex-1`}>
-                          {filas[`${fila.toString()}`].map(({ id, precio, asiento }: IColums, index: any) => {
-                            if (index < asiento) {
-                              const isActive = seleccionados.some((seleccionado) => seleccionado.id === id)
-                              console.log(id)
-                              const disabled = desabilitados.some((_item) => _item?.reservado === id)
-                              return (
-                                <button
-                                  id={id}
-                                  key={id}
-                                  onClick={() => selectId({ id, precio, asiento })}
-                                  disabled={disabled}
-                                  className={`
+                          {filas[`${fila.toString()}`].map(
+                            ({ reservado, precio, asiento, codigo, feriaId, tendido }: IColums, index: any) => {
+                              if (index < asiento) {
+                                const isActive = seleccionados.some(
+                                  (seleccionado) => seleccionado.reservado === reservado
+                                )
+                                console.log(reservado)
+                                const disabled = desabilitados.some((_item) => _item?.reservado === reservado)
+                                return (
+                                  <button
+                                    id={reservado}
+                                    key={reservado}
+                                    onClick={() =>
+                                      selectId({
+                                        reservado,
+                                        precio,
+                                        asiento: asiento.toString(),
+                                        codigo,
+                                        feriaId,
+                                        tendido
+                                      })
+                                    }
+                                    disabled={disabled}
+                                    className={`
                                   ${
                                     disabled
                                       ? 'bg-text text-white'
@@ -109,11 +124,12 @@ const Asientos = ({
                                       : 'bg-yellow-500  text-primary'
                                   }
                                    rounded-full h-5 w-5 lg:h-3 lg:w-3  font-semibold  flex justify-center items-center lg:text-[5px] text-[10px] `}>
-                                  {asiento}
-                                </button>
-                              )
-                            } else return null
-                          })}
+                                    {asiento}
+                                  </button>
+                                )
+                              } else return null
+                            }
+                          )}
                         </div>
                         <div className='w-36 lg:w-24 '>
                           <p className='text-base lg:text-[10px] text-primary font-semibold'>{nombreFilas[index]}</p>

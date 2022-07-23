@@ -10,6 +10,8 @@ import OpenGraph from '../components/openGraph'
 import { useRouter } from 'next/router'
 import IconMano from '../../public/icons/IconMano'
 import { useLogin } from '../services/useLogin'
+import { getSession } from 'next-auth/react'
+import { useEffect } from 'react'
 
 const banners = ['banner-home1', 'banner-home2', 'banner-home3', 'banner-home4']
 
@@ -21,6 +23,15 @@ const flyers = [
 
 const Home: NextPage = () => {
   const navigate = useRouter()
+
+  useEffect(() => {
+    const sesion = async () => {
+      const res = await getSession()
+      console.log('sesion', res)
+    }
+
+    sesion()
+  }, [])
 
   return (
     <>

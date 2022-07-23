@@ -8,7 +8,7 @@ import { usePaymentContext } from '../../context/payment/PaymentState'
 import { genNombreFilas } from '../../data/asientos'
 import { useAsientosAbonado } from '../../services/useAsientosAbonado'
 
-import { useButacasAbonado } from '../../services/useButacasAbonado'
+import { useButacas } from '../../services/useButacas'
 
 const Detalle = () => {
   const navigation = useRouter()
@@ -16,12 +16,12 @@ const Detalle = () => {
 
   const [seleccionados, setSeleccionados] = useState<IColums[]>([])
   const { id } = useRouter().query as any
-  const { butacas, loading, refetch } = useButacasAbonado(id)
+  const { butacas, loading, refetch } = useButacas(id)
 
   const { asientos, refetch: refetchAsientos } = useAsientosAbonado({ feriaId: 1, tendido: id })
   console.log(butacas)
 
-  const dataAientos = useMemo(() => {
+  const dataAsientos = useMemo(() => {
     if (butacas.length && !loading) {
       return butacas.map((item, i) => ({
         tendido: item?.tendido || '',
@@ -37,9 +37,6 @@ const Detalle = () => {
     refetch()
     refetchAsientos()
   }, [id])
-
-  console.log('elmo', dataAientos)
-  console.log('desa', asientos)
 
   const total = seleccionados.reduce((previousValue, currentValue) => previousValue + currentValue.precio, 0)
 
@@ -65,17 +62,17 @@ const Detalle = () => {
               <p className='text-primary font-bold lg:text-base text-xs'>Sábado 23 de julio</p>
             </div>
           </div>
-          {dataAientos?.length && (
+          {dataAsientos?.length && (
             <Asientos
               {...{
-                data: dataAientos,
+                data: dataAsientos,
                 desabilitados: asientos,
                 seleccionados,
                 setSeleccionados,
                 nombreFilas: genNombreFilas(id)
               }}
-              doble={id === '2' ? 'Tendido2' : id === '4' ? 'Tendido3' : 'Ruedo'}
-              direccion={id === '5' ? 'end' : id === '6' ? 'start' : 'center'}
+              doble={id === 'T2S' ? 'Tendido2' : id === 'T3' ? 'Tendido3' : 'Ruedo'}
+              direccion={id === 'T3A' ? 'end' : id === 'T3B' ? 'start' : 'center'}
             />
           )}
         </div>
@@ -100,8 +97,8 @@ const Detalle = () => {
             <p className='text-primary font-bold'>Seleccionados:</p>
             <div className='flex flex-wrap lg:grid lg:grid-cols-10 leading-none gap-2'>
               {seleccionados.map((item) => (
-                <p key={item.id} className='text-primary text-xs font-bold'>
-                  {item.id}
+                <p key={item.reservado} className='text-primary text-xs font-bold'>
+                  {item.reservado}
                 </p>
               ))}
             </div>

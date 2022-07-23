@@ -43,6 +43,13 @@ const Header = () => {
     }
   }, [])
 
+  useEffect(() => {
+    if (status === 'authenticated') {
+      localStorage.setItem('token', data?.user?.apiToken)
+      console.log('token', data?.user?.apiToken)
+    }
+  }, [status])
+
   const handleSignOut = async () => {
     await signOut({ redirect: false })
     localStorage.removeItem('token')

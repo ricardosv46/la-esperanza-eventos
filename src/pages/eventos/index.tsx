@@ -7,6 +7,7 @@ import OpenGraph from '../../components/openGraph'
 import Spinner from '../../components/spinner'
 import { useAbonado } from '../../services/useAbonado'
 import { useEventos } from '../../services/useEventos'
+import { useEventoSlug } from '../../services/useEventoSlug'
 
 const Eventos = () => {
   const navigate = useRouter()
@@ -135,7 +136,7 @@ const Eventos = () => {
 
                 <p className=' text-justify  text-sm my-3'>{item?.descripcionCorta}</p>
                 <button
-                  onClick={() => navigate.push(`/eventos/${item.eventoId}`)}
+                  onClick={() => navigate.push(`/eventos/${item?.slug}`)}
                   style={{ boxShadow: '-8px 6px 13px 0px rgba(0,0,0,0.42)' }}
                   className='bg-tertiary px-6 py-2 mt-2 text-md rounded-sm text-white font-semibold cursor-pointer  shadow-primary'>
                   Comprar entrada

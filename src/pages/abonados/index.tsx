@@ -8,7 +8,6 @@ import Spinner from '../../components/spinner'
 import { CarritoProps, useCarritoContext } from '../../context/cart/CarritoState'
 import { abonados } from '../../data/abonados'
 import { useAbonado } from '../../services/useAbonado'
-import { useButacasAbonado } from '../../services/useButacasAbonado'
 
 const colors = ['bg-[#F89F59]', ' bg-[#FFD066]', 'bg-[#FFDA99]', 'bg-[#D03B3E]', 'bg-[#E7565C]', 'bg-[#E7565C]']
 
