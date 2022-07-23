@@ -24,22 +24,15 @@ const ModalCompra = ({ isOpen, onClose, onClick }: Props) => {
 
   const desabilitados = ['A12', 'A57', 'A45', 'A20', 'A21']
 
-  const total = seleccionados.reduce(
-    (previousValue, currentValue) => previousValue + currentValue.precio,
-    0
-  )
+  const total = seleccionados.reduce((previousValue, currentValue) => previousValue + currentValue.precio, 0)
 
   return (
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      className='h-full md:h-auto w-full md:w-[1000px] overflow-y-scroll no-scrollbar '
-    >
+      className='h-full md:h-auto w-full md:w-[1000px] overflow-y-scroll no-scrollbar '>
       <section className='bg-white  rounded-lg pt-5 relative overflow-hidden'>
-        <button
-          onClick={onClose}
-          className='absolute top-2 right-4 text-primary font-bold cursor-pointer'
-        >
+        <button onClick={onClose} className='absolute top-2 right-4 text-primary font-bold cursor-pointer'>
           X
         </button>
         <div className='flex justify-center mb-5'>
@@ -52,9 +45,7 @@ const ModalCompra = ({ isOpen, onClose, onClick }: Props) => {
             alt='logo'
           />
         </div>
-        <p className='text-center text-3xl text-primary font-bold'>
-          SELECCIONA TUS ASIENTOS
-        </p>
+        <p className='text-center text-3xl text-primary font-bold'>SELECCIONA TUS ASIENTOS</p>
         <div className='flex flex-col justify-center border-b-2 border-t-2 border-primary py-5 mt-5 mx-5'>
           <div className='flex justify-end items-center gap-3'>
             <IconDate fill='#4C000C' width={20} height={20} />{' '}
@@ -84,7 +75,9 @@ const ModalCompra = ({ isOpen, onClose, onClick }: Props) => {
             <p className='text-primary font-bold'>Seleccionados:</p>
             <div className='flex flex-wrap w-60 gap-2 leading-none'>
               {seleccionados.map((item) => (
-                <p key={item.id} className='text-primary font-bold'>{item.id}</p>
+                <p key={item.reservado} className='text-primary font-bold'>
+                  {item.reservado}
+                </p>
               ))}
             </div>
           </div>
