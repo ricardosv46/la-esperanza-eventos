@@ -218,7 +218,7 @@ const CheckOut = () => {
               })}
               onSubmit={(values) => {
                 if (query.name === 'abono') {
-                  createPedidoEvento({
+                  createPedidoAbonado({
                     input1: {
                       fechaPedido: '2022-07-22',
                       numeroComprobante: values.documento,
