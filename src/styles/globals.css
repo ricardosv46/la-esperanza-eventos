@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import './payme.css';
+
 /* FrankRuhlLibre */
 
 @font-face {
@@ -109,19 +111,19 @@
   font-family: Lato;
   font-weight: 300;
   font-display: swap;
-  src: url(/fonts/Lato/Lato-Light.ttf)
+  src: url(/fonts/Lato/Lato-Light.ttf);
 }
 
 @font-face {
   font-family: Lato;
   font-weight: 400;
   font-display: swap;
-  src: url(/fonts/Lato/Lato-Regular.ttf)
+  src: url(/fonts/Lato/Lato-Regular.ttf);
 }
 
-@layer base{
-  p{
-    @apply font-parrafo 
+@layer base {
+  p {
+    @apply font-parrafo;
   }
 }
 
@@ -157,7 +159,7 @@ html {
   background-size: cover;
   width: 100%;
   height: 100vh;
- /*  height: 955px; */
+  /*  height: 955px; */
   position: relative;
 }
 .banner::before {
@@ -201,7 +203,7 @@ html {
 .banner-home6 {
   background-image: url('/imgs/logos/logo-fondo.png');
   background-size: cover;
-  background-color: #52040F;
+  background-color: #52040f;
   background-repeat: no-repeat;
   height: auto;
   background-position: bottom right;
@@ -210,9 +212,13 @@ html {
   background-color: transparent;
 }
 
-.bg-fondo{
+.bg-fondo {
   background-color: transparent;
-  background-image: radial-gradient(at center center, #FFF2E6 50%, #F0D6BE 100%);
+  background-image: radial-gradient(
+    at center center,
+    #fff2e6 50%,
+    #f0d6be 100%
+  );
 }
 
 .banner-parallax {
@@ -240,7 +246,6 @@ html {
   width: 100%;
   height: 100%;
   background-attachment: fixed;
-
 }
 @media (max-width: 768px) {
   .banner-parallax-plaza {

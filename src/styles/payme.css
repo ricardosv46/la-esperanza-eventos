@@ -1,0 +1,23 @@
+#payme h2 {
+  @apply text-3xl font-black text-center mb-3;
+}
+
+#payme form {
+  @apply w-80 flex flex-col gap-3;
+}
+
+#payme .field {
+  @apply flex flex-col;
+}
+
+#payme .field label {
+  @apply text-sm text-gray-500 font-semibold;
+}
+
+#payme .field input {
+  @apply outline-none h-12 rounded-md focus:border-primary text-sm text-gray-900 font-semibold border border-gray-300 px-2.5 py-5;
+}
+
+#payme .submit button {
+  @apply w-full py-2 bg-primary text-white rounded-md;
+}
