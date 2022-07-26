@@ -1,3 +1,4 @@
+import moment from 'moment'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
@@ -5,8 +6,6 @@ import IconCalendar from '../../../public/icons/IconCalendar'
 import IconHour from '../../../public/icons/IconHour'
 import Container from '../../components/container'
 import Spinner from '../../components/spinner'
-import { CarritoProps, useCarritoContext } from '../../context/cart/CarritoState'
-import { abonados } from '../../data/abonados'
 import { useAbonado } from '../../services/useAbonado'
 import { usePreciosRefs } from '../../services/usePreciosRefs'
 
@@ -14,14 +13,10 @@ const colors = ['bg-[#F89F59]', ' bg-[#FFD066]', 'bg-[#FFDA99]', 'bg-[#D03B3E]',
 
 const Abonados = () => {
   const { abono, loading } = useAbonado()
-
-  console.log(abono)
   const router = useRouter()
-
   const handleModal = (id: string) => {
     router.push(`/abonados/${id}`)
   }
-
   const { precios } = usePreciosRefs()
 
   return (
