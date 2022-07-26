@@ -2,22 +2,30 @@ import * as ReactDOM from 'react-dom'
 import { Fragment, useCallback, useEffect, useState } from 'react'
 
 import Modal from '../modal'
-import { payRequest } from '../../data/paydata'
+import { PaymePayload } from '../../data/paydata'
 
 interface Props {
   isOpen: boolean
+  payload: PaymePayload
   onClose: () => void
   onChange: (data: any) => void
 }
 
 const PAYME_URL = 'https://alignet-flex-demo.s3.amazonaws.com'
 
-const ModalPayme = ({ isOpen, onClose, onChange }: Props) => {
+const ModalPayme = ({ isOpen, onClose, onChange, payload }: Props) => {
+  const [error, setError] = useState(false)
   const [scriptReady, setScriptReady] = useState(false)
 
-  const handleRequest = useCallback((data) => {
-    onChange(data)
-  }, [])
+  const handleRequest = useCallback(
+    (data) => {
+      if (!data?.id) return setError(true)
+
+      onChange(data)
+      onClose()
+    },
+    [onChange]
+  )
 
   // Load css
   useEffect(() => {
@@ -56,25 +64,27 @@ const ModalPayme = ({ isOpen, onClose, onChange }: Props) => {
   }, [])
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && (window as any).FlexCapture) {
+    if (isOpen) {
       // @ts-ignore
       const capture = new FlexCapture({
+        payload,
         additionalFields: [],
-        payload: payRequest({ amount: '10' }),
         key: 'FsVVX37w7ZSK1HNQ8NXxDhFEFLXjREorode1sokWZzz2ZahPfG1F35DpOd1miSuh'
         //"additionalFields": ["v_nombre", "v_apellido", "v_email", "v_doc_type", "v_dni"]
       })
 
       capture.init(document.querySelector('#payme'), handleRequest)
     }
-  }, [scriptReady, handleRequest])
+  }, [isOpen, handleRequest, payload])
 
   return (
     <Fragment>
       {scriptReady &&
         ReactDOM.createPortal(
-          <Modal isOpen={!isOpen} onClose={onClose}>
-            <div className="bg-white p-3 rounded" id="payme" />
+          <Modal isOpen={isOpen} onClose={onClose}>
+            <div className="bg-white p-3 rounded" id="payme">
+              {!error && <p>Ha ocurrido un error intente nuevamente</p>}
+            </div>
           </Modal>,
           document.getElementById('portal') as Element
         )}

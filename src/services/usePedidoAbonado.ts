@@ -1,4 +1,8 @@
-import { useCreatePedidoAbonadoMutation } from '../generated/graphql'
+import {
+  CreatePedidoAbonadoMutationFn,
+  CreatePedidoAbonadoMutationVariables,
+  useCreatePedidoAbonadoMutation
+} from '../generated/graphql'
 
 interface ICreateBlog {
   titulo: string
@@ -35,9 +39,14 @@ interface ICreatePedido {
 }
 
 export const usePedidoAbonado = () => {
-  const [CreatePedido, { loading: loadingCreate }] = useCreatePedidoAbonadoMutation()
+  const [CreatePedido, { loading: loadingCreate }] =
+    useCreatePedidoAbonadoMutation()
 
-  const createPedidoAbonado = async ({ input1, input2, input3 }: ICreatePedido) => {
+  const createPedidoAbonado = async ({
+    input1,
+    input2,
+    input3
+  }: CreatePedidoAbonadoMutationVariables) => {
     try {
       const res = await CreatePedido({
         variables: {

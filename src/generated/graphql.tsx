@@ -220,8 +220,10 @@ export type Mutation = {
   UpdateAsignacionEntrada?: Maybe<AsignacionEntrada>;
   UpdateEstadoEvento?: Maybe<Evento>;
   UpdateEvento?: Maybe<Evento>;
+  UpdateFeria?: Maybe<Feria>;
   UpdateImagen: Imagen;
   UpdatePrecio: Butaca;
+  UpdatePrecioReferencial?: Maybe<Referencial>;
   UpdateUsuario: User;
   ValidacionEntrada?: Maybe<Scalars['String']>;
 };
@@ -286,6 +288,11 @@ export type MutationUpdateEventoArgs = {
 };
 
 
+export type MutationUpdateFeriaArgs = {
+  input: FeriaInput;
+};
+
+
 export type MutationUpdateImagenArgs = {
   id?: InputMaybe<Scalars['Int']>;
   titulo?: InputMaybe<Scalars['String']>;
@@ -294,6 +301,11 @@ export type MutationUpdateImagenArgs = {
 
 export type MutationUpdatePrecioArgs = {
   input?: InputMaybe<ButacaInput>;
+};
+
+
+export type MutationUpdatePrecioReferencialArgs = {
+  input: ReferencialInput;
 };
 
 
@@ -366,6 +378,7 @@ export type Pedido = {
   pedidoId?: Maybe<Scalars['ID']>;
   precioTotal?: Maybe<Scalars['Float']>;
   tipoComprobante?: Maybe<Scalars['String']>;
+  transaccionId?: Maybe<Scalars['Float']>;
   usuarioId?: Maybe<Scalars['Int']>;
 };
 
@@ -375,6 +388,7 @@ export type PedidoInput = {
   pedidoId?: InputMaybe<Scalars['ID']>;
   precioTotal?: InputMaybe<Scalars['Float']>;
   tipoComprobante?: InputMaybe<Scalars['String']>;
+  transaccionId?: InputMaybe<Scalars['Float']>;
 };
 
 export type Query = {
@@ -440,8 +454,14 @@ export type QueryGetEventoSlugArgs = {
 export type Referencial = {
   __typename?: 'Referencial';
   precio?: Maybe<Scalars['Float']>;
+  referenciaId?: Maybe<Scalars['ID']>;
   tendido?: Maybe<Scalars['String']>;
   titulo?: Maybe<Scalars['String']>;
+};
+
+export type ReferencialInput = {
+  precio?: InputMaybe<Scalars['Float']>;
+  referenciaId?: InputMaybe<Scalars['ID']>;
 };
 
 /** The available directions for ordering a list of records. */
