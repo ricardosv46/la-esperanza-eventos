@@ -1,3 +1,4 @@
+import moment from 'moment'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React from 'react'
@@ -15,7 +16,11 @@ const Eventos = () => {
 
   const { eventos } = useEventos({ estado: 'Activado', feriaId: 1 })
 
-  console.log(eventos)
+  const { fechaFinal, fechaInicial, horaFinal, horaInicial } = abono
+
+  const fechaI = `${fechaInicial} ${horaInicial}`
+  const fechaF = `${fechaFinal} ${horaFinal}`
+  const isDisableAbono = moment().isBetween(moment(fechaI), moment(fechaF)) ? false : true
 
   return (
     <>
@@ -81,6 +86,7 @@ const Eventos = () => {
 
             <div className='flex justify-center border-b border-black pb-14'>
               <button
+                disabled={isDisableAbono}
                 onClick={() => navigate.push(`/abonados`)}
                 style={{ boxShadow: '-8px 6px 13px 0px rgba(0,0,0,0.42)' }}
                 className='bg-tertiary px-6 py-2 mt-5 text-md rounded-sm text-white font-semibold cursor-pointer  shadow-primary'>
@@ -101,47 +107,59 @@ const Eventos = () => {
           </div>
 
           <div className='grid pb-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-center text-[#505050] '>
-            {eventos.map((item) => (
-              <article
-                key={item?.eventoId}
-                style={{ boxShadow: '-14px 14px 14px -5px rgba(0,0,0,0.42)' }}
-                className='max-w-[300px] mx-auto sm:mx-0 sm:max-w-none bg-white px-7 py-7 rounded-md shadow-md'>
-                <div className='flex gap-x-5 text-[13px]'>
-                  <div className='flex items-center gap-x-1'>
-                    <div className=''>
-                      <IconCalendar width={14} height={14} />
-                    </div>
+            {eventos.map((item) => {
+              const fechaInicialEvento = `${item?.fechaInicial} ${item?.horaInicial}`
+              const fechaFinalEvento = `${item?.fechaFinal} ${item?.horaFinal}`
 
-                    <div className='mt-0.5'>{item?.fecha}</div>
-                  </div>
-                  <div className='flex  items-center gap-x-1'>
-                    <div className=''>
-                      <IconHour width={14} height={14} />
-                    </div>
-                    <div className='mt-0.5'>{item?.hora} am</div>
-                  </div>
-                </div>
-                <h6 className='text-[#4c000c] font-bold text-3xl text-left my-3'>{item?.titulo}</h6>
-                <div className='hover:-translate-y-3 transition-all duration-500 ease-in-out'>
-                  <Image
-                    loading='lazy'
-                    src={item?.imagenPrincipal?.url!}
-                    alt='Picture of the author'
-                    width={500}
-                    height={350}
-                    className='object-cover'
-                  />
-                </div>
+              const isDisabledEvento = moment().isBetween(moment(fechaInicialEvento), moment(fechaFinalEvento))
+                ? false
+                : true
 
-                <p className=' text-justify  text-sm my-3'>{item?.descripcionCorta}</p>
-                <button
-                  onClick={() => navigate.push(`/eventos/${item?.slug}`)}
-                  style={{ boxShadow: '-8px 6px 13px 0px rgba(0,0,0,0.42)' }}
-                  className='bg-tertiary px-6 py-2 mt-2 text-md rounded-sm text-white font-semibold cursor-pointer  shadow-primary'>
-                  Comprar entrada
-                </button>
-              </article>
-            ))}
+              return (
+                <article
+                  key={item?.eventoId}
+                  style={{ boxShadow: '-14px 14px 14px -5px rgba(0,0,0,0.42)' }}
+                  className='max-w-[300px] mx-auto sm:mx-0 sm:max-w-none bg-white px-7 py-7 rounded-md shadow-md'>
+                  <div className='flex gap-x-5 text-[13px]'>
+                    <div className='flex items-center gap-x-1'>
+                      <div className=''>
+                        <IconCalendar width={14} height={14} />
+                      </div>
+
+                      <div className='mt-0.5'>{item?.fecha}</div>
+                    </div>
+                    <div className='flex  items-center gap-x-1'>
+                      <div className=''>
+                        <IconHour width={14} height={14} />
+                      </div>
+                      <div className='mt-0.5'>{item?.hora} am</div>
+                    </div>
+                  </div>
+                  <h6 className='text-[#4c000c] font-bold text-3xl text-left my-3'>{item?.titulo}</h6>
+                  <div className='hover:-translate-y-3 transition-all duration-500 ease-in-out'>
+                    <Image
+                      loading='lazy'
+                      src={item?.imagenPrincipal?.url!}
+                      alt='Picture of the author'
+                      width={500}
+                      height={350}
+                      className='object-cover'
+                    />
+                  </div>
+
+                  <p className=' text-justify  text-sm my-3'>{item?.descripcionCorta}</p>
+                  <button
+                    disabled={true}
+                    onClick={() => navigate.push(`/eventos/${item?.slug}`)}
+                    style={{ boxShadow: '-8px 6px 13px 0px rgba(0,0,0,0.42)' }}
+                    className={`bg-tertiary px-6 py-2 mt-2 text-md rounded-sm text-white font-semibold cursor-pointer  shadow-primary ${
+                      isDisabledEvento ? 'opacity-50' : 'opacity-100'
+                    }`}>
+                    Comprar entrada
+                  </button>
+                </article>
+              )
+            })}
           </div>
         </div>
       </div>

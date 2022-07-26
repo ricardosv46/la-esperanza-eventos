@@ -9,19 +9,13 @@ import Image from 'next/image'
 import OpenGraph from '../components/openGraph'
 import { useRouter } from 'next/router'
 import IconMano from '../../public/icons/IconMano'
-import { useLogin } from '../services/useLogin'
-import { getSession } from 'next-auth/react'
-import { useEffect } from 'react'
+import { useEventos } from '../services/useEventos'
+import Spinner from '../components/spinner'
 
 const banners = ['banner-home1', 'banner-home2', 'banner-home3', 'banner-home4']
 
-const flyers = [
-  { id: 0, img: 'flyer1.jpg' },
-  { id: 1, img: 'flyer2.jpg' },
-  { id: 2, img: 'flyer3.jpg' }
-]
-
 const Home: NextPage = () => {
+  const { eventos, loading } = useEventos({ estado: 'Activado', feriaId: 1 })
   const navigate = useRouter()
 
   return (
@@ -54,7 +48,9 @@ const Home: NextPage = () => {
                   <h2>Vive la tradición</h2>
                   <h2>Vive la magia</h2>
                   <div className=' mt-4'>
-                    <button className='relative text-lg text-center font-bold rounded-l-md rounded-r-full bg-secondary pr-12 pl-6 py-2 mt-4 hover:bg-tertiary ease-in-out duration-300 transition-all shadow-2xl'>
+                    <button
+                      onClick={() => navigate.push('eventos')}
+                      className='relative text-lg text-center font-bold rounded-l-md rounded-r-full bg-secondary pr-12 pl-6 py-2 mt-4 hover:bg-tertiary ease-in-out duration-300 transition-all shadow-2xl'>
                       <p className='font-extrabold'> Venta de entradas</p>
                       <div className='absolute -bottom-3 -right-3'>
                         <IconMano width={45} height={45} fill='#fff' />
@@ -118,40 +114,44 @@ const Home: NextPage = () => {
           </p>
         </div>
         <div className='w-full lg:w-1/2'>
-          <Swiper
-            loop={true}
-            autoplay={{
-              delay: 4000,
-              disableOnInteraction: true
-            }}
-            slidesPerView={1}
-            navigation={true}
-            pagination={true}
-            modules={[Autoplay, Navigation, Pagination]}
-            className='mySwiper'>
-            {flyers.map((flyer) => (
-              <SwiperSlide key={flyer.id}>
-                {({ isActive }) => (
-                  <div className='flex justify-center items-center '>
-                    <Image
-                      className='cursor-pointer relative'
-                      src={`/imgs/flyers/${flyer.img}`}
-                      width={520}
-                      height={344}
-                      alt='logo'
-                    />
-                    <button
-                      onClick={() => navigate.push(`/eventos/${flyer.img}`)}
-                      className={`bottom-7 lg:bottom-10 right-5 lg:right-20 absolute px-4 lg:px-6 py-2 lg:py-2.5  bg-secondary border-2 border-secondary hover:bg-transparent transition-all ease-in-out duration-500 text-white font-semibold text-sm lg:text-lg rounded   ${
-                        isActive ? 'animate-fade' : 'animate-fade-out'
-                      }`}>
-                      Comprar entradas
-                    </button>
-                  </div>
-                )}
-              </SwiperSlide>
-            ))}
-          </Swiper>
+          {loading ? (
+            <Spinner />
+          ) : (
+            <Swiper
+              loop={true}
+              autoplay={{
+                delay: 4000,
+                disableOnInteraction: true
+              }}
+              slidesPerView={1}
+              navigation={true}
+              pagination={true}
+              modules={[Autoplay, Navigation, Pagination]}
+              className='mySwiper'>
+              {eventos.map((evento) => (
+                <SwiperSlide key={evento?.eventoId}>
+                  {({ isActive }) => (
+                    <div className='flex justify-center items-center '>
+                      <Image
+                        className='cursor-pointer relative'
+                        src={evento.imagenPrincipal?.url!}
+                        width={520}
+                        height={344}
+                        alt='logo'
+                      />
+                      <button
+                        onClick={() => navigate.push(`/eventos/${evento?.eventoId}`)}
+                        className={`bottom-7 lg:bottom-10 right-5 lg:right-20 absolute px-4 lg:px-6 py-2 lg:py-2.5  bg-secondary border-2 border-secondary hover:bg-transparent transition-all ease-in-out duration-500 text-white font-semibold text-sm lg:text-lg rounded   ${
+                          isActive ? 'animate-fade' : 'animate-fade-out'
+                        }`}>
+                        Comprar entradas
+                      </button>
+                    </div>
+                  )}
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          )}
         </div>
       </Container>
       <Container bgColor='bg-primarydark'>
@@ -174,7 +174,7 @@ const Home: NextPage = () => {
                 cuán diversas son las tradiciones taurinas en España, México y Perú.
               </p>
               <button
-                onClick={() => navigate.push('/eventos')}
+                onClick={() => navigate.push('eventos')}
                 style={{ boxShadow: '-8px 6px 13px 0px rgba(0,0,0,0.42)' }}
                 className='bg-tertiary px-8 py-2.5 rounded-sm text-white font-semibold cursor-pointer  shadow-primary'>
                 Comprar aquí
