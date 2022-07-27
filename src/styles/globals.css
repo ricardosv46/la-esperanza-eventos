@@ -52,8 +52,7 @@
   font-family: NotoSerif;
   font-weight: 800;
   font-display: swap;
-  src: url(/fonts/Noto_Serif_Display/NotoSerifDisplay-ExtraBold.ttf)
-    format('ttf');
+  src: url(/fonts/Noto_Serif_Display/NotoSerifDisplay-ExtraBold.ttf) format('ttf');
 }
 @font-face {
   font-family: NotoSerif;
@@ -66,8 +65,7 @@
   font-family: NotoSerif;
   font-weight: 600;
   font-display: swap;
-  src: url(/fonts/Noto_Serif_Display/NotoSerifDisplay-SemiBold.ttf)
-    format('ttf');
+  src: url(/fonts/Noto_Serif_Display/NotoSerifDisplay-SemiBold.ttf) format('ttf');
 }
 
 @font-face {
@@ -94,8 +92,7 @@
   font-family: NotoSerif;
   font-weight: 200;
   font-display: swap;
-  src: url(/fonts/Noto_Serif_Display/NotoSerifDisplay-ExtraLight.ttf)
-    format('ttf');
+  src: url(/fonts/Noto_Serif_Display/NotoSerifDisplay-ExtraLight.ttf) format('ttf');
 }
 
 @font-face {
@@ -132,8 +129,12 @@ html {
 }
 
 .filter-logo {
-  filter: brightness(0) saturate(100%) invert(21%) sepia(100%) saturate(7117%)
-    hue-rotate(338deg) brightness(32%) contrast(111%);
+  filter: brightness(0) saturate(100%) invert(21%) sepia(100%) saturate(7117%) hue-rotate(338deg) brightness(32%)
+    contrast(111%);
+}
+
+pre {
+  display: none;
 }
 
 .snap-section {
@@ -214,11 +215,7 @@ html {
 
 .bg-fondo {
   background-color: transparent;
-  background-image: radial-gradient(
-    at center center,
-    #fff2e6 50%,
-    #f0d6be 100%
-  );
+  background-image: radial-gradient(at center center, #fff2e6 50%, #f0d6be 100%);
 }
 
 .banner-parallax {

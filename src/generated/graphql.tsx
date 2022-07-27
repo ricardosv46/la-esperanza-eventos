@@ -195,6 +195,12 @@ export type GetAllPedidos = {
   numeroTotal?: Maybe<Scalars['Int']>;
 };
 
+export type GetAllSuscriptores = {
+  __typename?: 'GetAllSuscriptores';
+  data?: Maybe<Array<Maybe<Suscriptor>>>;
+  numeroTotal?: Maybe<Scalars['Int']>;
+};
+
 export type Imagen = {
   __typename?: 'Imagen';
   id?: Maybe<Scalars['ID']>;
@@ -209,10 +215,12 @@ export type LoginInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  ConsultEmail?: Maybe<Scalars['String']>;
   CreateEvento?: Maybe<Evento>;
   CreateImagen: Scalars['String'];
   CreatePedido: Pedido;
   CreatePedidoAbonado: Pedido;
+  CreateSuscriptor?: Maybe<Suscriptor>;
   CreateUsuario: User;
   DeleteEvento?: Maybe<Scalars['String']>;
   DeleteImagen: Scalars['String'];
@@ -226,6 +234,11 @@ export type Mutation = {
   UpdatePrecioReferencial?: Maybe<Referencial>;
   UpdateUsuario: User;
   ValidacionEntrada?: Maybe<Scalars['String']>;
+};
+
+
+export type MutationConsultEmailArgs = {
+  email: Scalars['String'];
 };
 
 
@@ -250,6 +263,11 @@ export type MutationCreatePedidoAbonadoArgs = {
   input1: PedidoInput;
   input2?: InputMaybe<Array<DetallePedidoInput>>;
   input3?: InputMaybe<UserInput>;
+};
+
+
+export type MutationCreateSuscriptorArgs = {
+  input: SuscriptorInput;
 };
 
 
@@ -402,6 +420,7 @@ export type Query = {
   GetAllImagenes?: Maybe<GetAllImagenes>;
   GetAllPedidos?: Maybe<GetAllPedidos>;
   GetAllPrecioReferencial?: Maybe<Array<Maybe<Referencial>>>;
+  GetAllSuscriptores?: Maybe<GetAllSuscriptores>;
   GetEventoSlug?: Maybe<Evento>;
   GetFeria?: Maybe<Feria>;
 };
@@ -447,6 +466,12 @@ export type QueryGetAllPedidosArgs = {
 };
 
 
+export type QueryGetAllSuscriptoresArgs = {
+  numeroPagina?: InputMaybe<Scalars['Int']>;
+  pagina?: InputMaybe<Scalars['Int']>;
+};
+
+
 export type QueryGetEventoSlugArgs = {
   slug?: InputMaybe<Scalars['String']>;
 };
@@ -471,6 +496,18 @@ export enum SortOrder {
   /** Sort records in descending order. */
   Desc = 'DESC'
 }
+
+export type Suscriptor = {
+  __typename?: 'Suscriptor';
+  email?: Maybe<Scalars['String']>;
+  nombres?: Maybe<Scalars['String']>;
+  suscriptorId?: Maybe<Scalars['ID']>;
+};
+
+export type SuscriptorInput = {
+  email?: InputMaybe<Scalars['String']>;
+  nombres?: InputMaybe<Scalars['String']>;
+};
 
 /** Specify if you want to include or exclude trashed results from a query. */
 export enum Trashed {
@@ -510,6 +547,13 @@ export type UserInput = {
   password?: InputMaybe<Scalars['String']>;
   tipoDocumento?: InputMaybe<Scalars['String']>;
 };
+
+export type ConsultEmailMutationVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type ConsultEmailMutation = { __typename?: 'Mutation', ConsultEmail?: string | null };
 
 export type CreatePedidoMutationVariables = Exact<{
   input1: PedidoInput;
@@ -611,6 +655,37 @@ export type GetFeriaQueryVariables = Exact<{ [key: string]: never; }>;
 export type GetFeriaQuery = { __typename?: 'Query', GetFeria?: { __typename?: 'Feria', feriaId?: string | null, descripcionCorta?: string | null, descripcionLarga?: string | null, descuento?: number | null, titulo?: string | null, terminosCondiciones?: string | null, fechaInicial?: any | null, horaInicial?: string | null, fechaFinal?: any | null, horaFinal?: string | null, imagenPrincipal?: { __typename?: 'Imagen', id?: string | null, titulo?: string | null, url?: string | null } | null, imagenSecundaria?: { __typename?: 'Imagen', id?: string | null, titulo?: string | null, url?: string | null } | null } | null };
 
 
+export const ConsultEmailDocument = gql`
+    mutation ConsultEmail($email: String!) {
+  ConsultEmail(email: $email)
+}
+    `;
+export type ConsultEmailMutationFn = Apollo.MutationFunction<ConsultEmailMutation, ConsultEmailMutationVariables>;
+
+/**
+ * __useConsultEmailMutation__
+ *
+ * To run a mutation, you first call `useConsultEmailMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useConsultEmailMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [consultEmailMutation, { data, loading, error }] = useConsultEmailMutation({
+ *   variables: {
+ *      email: // value for 'email'
+ *   },
+ * });
+ */
+export function useConsultEmailMutation(baseOptions?: Apollo.MutationHookOptions<ConsultEmailMutation, ConsultEmailMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<ConsultEmailMutation, ConsultEmailMutationVariables>(ConsultEmailDocument, options);
+      }
+export type ConsultEmailMutationHookResult = ReturnType<typeof useConsultEmailMutation>;
+export type ConsultEmailMutationResult = Apollo.MutationResult<ConsultEmailMutation>;
+export type ConsultEmailMutationOptions = Apollo.BaseMutationOptions<ConsultEmailMutation, ConsultEmailMutationVariables>;
 export const CreatePedidoDocument = gql`
     mutation CreatePedido($input1: PedidoInput!, $input2: [DetallePedidoInput!], $input3: UserInput) {
   CreatePedido(input1: $input1, input2: $input2, input3: $input3) {
