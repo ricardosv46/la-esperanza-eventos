@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import Image from 'next/image'
@@ -24,6 +24,7 @@ const validationSchema = Yup.object().shape({
 
 export const FormPayAuth = ({ isAbono, onSubmit }: Props) => {
   const { pago } = usePaymentContext()
+  const [isChecked, setIsChecked] = useState(false)
   const { isOpen, onOpen, onClose } = useToggle()
   const { createPedidoEvento } = usePedidoEvento()
   const { createPedidoAbonado } = usePedidoAbonado()
@@ -32,6 +33,10 @@ export const FormPayAuth = ({ isAbono, onSubmit }: Props) => {
     onSubmit: onOpen,
     initialValues: { tipoComprobante: 'Boleta', documento: '' }
   })
+
+  const handleOnChangeCheckBox = () => {
+    setIsChecked(!isChecked)
+  }
 
   const handlePay = async ({ id }: { id: string }) => {
     const transaccionId = parseInt(id)
@@ -105,7 +110,14 @@ export const FormPayAuth = ({ isAbono, onSubmit }: Props) => {
         </div>
 
         <div className='flex items-center gap-x-2'>
-          <input type='checkbox' />
+          <input
+            type='checkbox'
+            id='topping'
+            name='topping'
+            value='Terminos'
+            checked={isChecked}
+            onChange={handleOnChangeCheckBox}
+          />
           <p className='text-xs'>Acepto los términos y condiciones</p>
         </div>
 
@@ -136,8 +148,11 @@ export const FormPayAuth = ({ isAbono, onSubmit }: Props) => {
           </div>
 
           <button
+            disabled={!isChecked}
             type='submit'
-            className='bg-[#a02e2b] text-white  py-1.5 px-5 sm:px-10 hover:opacity-75 transition-all duration-500 rounded-md'>
+            className={`bg-[#a02e2b] text-white  py-1.5 px-5 sm:px-10 hover:opacity-75 transition-all duration-500 rounded-md ${
+              !isChecked ? 'opacity-50' : 'opacity-100'
+            } `}>
             Ir a Pagar
           </button>
         </div>

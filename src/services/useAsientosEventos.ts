@@ -4,6 +4,7 @@ import { useGetAllAsientosQuery } from '../generated/graphql'
 export const useAsientosEventos = (input = { eventoId: 1, tendido: 'T1' }) => {
   const { data, loading, refetch } = useGetAllAsientosQuery({
     fetchPolicy: 'network-only',
+    pollInterval: 1000 * 3,
     variables: {
       ...input
     }

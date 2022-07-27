@@ -573,6 +573,13 @@ export type CreatePedidoAbonadoMutationVariables = Exact<{
 
 export type CreatePedidoAbonadoMutation = { __typename?: 'Mutation', CreatePedidoAbonado: { __typename?: 'Pedido', pedidoId?: string | null, tipoComprobante?: string | null } };
 
+export type CreateSuscriptorMutationVariables = Exact<{
+  input: SuscriptorInput;
+}>;
+
+
+export type CreateSuscriptorMutation = { __typename?: 'Mutation', CreateSuscriptor?: { __typename?: 'Suscriptor', suscriptorId?: string | null, nombres?: string | null, email?: string | null } | null };
+
 export type CreateUsuarioMutationVariables = Exact<{
   input: UserInput;
 }>;
@@ -758,6 +765,41 @@ export function useCreatePedidoAbonadoMutation(baseOptions?: Apollo.MutationHook
 export type CreatePedidoAbonadoMutationHookResult = ReturnType<typeof useCreatePedidoAbonadoMutation>;
 export type CreatePedidoAbonadoMutationResult = Apollo.MutationResult<CreatePedidoAbonadoMutation>;
 export type CreatePedidoAbonadoMutationOptions = Apollo.BaseMutationOptions<CreatePedidoAbonadoMutation, CreatePedidoAbonadoMutationVariables>;
+export const CreateSuscriptorDocument = gql`
+    mutation CreateSuscriptor($input: SuscriptorInput!) {
+  CreateSuscriptor(input: $input) {
+    suscriptorId
+    nombres
+    email
+  }
+}
+    `;
+export type CreateSuscriptorMutationFn = Apollo.MutationFunction<CreateSuscriptorMutation, CreateSuscriptorMutationVariables>;
+
+/**
+ * __useCreateSuscriptorMutation__
+ *
+ * To run a mutation, you first call `useCreateSuscriptorMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateSuscriptorMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createSuscriptorMutation, { data, loading, error }] = useCreateSuscriptorMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateSuscriptorMutation(baseOptions?: Apollo.MutationHookOptions<CreateSuscriptorMutation, CreateSuscriptorMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateSuscriptorMutation, CreateSuscriptorMutationVariables>(CreateSuscriptorDocument, options);
+      }
+export type CreateSuscriptorMutationHookResult = ReturnType<typeof useCreateSuscriptorMutation>;
+export type CreateSuscriptorMutationResult = Apollo.MutationResult<CreateSuscriptorMutation>;
+export type CreateSuscriptorMutationOptions = Apollo.BaseMutationOptions<CreateSuscriptorMutation, CreateSuscriptorMutationVariables>;
 export const CreateUsuarioDocument = gql`
     mutation CreateUsuario($input: UserInput!) {
   CreateUsuario(input: $input) {

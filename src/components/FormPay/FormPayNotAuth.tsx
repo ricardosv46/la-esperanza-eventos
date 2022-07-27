@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FormikErrors, FormikValues, useFormik } from 'formik'
 import Image from 'next/image'
 import IconShield from '../../../public/icons/IconShield'
@@ -98,6 +98,8 @@ const validationSchema = async (values: FormikValues) => {
 export const FormPayNotAuth = ({ isAbono, onSubmit, errores }: Props) => {
   const { pago } = usePaymentContext()
   const { isOpen, onOpen, onClose } = useToggle()
+  const [isChecked, setIsChecked] = useState(false)
+
   const { createPedidoEvento } = usePedidoEvento()
   const { createPedidoAbonado } = usePedidoAbonado()
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
@@ -113,6 +115,10 @@ export const FormPayNotAuth = ({ isAbono, onSubmit, errores }: Props) => {
       email: ''
     }
   })
+
+  const handleOnChangeCheckBox = () => {
+    setIsChecked(!isChecked)
+  }
 
   const handlePay = async ({ id }: { id: string }) => {
     const transaccionId = parseInt(id)
@@ -254,7 +260,14 @@ export const FormPayNotAuth = ({ isAbono, onSubmit, errores }: Props) => {
             ) : null}
           </div>
           <div className='flex items-center gap-x-2'>
-            <input type='checkbox' />
+            <input
+              type='checkbox'
+              id='topping'
+              name='topping'
+              value='Terminos'
+              checked={isChecked}
+              onChange={handleOnChangeCheckBox}
+            />
             <p className='text-xs'>Acepto los términos y condiciones</p>
           </div>
 
@@ -292,8 +305,11 @@ export const FormPayNotAuth = ({ isAbono, onSubmit, errores }: Props) => {
             </div>
 
             <button
+              disabled={!isChecked}
               type='submit'
-              className='bg-[#a02e2b] text-white  py-1.5 px-5 sm:px-10 hover:opacity-75 transition-all duration-500 rounded-md'>
+              className={`bg-[#a02e2b] text-white  py-1.5 px-5 sm:px-10 hover:opacity-75 transition-all duration-500 rounded-md ${
+                !isChecked ? 'opacity-50' : 'opacity-100'
+              } `}>
               Ir a Pagar
             </button>
           </div>
