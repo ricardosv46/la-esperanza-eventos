@@ -5,6 +5,8 @@ query GetFeria {
     descripcionLarga
     descuento
     titulo
+    fecha
+    hora
     terminosCondiciones
     imagenPrincipal {
       id

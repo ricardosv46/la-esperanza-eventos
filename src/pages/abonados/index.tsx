@@ -13,9 +13,13 @@ const colors = ['bg-[#F89F59]', ' bg-[#FFD066]', 'bg-[#FFDA99]', 'bg-[#D03B3E]',
 
 const Abonados = () => {
   const { abono, loading } = useAbonado()
+  console.log(abono)
   const router = useRouter()
   const handleModal = (id: string) => {
-    router.push(`/abonados/${id}`)
+    router.push({
+      pathname: `/abonados/${id}`,
+      query: { fecha: abono?.fecha, hora: abono?.hora }
+    })
   }
   const { precios } = usePreciosRefs()
 
@@ -50,13 +54,13 @@ const Abonados = () => {
                         <IconCalendar width={16} height={16} />
                       </div>
 
-                      <div className=''>23 jul 2022</div>
+                      <div className=''>{moment(abono?.fecha).format('LL')}</div>
                     </div>
                     <div className='flex gap-x-3'>
                       <div className='mt-0.5'>
                         <IconHour width={16} height={16} />
                       </div>
-                      <div className=''>1:56</div>
+                      <div className=''>{moment(abono?.fecha + ' ' + abono?.hora).format('hh:mm A')}</div>
                     </div>
                   </div>
                   <div className='flex justify-center mt-5 '>
@@ -92,13 +96,13 @@ const Abonados = () => {
                         <IconCalendar width={16} height={16} />
                       </div>
 
-                      <div className=''>23 jul 2022</div>
+                      <div className=''>{moment(abono?.fecha).format('LL')}</div>
                     </div>
                     <div className='flex gap-x-3'>
                       <div className='mt-0.5'>
                         <IconHour width={16} height={16} />
                       </div>
-                      <div className=''>1:56</div>
+                      <div className=''>{moment(abono?.fecha + ' ' + abono?.hora).format('hh:mm A')}</div>
                     </div>
                   </div>
                   <p className='text-md text-text text-center'>

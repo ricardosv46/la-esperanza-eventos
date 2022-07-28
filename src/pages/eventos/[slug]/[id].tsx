@@ -1,3 +1,4 @@
+import moment from 'moment'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { useEffect, useMemo, useState } from 'react'
@@ -6,6 +7,7 @@ import Asientos, { IColums } from '../../../components/asientos'
 import Container from '../../../components/container'
 import { usePaymentContext } from '../../../context/payment/PaymentState'
 import { genNombreFilas } from '../../../data/asientos'
+import { gentituloButacas } from '../../../data/tituloButacas'
 import { useAsientosEventos } from '../../../services/useAsientosEventos'
 import { useButacas } from '../../../services/useButacas'
 import { useEventoSlug } from '../../../services/useEventoSlug'
@@ -14,10 +16,9 @@ const Detalle = () => {
   const navigation = useRouter()
   const { EnviarPago } = usePaymentContext()
   const [seleccionados, setSeleccionados] = useState<IColums[]>([])
-  const { id, slug } = useRouter().query as any
+  const { id, slug, fecha, hora } = useRouter().query as any
   const { butacas, loading, refetch } = useButacas(id)
   const { eventoSlug, loading: loadingEvento, refetch: refetchEvento } = useEventoSlug(slug)
-  console.log(id, slug)
 
   useEffect(() => {
     if (!loading && !loadingEvento) {
@@ -70,10 +71,10 @@ const Detalle = () => {
         <p className='text-center text-3xl text-primary font-bold'>SELECCIONA TUS ASIENTOS</p>
         <div className='flex flex-col justify-center border-b-2 border-t-2 border-primary py-5 mt-5'>
           <div className='flex justify-between items-center lg:px-8'>
-            <p className=' text-base text-primary font-bold lg:text-xl'>Tendido 1 SOMBRA</p>
+            <p className=' text-base text-primary font-bold lg:text-xl'>{gentituloButacas(id)}</p>
             <div className='flex gap-3 items-center'>
               <IconDate fill='#4C000C' width={20} height={20} />
-              <p className='text-primary font-bold lg:text-base text-xs'>{eventoSlug?.fecha}</p>
+              <p className='text-primary font-bold lg:text-base text-xs'>{moment(eventoSlug?.fecha).format('LL')}</p>
             </div>
           </div>
           {dataAsientos?.length && (
@@ -126,7 +127,7 @@ const Detalle = () => {
               onClick={() => {
                 navigation.push({
                   pathname: '/check-out/',
-                  query: { name: 'evento' }
+                  query: { name: 'evento', fecha, hora }
                 })
                 EnviarPago(seleccionados)
               }}>

@@ -1,3 +1,4 @@
+import moment from 'moment'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
@@ -18,7 +19,10 @@ const Compra = () => {
 
   const { eventoSlug, loading, refetch } = useEventoSlug(slug)
   const handleClick = (id: string) => {
-    router.push(`/eventos/${slug}/${id}`)
+    router.push({
+      pathname: `/eventos/${slug}/${id}`,
+      query: { fecha: eventoSlug?.fecha, hora: eventoSlug?.hora }
+    })
   }
 
   useEffect(() => {
@@ -68,13 +72,13 @@ const Compra = () => {
                           <IconCalendar width={16} height={16} />
                         </div>
 
-                        <div className=''>{eventoSlug?.fecha}</div>
+                        <div className=''>{moment(eventoSlug?.fecha).format('LL')}</div>
                       </div>
                       <div className='flex gap-x-3'>
                         <div className='mt-0.5'>
                           <IconHour width={16} height={16} />
                         </div>
-                        <div className=''>{eventoSlug?.hora}</div>
+                        <div className=''>{moment(eventoSlug?.fecha + ' ' + eventoSlug?.hora).format('hh:mm A')}</div>
                       </div>
                     </div>
                     <div className='flex justify-center mt-5'>
@@ -104,13 +108,13 @@ const Compra = () => {
                         <IconCalendar width={16} height={16} />
                       </div>
 
-                      <div className=''>{eventoSlug?.fecha}</div>
+                      <div className=''>{moment(eventoSlug?.fecha).format('LL')}</div>
                     </div>
                     <div className='flex gap-x-3'>
                       <div className='mt-0.5'>
                         <IconHour width={16} height={16} />
                       </div>
-                      <div className=''>{eventoSlug?.hora}</div>
+                      <div className=''>{moment(eventoSlug?.fecha + ' ' + eventoSlug?.hora).format('hh:mm A')}</div>
                     </div>
                   </div>
                   <p className='text-md text-text text-center border-b border-black pb-5'>

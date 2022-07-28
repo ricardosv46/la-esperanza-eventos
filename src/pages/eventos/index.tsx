@@ -1,3 +1,4 @@
+import { Console } from 'console'
 import moment from 'moment'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
@@ -21,7 +22,6 @@ const Eventos = () => {
   const fechaI = `${fechaInicial} ${horaInicial}`
   const fechaF = `${fechaFinal} ${horaFinal}`
   const isDisableAbono = moment().isBetween(moment(fechaI), moment(fechaF)) ? false : true
-
   return (
     <>
       <OpenGraph
@@ -89,7 +89,9 @@ const Eventos = () => {
                 disabled={isDisableAbono}
                 onClick={() => navigate.push(`/abonados`)}
                 style={{ boxShadow: '-8px 6px 13px 0px rgba(0,0,0,0.42)' }}
-                className='bg-tertiary px-6 py-2 mt-5 text-md rounded-sm text-white font-semibold cursor-pointer  shadow-primary'>
+                className={`bg-tertiary px-6 py-2 mt-5 text-md rounded-sm text-white font-semibold cursor-pointer  shadow-primary  ${
+                  isDisableAbono ? 'opacity-50' : 'opacity-100'
+                }`}>
                 Comprar tu abono
               </button>
             </div>
@@ -126,13 +128,13 @@ const Eventos = () => {
                         <IconCalendar width={14} height={14} />
                       </div>
 
-                      <div className='mt-0.5'>{item?.fecha}</div>
+                      <div className='mt-0.5'>{moment(item?.fecha).format('LL')}</div>
                     </div>
                     <div className='flex  items-center gap-x-1'>
                       <div className=''>
                         <IconHour width={14} height={14} />
                       </div>
-                      <div className='mt-0.5'>{item?.hora} am</div>
+                      <div className='mt-0.5'>{moment(item?.fecha + ' ' + item?.hora).format('hh:mm A')}</div>
                     </div>
                   </div>
                   <h6 className='text-[#4c000c] font-bold text-3xl text-left my-3'>{item?.titulo}</h6>

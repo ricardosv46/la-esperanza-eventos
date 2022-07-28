@@ -659,7 +659,7 @@ export type GetEventoSlugQuery = { __typename?: 'Query', GetEventoSlug?: { __typ
 export type GetFeriaQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetFeriaQuery = { __typename?: 'Query', GetFeria?: { __typename?: 'Feria', feriaId?: string | null, descripcionCorta?: string | null, descripcionLarga?: string | null, descuento?: number | null, titulo?: string | null, terminosCondiciones?: string | null, fechaInicial?: any | null, horaInicial?: string | null, fechaFinal?: any | null, horaFinal?: string | null, imagenPrincipal?: { __typename?: 'Imagen', id?: string | null, titulo?: string | null, url?: string | null } | null, imagenSecundaria?: { __typename?: 'Imagen', id?: string | null, titulo?: string | null, url?: string | null } | null } | null };
+export type GetFeriaQuery = { __typename?: 'Query', GetFeria?: { __typename?: 'Feria', feriaId?: string | null, descripcionCorta?: string | null, descripcionLarga?: string | null, descuento?: number | null, titulo?: string | null, fecha?: any | null, hora?: string | null, terminosCondiciones?: string | null, fechaInicial?: any | null, horaInicial?: string | null, fechaFinal?: any | null, horaFinal?: string | null, imagenPrincipal?: { __typename?: 'Imagen', id?: string | null, titulo?: string | null, url?: string | null } | null, imagenSecundaria?: { __typename?: 'Imagen', id?: string | null, titulo?: string | null, url?: string | null } | null } | null };
 
 
 export const ConsultEmailDocument = gql`
@@ -1290,6 +1290,8 @@ export const GetFeriaDocument = gql`
     descripcionLarga
     descuento
     titulo
+    fecha
+    hora
     terminosCondiciones
     imagenPrincipal {
       id

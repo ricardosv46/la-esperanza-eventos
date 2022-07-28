@@ -12,6 +12,7 @@ import { usePedidoAbonado } from '../../services/usePedidoAbonado'
 import { isEmail } from '../../utils/isEmail'
 import { useEmail } from '../../services/useEmail'
 import { isEmpty } from '../../utils/isEmpty'
+import moment from 'moment'
 
 interface Props {
   errores: string
@@ -116,6 +117,8 @@ export const FormPayNotAuth = ({ isAbono, onSubmit, errores }: Props) => {
     }
   })
 
+  const fecha = moment().format('YYYY-MM-DD')
+
   const handleOnChangeCheckBox = () => {
     setIsChecked(!isChecked)
   }
@@ -128,7 +131,7 @@ export const FormPayNotAuth = ({ isAbono, onSubmit, errores }: Props) => {
         input1: {
           transaccionId,
           precioTotal: total,
-          fechaPedido: '2022-07-22',
+          fechaPedido: fecha,
           numeroComprobante: values.documento,
           tipoComprobante: values.tipoComprobante
         },
@@ -149,7 +152,7 @@ export const FormPayNotAuth = ({ isAbono, onSubmit, errores }: Props) => {
         input1: {
           transaccionId,
           precioTotal: total,
-          fechaPedido: '2022-07-22',
+          fechaPedido: fecha,
           numeroComprobante: values.documento,
           tipoComprobante: values.tipoComprobante
         },

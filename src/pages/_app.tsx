@@ -10,6 +10,9 @@ import PaymentState from '../context/payment/PaymentState'
 import { ApolloProvider } from '@apollo/client'
 import client from '../apollo'
 import { SessionProvider } from 'next-auth/react'
+import moment from 'moment'
+import 'moment/locale/es'
+moment.locale('es')
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (

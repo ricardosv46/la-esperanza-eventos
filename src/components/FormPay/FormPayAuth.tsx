@@ -10,6 +10,7 @@ import { payRequest } from '../../data/paydata'
 import { usePaymentContext } from '../../context/payment/PaymentState'
 import { usePedidoEvento } from '../../services/usePedidoEvento'
 import { usePedidoAbonado } from '../../services/usePedidoAbonado'
+import moment from 'moment'
 
 interface Props {
   isAbono: boolean
@@ -21,6 +22,8 @@ const validationSchema = Yup.object().shape({
     .required(`El número es requerido`)
     .matches(/^[0-9]+$/, 'Debe ser solo números')
 })
+
+const fecha = moment().format('YYYY-MM-DD')
 
 export const FormPayAuth = ({ isAbono, onSubmit }: Props) => {
   const { pago } = usePaymentContext()
@@ -46,7 +49,7 @@ export const FormPayAuth = ({ isAbono, onSubmit }: Props) => {
         input1: {
           transaccionId,
           precioTotal: total,
-          fechaPedido: '2022-07-22',
+          fechaPedido: fecha,
           numeroComprobante: values.documento,
           tipoComprobante: values.tipoComprobante
         },
@@ -62,7 +65,7 @@ export const FormPayAuth = ({ isAbono, onSubmit }: Props) => {
         input1: {
           transaccionId,
           precioTotal: total,
-          fechaPedido: '2022-07-22',
+          fechaPedido: fecha,
           numeroComprobante: values.documento,
           tipoComprobante: values.tipoComprobante
         },
