@@ -1,8 +1,10 @@
 import * as ReactDOM from 'react-dom'
-import { Fragment, useCallback, useEffect, useState } from 'react'
+import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
 
 import Modal from '../modal'
 import { PaymePayload } from '../../data/paydata'
+import Image from 'next/image'
+import IconPayme from '../../../public/icons/IconPayme'
 
 interface Props {
   isOpen: boolean
@@ -64,26 +66,41 @@ const ModalPayme = ({ isOpen, onClose, onChange, payload }: Props) => {
   }, [])
 
   useEffect(() => {
-    if (isOpen) {
+    const paymeForm = document.querySelector('#payme')
+
+    if (isOpen && scriptReady) {
       // @ts-ignore
       const capture = new FlexCapture({
         payload,
         additionalFields: [],
         key: 'FsVVX37w7ZSK1HNQ8NXxDhFEFLXjREorode1sokWZzz2ZahPfG1F35DpOd1miSuh'
-        //"additionalFields": ["v_nombre", "v_apellido", "v_email", "v_doc_type", "v_dni"]
       })
 
-      capture.init(document.querySelector('#payme'), handleRequest)
+      capture.init(paymeForm, handleRequest)
     }
-  }, [isOpen, handleRequest, payload])
+  }, [isOpen, handleRequest, payload, scriptReady])
 
   return (
     <Fragment>
       {scriptReady &&
         ReactDOM.createPortal(
           <Modal isOpen={isOpen} onClose={onClose}>
-            <div className="bg-white p-3 rounded" id="payme">
-              {!error && <p>Ha ocurrido un error intente nuevamente</p>}
+            <div className="bg-white p-3 rounded">
+              <div className="grid place-items-center mb-5">
+                <Image
+                  alt="logo"
+                  width={180}
+                  height={60}
+                  className="filter-logo"
+                  src="/imgs/logos/logo.png"
+                />
+              </div>
+              <div id="payme">
+                {!error && <p>Ha ocurrido un error intente nuevamente</p>}
+              </div>
+              <div className="grid place-items-center my-5">
+                <IconPayme width={160} height={40} />
+              </div>
             </div>
           </Modal>,
           document.getElementById('portal') as Element
