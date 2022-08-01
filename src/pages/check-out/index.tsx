@@ -18,19 +18,48 @@ import useToggle from '../../hooks/useToggle'
 import { payRequest } from '../../data/paydata'
 import { FormPayAuth, FormPayNotAuth } from '../../components/FormPay'
 import moment from 'moment'
+import IconCheck from '../../../public/icons/IconCheck'
 
 const CheckOut = () => {
   const { status, data } = useSession() as any
 
   const [pagado, setPagado] = useState(false)
   const [errores, setErrores] = useState('')
+  const navigate = useRouter()
 
   const { query } = useRouter()
   const { fecha, hora } = useRouter().query as any
 
   return (
     <Container bgColor='bg-[#fff2e6]' className='px-5 py-5'>
-      {pagado && <p>se realizo el pago correctamente</p>}
+      {/* {pagado && <div className='h-[533px]' ><p className='font-bold text-primary'>Hemos recibido correctamente el pago y enviado tus datos de usuario al correo registrado. Ingresa a la sección de usuarios para visualizar tus boletos o para asignar o modificar los asistentes con el usuario y contraseña enviados</p></div>} */}
+
+      {pagado &&  <div className='flex justify-center h-[533px] flex-col items-center text-primary-300 gap-10 py-5'>
+      <p className='text-center text-primary font-bold text-xl'>
+      Hemos recibido correctamente el pago y enviado tus datos de usuario al correo registrado. Ingresa a la sección de usuarios para visualizar tus boletos o para asignar o modificar los asistentes con el usuario y contraseña enviados
+      </p>
+      <div className='flex justify-center mt-4 text-primary'>
+        <IconCheck width={100} height={100} className='text-current' />
+      </div>
+      <div className='flex flex-col gap-5'>
+        <button
+          onClick={() => navigate.push('/')}
+          className='bg-primary text-[#fff2e6] border-2 px-10 py-2.5 rounded-full font-semibold uppercase duration-300 ease-in-out hover:border-primary hover:bg-[#fff2e6] hover:text-primary'
+        >
+          Ir a Inicio
+        </button>
+        <button
+          onClick={() => navigate.push('/eventos')}
+          className='bg-[#fff2e6] text-primary border-2 px-10 py-2.5 rounded-full font-semibold uppercase duration-300 ease-in-out border-primary hover:bg-primary hover:text-[#fff2e6]'
+        >
+          Seguir Comprando
+        </button>
+      </div>
+    </div>}
+
+
+
+
 
       {!pagado && (
         <div className='max-w-[1000px] w-full mx-auto p-10 bg-white shadow-xl rounded-xl'>

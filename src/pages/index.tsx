@@ -86,7 +86,7 @@ const Home: NextPage = () => {
                     a disfrutar una tarde de toros entre amigos.
                   </p>
                   <button
-                    onClick={() => navigate.push('/eventos')}
+                    onClick={() => navigate.push('/plaza')}
                     style={{ boxShadow: '-8px 6px 13px 0px rgba(0,0,0,0.42)' }}
                     className='bg-tertiary px-6 py-2 rounded-sm text-white font-semibold cursor-pointer  shadow-primary'>
                     <p className='font-bold'>Conoce más</p>

@@ -136,7 +136,7 @@ export const FormPayNotAuth = ({ isAbono, onSubmit, errores }: Props) => {
           transaccionId,
           precioTotal: total,
           fechaPedido: fecha,
-          numeroComprobante: values.documento,
+          numeroComprobante: values.tipoComprobante === 'Factura' ? values.ruc : values.dni,
           tipoComprobante: values.tipoComprobante
         },
         input2: pago,
@@ -157,7 +157,7 @@ export const FormPayNotAuth = ({ isAbono, onSubmit, errores }: Props) => {
           transaccionId,
           precioTotal: total,
           fechaPedido: fecha,
-          numeroComprobante: values.documento,
+          numeroComprobante: values.tipoComprobante === 'Factura' ? values.ruc : values.dni,
           tipoComprobante: values.tipoComprobante
         },
         input2: pago,

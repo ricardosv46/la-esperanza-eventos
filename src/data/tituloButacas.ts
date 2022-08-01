@@ -14,10 +14,10 @@ export const gentituloButacas = (id: string) => {
     titulo = 'Tendido 3 SOL'
   }
   if (id === 'T3A') {
-    titulo = 'Tendido 3 SOMBRA'
+    titulo = 'Tendido 3A SOL'
   }
   if (id === 'T3B') {
-    titulo = 'Tendido 3 BAJO'
+    titulo = 'Tendido 3B SOL/SOMBRA'
   }
 
   return titulo
