@@ -80,7 +80,7 @@ const Footer = () => {
 						Términos y condiciones
 					</a>
 					<a className='cursor-pointer hover:underline hover:text-secondary' onClick={() => window.open('/cookies')}>
-						polÍticas de cookies
+						PolÍticas de cookies
 					</a>
 				</div>
 				<form onSubmit={handleSubmit} className='flex-1 flex flex-col gap-6 justify-center my-10 sm:mt-0 '>
