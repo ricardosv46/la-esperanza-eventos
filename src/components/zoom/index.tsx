@@ -1,6 +1,8 @@
 import { animate, motion, useMotionValue } from 'framer-motion'
 import { ReactNode, useRef, useState } from 'react'
 import { useGesture } from 'react-use-gesture'
+import IconSearchMinus from '../../../public/icons/IconSearchMinus'
+import IconSearchPlus from '../../../public/icons/IconSearchPlus'
 
 interface Props {
 	children: JSX.Element | JSX.Element[]
@@ -20,7 +22,9 @@ export default function Zoom({ children, id }: ZProps) {
 	return (
 		<>
 			<div className=''>
-				<ImageCropper crop={crop} onCropChange={setCrop} children={children} id={id} />
+				<ImageCropper crop={crop} onCropChange={setCrop} id={id}>
+					{children}
+				</ImageCropper>
 
 				{/* <div className='mt-6'>
 					<button onClick={() => {}}>pinch</button>
@@ -157,11 +161,25 @@ function ImageCropper({ crop, onCropChange, children, id }: Props) {
 							WebkitUserDrag: 'none'
 						}}
 						className={`${
-							id === 'T2S' ? 'w-[2800px]' : id === 'T2B' ? 'w-[1700px]' : id === 'T3' ? 'w-[2220px]' : 'w-[1450px]'
+							id === 'T2S' ? 'w-[3100px]' : id === 'T2B' ? 'w-[2000px]' : id === 'T3' ? 'w-[2450px]' : 'w-[1580px]'
 						} relative h-full max-w-none max-h-none  mx-auto`}>
 						{/* //@ts-ignore */}
 						{children}
 					</motion.div>
+					{/* <div className='flex w-full justify-end gap-3 pt-2 px-10'>
+						<button
+							onClick={() => {
+								scale.set(1.5)
+							}}>
+							<IconSearchPlus fill='#4C000C' width={20} height={20} />
+						</button>
+						<button
+							onClick={() => {
+								scale.set(1)
+							}}>
+							<IconSearchMinus fill='#4C000C' width={20} height={20} />
+						</button>
+					</div> */}
 				</div>
 			</div>
 		</>
