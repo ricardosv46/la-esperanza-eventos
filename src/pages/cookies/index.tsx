@@ -107,14 +107,14 @@ const Cookies = () => {
 				Web, aunque el uso de algunos de sus servicios podrá ser limitado y por tanto la experiencia del usuario puede ser menos
 				satisfactoria. Los accesos a la configuración de cookies de los principales navegadores son los siguientes: I. Internet Explorer:
 				Herramientas -&gt; Opciones de Internet -&gt; Privacidad -&gt; Configuración. Para más información, puede consultar el soporte de
-				Microsoft o la Ayuda del navegador. En cada navegador la operativa que ha de seguirse es diferente, pero la función de "Ayuda" del
+				Microsoft o la Ayuda del navegador. En cada navegador la operativa que ha de seguirse es diferente, pero la función de &quot;Ayuda&quot; del
 				sitio Web de cada navegador le mostrará cómo hacerlo, como sucede por ejemplo para Internet Explorer:
-				windows.microsoft.com/es-xl/internetexplorer/delete-manage-cookies#ie="ie-10" II. Safari: Preferencias -&gt; Seguridad. Para más
+				windows.microsoft.com/es-xl/internetexplorer/delete-manage-cookies#ie=&quot;ie-10&quot; II. Safari: Preferencias -&gt; Seguridad. Para más
 				información, puede consultar el soporte de Apple o la Ayuda del navegador en www.apple.com/es/privacy/use-ofcookies III. Firefox:
 				Herramientas -&gt; Opciones -&gt; Privacidad -&gt; Historial -&gt; Configuración Personalizada. Para más información, puede consultar
 				el soporte de Mozilla o la Ayuda del navegador en support.mozilla.org/es/kb/Borrar%20cookies IV. Chrome: Configuración -&gt; Mostrar
 				opciones avanzadas -&gt; Privacidad -&gt; Configuración de contenido. Para más información, puede consultar el soporte de Google o la
-				Ayuda del navegador en support.google.com/chrome/answer/95647?hl="es"
+				Ayuda del navegador en support.google.com/chrome/answer/95647?hl=&quot;es&quot;
 			</p>
 
 			<p>
