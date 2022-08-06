@@ -151,7 +151,7 @@ const Compra = () => {
 							</section>
 						</main>
 					</Container>
-					<Container bgColor='bg-white' className='flex justify-between gap-10 p-5'>
+					<Container bgColor='bg-white' className='flex flex-col lg:flex-row justify-between gap-10 p-5'>
 						<article className='w-full bg-white rounded-lg p-5  flex flex-col gap-5 border shadow-lg z-0'>
 							<h1 className='text-2xl lg:text-5xl text-primary font-bold '>Vive la emoción de cerca!</h1>
 							<p className='text-md text-primary '>{eventoSlug?.descripcionLarga}</p>

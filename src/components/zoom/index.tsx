@@ -1,28 +1,39 @@
 import { animate, motion, useMotionValue } from 'framer-motion'
-import { useRef, useState } from 'react'
+import { ReactNode, useRef, useState } from 'react'
 import { useGesture } from 'react-use-gesture'
 
-export default function Prueba() {
+interface Props {
+	children: ReactNode
+	crop: any
+	onCropChange: any
+	id: string
+}
+
+interface ZProps {
+	children: ReactNode
+	id: string
+}
+
+export default function Zoom({ children, id }: ZProps) {
 	let [crop, setCrop] = useState({ x: 0, y: 0, scale: 1 })
 
 	return (
 		<>
-			<p className='mt-2 text-lg text-center'>Image Cropper</p>
+			<div className=''>
+				<ImageCropper crop={crop} onCropChange={setCrop} children={children} id={id} />
 
-			<div className='p-8 mt-2'>
-				<ImageCropper src='/thumb.jpg' crop={crop} onCropChange={setCrop} />
-
-				<div className='mt-6'>
+				{/* <div className='mt-6'>
+					<button onClick={() => {}}>pinch</button>
 					<p>Crop X: {Math.round(crop.x)}</p>
 					<p>Crop Y: {Math.round(crop.y)}</p>
 					<p>Crop Scale: {Math.round(crop.scale * 100) / 100}</p>
-				</div>
+				</div> */}
 			</div>
 		</>
 	)
 }
 
-function ImageCropper({ src, crop, onCropChange }: any) {
+function ImageCropper({ crop, onCropChange, children, id }: Props) {
 	let x = useMotionValue(crop.x)
 	let y = useMotionValue(crop.y)
 	let scale = useMotionValue(crop.scale)
@@ -131,7 +142,7 @@ function ImageCropper({ src, crop, onCropChange }: any) {
 
 	return (
 		<>
-			<div className={`relative overflow-hidden  ${isDragging ? 'cursor-grabbing' : 'cursor-grab'} ring-white aspect-w-4 aspect-h-5`}>
+			<div className={`relative overflow-hidden   ${isDragging ? 'cursor-grabbing' : 'cursor-grab'} ring-white aspect-w-4 aspect-h-5`}>
 				<div ref={imageContainerRef}>
 					<motion.div
 						ref={imageRef}
@@ -145,41 +156,11 @@ function ImageCropper({ src, crop, onCropChange }: any) {
 							//@ts-ignore
 							WebkitUserDrag: 'none'
 						}}
-						className='relative w-[2000px]  h-full max-w-none max-h-none '>
-						<button onClick={() => console.log('elmoaa')}>afafaffaf</button>
-						<div className='flex-col flex w-full'>
-							<div className=' h-60 bg-secondary flex gap-5 '>
-								<div className='bg-red-500 w-40 h-40'>1</div>
-								<div className='bg-red-500 w-40 h-40'>2</div>
-								<div className='bg-red-500 w-40 h-40'>3</div>
-								<div className='bg-red-500 w-40 h-40'>4</div>
-								<div className='bg-red-500 w-40 h-40'>5</div>
-								<div className='bg-red-500 w-40 h-40'>1</div>
-								<div className='bg-red-500 w-40 h-40'>2</div>
-								<div className='bg-red-500 w-40 h-40'>3</div>
-								<div className='bg-red-500 w-40 h-40'>4</div>
-								<div className='bg-red-500 w-40 h-40'>5</div>
-							</div>
-
-							<div className='w-full h-60 bg-secondary'></div>
-						</div>
-						{/* {{ children }} */}
+						className={`${
+							id === 'T2S' ? 'w-[2800px]' : id === 'T2B' ? 'w-[1700px]' : id === 'T3' ? 'w-[2220px]' : 'w-[1450px]'
+						} relative h-full max-w-none max-h-none  mx-auto`}>
+						{children}
 					</motion.div>
-					<div
-						className={`pointer-events-none absolute inset-0 transition duration-300 ${
-							isDragging || isPinching ? 'opacity-100' : 'opacity-0'
-						}`}>
-						<div className='absolute inset-0 flex flex-col'>
-							<div className='self-stretch flex-1 border-b border-gray-50 '></div>
-							<div className='self-stretch flex-1 border-b border-gray-50 '></div>
-							<div className='self-stretch flex-1'></div>
-						</div>
-						<div className='absolute inset-0 flex'>
-							<div className='self-stretch flex-1 border-r border-gray-50 '></div>
-							<div className='self-stretch flex-1 border-r border-gray-50 '></div>
-							<div className='self-stretch flex-1'></div>
-						</div>
-					</div>
 				</div>
 			</div>
 		</>
