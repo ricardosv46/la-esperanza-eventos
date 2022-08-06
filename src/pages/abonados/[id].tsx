@@ -5,6 +5,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import IconDate from '../../../public/icons/IconDate'
 import Asientos, { IColums } from '../../components/asientos'
 import Container from '../../components/container'
+import Zoom from '../../components/zoom'
 import { usePaymentContext } from '../../context/payment/PaymentState'
 import { genNombreFilas } from '../../data/asientos'
 import { gentituloButacas } from '../../data/tituloButacas'
@@ -65,19 +66,21 @@ const Detalle = () => {
 						</div>
 					</div>
 					{dataAsientos?.length && (
-						<Asientos
-							{...{
-								data: dataAsientos,
-								desabilitados: asientos,
-								seleccionados,
-								setSeleccionados,
-								nombreFilas: genNombreFilas(id)
-							}}
-							tipo='abono'
-							doble={id === 'T2S' ? 'Tendido2' : id === 'T3' ? 'Tendido3' : 'Ruedo'}
-							direccion={id === 'T3A' ? 'end' : id === 'T3B' ? 'start' : 'center'}
-							id={id}
-						/>
+						<Zoom id='T1'>
+							<Asientos
+								{...{
+									data: dataAsientos,
+									desabilitados: asientos,
+									seleccionados,
+									setSeleccionados,
+									nombreFilas: genNombreFilas(id)
+								}}
+								tipo='abono'
+								doble={id === 'T2S' ? 'Tendido2' : id === 'T3' ? 'Tendido3' : 'Ruedo'}
+								direccion={id === 'T3A' ? 'end' : id === 'T3B' ? 'start' : 'center'}
+								id={id}
+							/>
+						</Zoom>
 					)}
 				</div>
 				<div className='p-5 flex gap-3 text-sm lg:text-base'>

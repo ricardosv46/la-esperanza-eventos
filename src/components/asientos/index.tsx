@@ -83,97 +83,95 @@ const Asientos = ({
 	}
 
 	return (
-		<Zoom id={id}>
-			<div className='flex flex-col  justify-center items-center  px-5 w-full py-16 gap-1'>
-				{Object.keys(filas).map((fila, index) => (
-					<div key={fila} className='flex justify-center  items-center gap-5 w-full'>
-						<div className='w-36  text-right'>
-							<p className='text-[12px] text-primary font-semibold'>{nombreFilas[index]}</p>
-						</div>
-						<div className={`flex flex-row-reverse justify-${direccion} items-center gap-1.5  flex-1 `}>
-							{filas[`${fila.toString()}`].map(
-								({ reservado, precio, asiento, codigo, feriaId, tendido, eventoId }: IColums, index: any) => {
-									if (index < asiento) {
-										const isActive = seleccionados.some((seleccionado) => seleccionado.reservado === reservado)
-										console.log(reservado)
-										const disabled = desabilitados.some((_item) => _item?.reservado === reservado)
-										return (
-											<button
-												id={reservado}
-												key={reservado}
-												onClick={() => {
-													if (tipo === 'abono') {
-														selectId({
-															reservado,
-															precio,
-															asiento: asiento.toString(),
-															codigo,
-															feriaId,
-															tendido
-														})
-													}
-													if (tipo === 'evento') {
-														selectId({
-															reservado,
-															precio,
-															asiento: asiento.toString(),
-															codigo,
-															feriaId,
-															tendido,
-															eventoId
-														})
-													}
-												}}
-												disabled={disabled}
-												className={`
+		<div className='flex flex-col  justify-center items-center  px-5 w-full py-16 gap-1'>
+			{Object.keys(filas).map((fila, index) => (
+				<div key={fila} className='flex justify-center  items-center gap-5 w-full'>
+					<div className='w-36  text-right'>
+						<p className='text-[12px] text-primary font-semibold'>{nombreFilas[index]}</p>
+					</div>
+					<div className={`flex flex-row-reverse justify-${direccion} items-center gap-1.5  flex-1 `}>
+						{filas[`${fila.toString()}`].map(
+							({ reservado, precio, asiento, codigo, feriaId, tendido, eventoId }: IColums, index: any) => {
+								if (index < asiento) {
+									const isActive = seleccionados.some((seleccionado) => seleccionado.reservado === reservado)
+									console.log(reservado)
+									const disabled = desabilitados.some((_item) => _item?.reservado === reservado)
+									return (
+										<button
+											id={reservado}
+											key={reservado}
+											onClick={() => {
+												if (tipo === 'abono') {
+													selectId({
+														reservado,
+														precio,
+														asiento: asiento.toString(),
+														codigo,
+														feriaId,
+														tendido
+													})
+												}
+												if (tipo === 'evento') {
+													selectId({
+														reservado,
+														precio,
+														asiento: asiento.toString(),
+														codigo,
+														feriaId,
+														tendido,
+														eventoId
+													})
+												}
+											}}
+											disabled={disabled}
+											className={`
                                   ${disabled ? 'bg-text text-white' : isActive ? 'bg-primary text-white' : 'bg-yellow-500  text-primary'}
                                    rounded-full  h-4 w-4  font-semibold  flex justify-center items-center `}>
-												<p className='text-[7px] leading-0'>{asiento}</p>
-											</button>
-										)
-									} else return null
-								}
-							)}
+											<p className='text-[7px] leading-0'>{asiento}</p>
+										</button>
+									)
+								} else return null
+							}
+						)}
+					</div>
+					<div className='w-36'>
+						<p className='text-[12px] text-primary font-semibold'>{nombreFilas[index]}</p>
+					</div>
+				</div>
+			))}
+			<div
+				className={`${
+					id === 'T2S' ? 'w-[2400px]' : id === 'T2B' ? 'w-[1300px]' : id === 'T3' ? 'w-[1820px]' : 'w-[1050px]'
+				} h-14 overflow-hidden relative mt-5 mx-auto`}>
+				{doble === 'Tendido3' && (
+					<div className='flex justify-between gap-5'>
+						<div className='bg-text w-full  h-9'>
+							<p className=' text-white flex justify-center items-center  w-full h-full'>TENDIDO 3B</p>
 						</div>
-						<div className='w-36'>
-							<p className='text-[12px] text-primary font-semibold'>{nombreFilas[index]}</p>
+						<div className='bg-text w-full  h-9'>
+							<p className=' text-white flex justify-center items-center  w-full h-full'>TENDIDO 3A</p>
 						</div>
 					</div>
-				))}
-				<div
-					className={`${
-						id === 'T2S' ? 'w-[2400px]' : id === 'T2B' ? 'w-[1300px]' : id === 'T3' ? 'w-[1820px]' : 'w-[1050px]'
-					} h-14 overflow-hidden relative mt-5 mx-auto`}>
-					{doble === 'Tendido3' && (
-						<div className='flex justify-between gap-5'>
-							<div className='bg-text w-full  h-9'>
-								<p className=' text-white flex justify-center items-center  w-full h-full'>TENDIDO 3B</p>
-							</div>
-							<div className='bg-text w-full  h-9'>
-								<p className=' text-white flex justify-center items-center  w-full h-full'>TENDIDO 3A</p>
-							</div>
+				)}
+				{doble === 'Tendido2' && (
+					<div className='flex'>
+						<div className='bg-text w-full  h-9'>
+							<p className=' text-white flex justify-center items-center  w-full h-full'>TENDIDO 2 BAJO</p>
 						</div>
-					)}
-					{doble === 'Tendido2' && (
-						<div className='flex'>
-							<div className='bg-text w-full  h-9'>
-								<p className=' text-white flex justify-center items-center  w-full h-full'>TENDIDO 2 BAJO</p>
-							</div>
-						</div>
-					)}
-					{doble === 'Ruedo' && (
-						<>
-							<svg viewBox='0 0 500 150' preserveAspectRatio='none' className='w-full h-full'>
-								<path
-									d='M0.00,49.98 C-71.95,55.77 250.27,-17.25 500.00,49.98 L500.00,120.00 L-0.27,117.94 Z'
-									className='fill-text '></path>
-							</svg>
-							<div className='absolute top-0 z-10 text-white flex justify-center items-center  w-full h-full '>RUEDO</div>
-						</>
-					)}
-				</div>
+					</div>
+				)}
+				{doble === 'Ruedo' && (
+					<>
+						<svg viewBox='0 0 500 150' preserveAspectRatio='none' className='w-full h-full'>
+							<path
+								d='M0.00,49.98 C-71.95,55.77 250.27,-17.25 500.00,49.98 L500.00,120.00 L-0.27,117.94 Z'
+								className='fill-text '></path>
+						</svg>
+						<div className='absolute top-0 z-10 text-white flex justify-center items-center  w-full h-full '>RUEDO</div>
+					</>
+				)}
 			</div>
-		</Zoom>
+		</div>
 	)
 }
 

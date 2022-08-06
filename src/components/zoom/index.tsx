@@ -3,14 +3,14 @@ import { ReactNode, useRef, useState } from 'react'
 import { useGesture } from 'react-use-gesture'
 
 interface Props {
-	children: ReactNode
+	children: JSX.Element | JSX.Element[]
 	crop: any
 	onCropChange: any
 	id: string
 }
 
 interface ZProps {
-	children: ReactNode
+	children: JSX.Element | JSX.Element[]
 	id: string
 }
 
@@ -159,6 +159,7 @@ function ImageCropper({ crop, onCropChange, children, id }: Props) {
 						className={`${
 							id === 'T2S' ? 'w-[2800px]' : id === 'T2B' ? 'w-[1700px]' : id === 'T3' ? 'w-[2220px]' : 'w-[1450px]'
 						} relative h-full max-w-none max-h-none  mx-auto`}>
+						{/* //@ts-ignore */}
 						{children}
 					</motion.div>
 				</div>
