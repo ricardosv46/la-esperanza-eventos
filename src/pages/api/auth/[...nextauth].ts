@@ -18,49 +18,49 @@ const LOGIN_AUTH = `mutation Login($input: LoginInput!) {
 }`
 
 export default NextAuth({
-  providers: [
-    CredentialsProvider({
-      name: 'Credentials',
+	providers: [
+		CredentialsProvider({
+			name: 'Credentials',
 
-      credentials: {
-        email: { label: 'Username', type: 'text' },
-        password: { label: 'Password', type: 'password' }
-      },
-      async authorize(credentials: any) {
-        try {
-          const res = await request('https://laesperanza.almacenrivera.com/public/graphql', LOGIN_AUTH, {
-            input: {
-              email: credentials.email,
-              password: credentials.password
-            }
-          })
+			credentials: {
+				email: { label: 'Username', type: 'text' },
+				password: { label: 'Password', type: 'password' }
+			},
+			async authorize(credentials: any) {
+				try {
+					const res = await request('https://apilaesperanza.plazaticket.com/public/graphql', LOGIN_AUTH, {
+						input: {
+							email: credentials.email,
+							password: credentials.password
+						}
+					})
 
-          if (res?.Login) {
-            return res?.Login
-          }
-          console.log('res', res)
-        } catch (error: any) {
-          console.log('res', error)
-          throw new Error(error.response.errors[0].debugMessage)
-        }
-      }
-    })
-  ],
-  secret: process.env.NEXTAUTH_SECRET,
-  session: {
-    maxAge: 30 * 24 * 60 * 60, // 30 days
-    strategy: 'jwt'
-  },
-  callbacks: {
-    async session({ session, token }: any) {
-      session.user = token.user
-      return session
-    },
-    async jwt({ token, user }: any) {
-      if (user) {
-        token.user = user
-      }
-      return token
-    }
-  }
+					if (res?.Login) {
+						return res?.Login
+					}
+					console.log('res', res)
+				} catch (error: any) {
+					console.log('res', error)
+					throw new Error(error.response.errors[0].debugMessage)
+				}
+			}
+		})
+	],
+	secret: process.env.NEXTAUTH_SECRET,
+	session: {
+		maxAge: 30 * 24 * 60 * 60, // 30 days
+		strategy: 'jwt'
+	},
+	callbacks: {
+		async session({ session, token }: any) {
+			session.user = token.user
+			return session
+		},
+		async jwt({ token, user }: any) {
+			if (user) {
+				token.user = user
+			}
+			return token
+		}
+	}
 })

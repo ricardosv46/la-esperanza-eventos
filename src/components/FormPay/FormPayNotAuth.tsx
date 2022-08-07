@@ -21,7 +21,7 @@ interface Props {
 }
 
 const consultaCorreo = async (email: string) => {
-	const res = await fetch('https://laesperanza.almacenrivera.com/public/graphql', {
+	const res = await fetch('https://apilaesperanza.plazaticket.com/public/graphql', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
