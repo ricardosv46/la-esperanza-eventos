@@ -114,9 +114,9 @@ const Home: NextPage = () => {
 				</div>
 				<div className='w-full lg:w-1/2'>
 					<div className='flex justify-end'>
-						<div className='flex justify-center items-center relative w-[520px] h-[344px]'>
+						<div className='flex justify-center items-center relative w-[520px] '>
 							<Image className='cursor-pointer relative' src='/imgs/eventosImage.png' width={520} height={344} alt='logo' />
-							<div className='absolute w-full h-full flex justify-end items-end p-8 '>
+							<div className='absolute w-full h-full flex justify-end items-end p-5 lg:p-8 '>
 								<button
 									onClick={() => navigate.push(`/eventos`)}
 									className={` absolute  px-4 lg:px-6 py-2 lg:py-2.5  bg-secondary border-2 border-secondary hover:bg-transparent transition-all ease-in-out duration-500 text-white font-semibold text-sm lg:text-lg rounded   `}>
