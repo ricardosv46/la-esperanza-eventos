@@ -145,8 +145,8 @@ function ImageCropper({ crop, onCropChange, children, id }: Props) {
 	}
 
 	return (
-		<>
-			<div className={`relative overflow-hidden   ${isDragging ? 'cursor-grabbing' : 'cursor-grab'} ring-white aspect-w-4 aspect-h-5`}>
+		<div className='w-full flex justify-center'>
+			<div className={`relative overflow-hidden  ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}>
 				<div ref={imageContainerRef}>
 					<motion.div
 						ref={imageRef}
@@ -162,27 +162,27 @@ function ImageCropper({ crop, onCropChange, children, id }: Props) {
 						}}
 						className={`${
 							id === 'T2S' ? 'w-[3100px]' : id === 'T2B' ? 'w-[2000px]' : id === 'T3' ? 'w-[2450px]' : 'w-[1580px]'
-						} relative h-full max-w-none max-h-none  mx-auto`}>
+						} relative h-full max-w-none max-h-none  mx-auto `}>
 						{/* //@ts-ignore */}
 						{children}
 					</motion.div>
-					{/* <div className='flex w-full justify-end gap-3 pt-2 px-10'>
+					<div className='flex w-full justify-end absolute bottom-0 right-0 gap-3 pt-2 px-10 z-50'>
 						<button
 							onClick={() => {
-								scale.set(1.5)
+								scale.set(scale.get() === 3 ? 3 : scale.get() + 0.25)
 							}}>
 							<IconSearchPlus fill='#4C000C' width={20} height={20} />
 						</button>
 						<button
 							onClick={() => {
-								scale.set(1)
+								scale.set(scale.get() === 1 ? 1 : scale.get() - 0.25)
 							}}>
 							<IconSearchMinus fill='#4C000C' width={20} height={20} />
 						</button>
-					</div> */}
+					</div>
 				</div>
 			</div>
-		</>
+		</div>
 	)
 }
 

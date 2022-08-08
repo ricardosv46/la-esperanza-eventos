@@ -20,23 +20,6 @@ const Footer = () => {
 
 	const [mensaje, setMensaje] = useState('')
 
-	const submit = (values: FormikValues) => {
-		createSuscriptor({ email: values.email, nombres: values.nombres }).then((res) => {
-			if (res?.ok) {
-				setMensaje('Gracias por suscribirte')
-				setTimeout(() => {
-					setMensaje('')
-				}, 5000)
-			} else {
-				setMensaje('Gracias por suscribirte')
-
-				setTimeout(() => {
-					setMensaje('')
-				}, 5000)
-			}
-		})
-	}
-
 	const validationSchema = async (values: FormikValues) => {
 		let errors: FormikErrors<FormikValues> = {}
 
@@ -55,7 +38,33 @@ const Footer = () => {
 		return errors
 	}
 
-	const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
+	const submit = (values: FormikValues) => {
+		createSuscriptor({ email: values.email, nombres: values.nombres }).then((res) => {
+			if (res?.ok) {
+				setMensaje('Gracias por suscribirte')
+				resetForm()
+				window.scrollTo({
+					top: 0,
+					behavior: 'smooth'
+				})
+				setTimeout(() => {
+					setMensaje('')
+				}, 5000)
+			} else {
+				setMensaje('Gracias por suscribirte')
+				resetForm()
+				window.scrollTo({
+					top: 0,
+					behavior: 'smooth'
+				})
+				setTimeout(() => {
+					setMensaje('')
+				}, 5000)
+			}
+		})
+	}
+
+	const { values, errors, touched, handleBlur, handleChange, handleSubmit, resetForm } = useFormik({
 		validate: validationSchema,
 		onSubmit: submit,
 		initialValues: {
