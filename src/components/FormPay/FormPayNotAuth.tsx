@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FormikErrors, FormikValues, useFormik } from 'formik'
 import Image from 'next/image'
 import IconShield from '../../../public/icons/IconShield'
@@ -13,11 +13,14 @@ import { isEmail } from '../../utils/isEmail'
 import { useEmail } from '../../services/useEmail'
 import { isEmpty } from '../../utils/isEmpty'
 import moment from 'moment'
+import { Router, useRouter } from 'next/router'
+import { route } from 'next/dist/server/router'
 
 interface Props {
 	errores: string
 	isAbono: boolean
 	onSubmit: (res: { ok?: boolean; error?: string }) => void
+	desabilitados: any[]
 }
 
 const consultaCorreo = async (email: string) => {
@@ -96,8 +99,9 @@ const validationSchema = async (values: FormikValues) => {
 	return errors
 }
 
-export const FormPayNotAuth = ({ isAbono, onSubmit, errores }: Props) => {
-	const { pago } = usePaymentContext()
+export const FormPayNotAuth = ({ isAbono, onSubmit, errores, desabilitados }: Props) => {
+	const { pago, EnviarPago } = usePaymentContext()
+	const navigation = useRouter()
 	const { isOpen, onOpen, onClose } = useToggle()
 	const [isChecked, setIsChecked] = useState(false)
 
@@ -170,6 +174,15 @@ export const FormPayNotAuth = ({ isAbono, onSubmit, errores }: Props) => {
 	}
 
 	const total = pago.reduce((prev, curr) => prev + curr.precio, 0)
+
+	useEffect(() => {
+		const desabilitado = pago.map((seleccionado) => desabilitados.some((desabilitado) => desabilitado?.reservado === seleccionado?.reservado))[0]
+		setIsChecked(!desabilitado)
+
+		if (pago?.length < 1) {
+			navigation.back()
+		}
+	}, [desabilitados, pago])
 
 	return (
 		<>
@@ -262,12 +275,34 @@ export const FormPayNotAuth = ({ isAbono, onSubmit, errores }: Props) => {
 						<p className='w-[300px] text-xl font-bold'>Nro de entradas</p>
 						<p className='text-xl font-bold'>{pago.length}</p>
 					</div>
-					{pago.map((item) => (
-						<div key={item.reservado} className='flex items-center justify-end '>
-							<p className='w-[300px] text-xs'>1 x ABONO – {item.reservado}</p>
-							<p className='text-md font-bold'>S/{item.precio.toFixed(2)}</p>
-						</div>
-					))}
+					{pago.map((item) => {
+						const desabilitado = desabilitados.some((desabilitado) => desabilitado?.reservado === item?.reservado)
+
+						const newtiems = pago.filter((seleccionado) => seleccionado.reservado !== item.reservado)
+
+						const removeItem = () => {
+							EnviarPago(newtiems)
+						}
+
+						return (
+							<div key={item.reservado} className='relative'>
+								<div className='flex w-full justify-between gap-40 pl-20'>
+									<p className=' text-xs leading-none mt-2'>1 x ABONO – {item.reservado}</p>
+									<p className='text-md font-bold leading-none'>S/{item.precio.toFixed(2)}</p>
+								</div>
+								<div className='flex w-full justify-between gap-40 pl-20 leading-none'>
+									<p className='text-red-500 text-xs left-5 leading-none'>
+										{desabilitado ? 'No disponible por favor vuleva a seleccionar' : ''}
+									</p>
+								</div>
+								{desabilitado && (
+									<button className='text-red-500 absolute -top-0 -right-5' onClick={removeItem}>
+										X
+									</button>
+								)}
+							</div>
+						)
+					})}
 					<div className='flex items-center justify-end mt-10 text-2xl font-bold'>
 						<p className='w-[200px] '>Total</p>
 						<p>S/{total.toFixed(2)}</p>

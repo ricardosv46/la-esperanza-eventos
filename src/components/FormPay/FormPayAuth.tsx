@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import Image from 'next/image'
@@ -15,6 +15,7 @@ import moment from 'moment'
 interface Props {
 	isAbono: boolean
 	onSubmit: (res: { ok?: boolean; error?: string }) => void
+	desabilitados: any[]
 }
 
 const validationSchema = Yup.object().shape({
@@ -25,8 +26,17 @@ const validationSchema = Yup.object().shape({
 
 const fecha = moment().format('YYYY-MM-DD')
 
-export const FormPayAuth = ({ isAbono, onSubmit }: Props) => {
-	const { pago } = usePaymentContext()
+export const FormPayAuth = ({ isAbono, onSubmit, desabilitados }: Props) => {
+	const { pago, EnviarPago } = usePaymentContext()
+
+	useEffect(() => {
+		const newselects = pago.filter((seleccionado) => {
+			const desabilitado = desabilitados.some((desabilitado) => desabilitado?.reservado === seleccionado?.reservado)
+			return !desabilitado
+		})
+		EnviarPago(newselects)
+	}, [desabilitados])
+
 	const [isChecked, setIsChecked] = useState(false)
 	const { isOpen, onOpen, onClose } = useToggle()
 	const { createPedidoEvento } = usePedidoEvento()

@@ -22,7 +22,6 @@ const Detalle = () => {
 	const { butacas, loading, refetch } = useButacas(id)
 
 	const { asientos, refetch: refetchAsientos } = useAsientosAbonado({ feriaId: 1, tendido: id })
-	console.log(butacas)
 
 	const dataAsientos = useMemo(() => {
 		if (butacas.length && !loading) {
@@ -115,7 +114,7 @@ const Detalle = () => {
 							onClick={() => {
 								navigation.push({
 									pathname: '/check-out/',
-									query: { name: 'abono', fecha, hora }
+									query: { name: 'abono', fecha, hora, id }
 								})
 								EnviarPago(seleccionados)
 							}}>

@@ -1,5 +1,5 @@
 import { Console } from 'console'
-import React, { Dispatch, SetStateAction, useMemo, useState } from 'react'
+import React, { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react'
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch'
 
 import IconRuedo from '../../../public/icons/IconRuedo'
@@ -82,6 +82,14 @@ const Asientos = ({
 		}
 	}
 
+	useEffect(() => {
+		const newids = seleccionados.filter((seleccionado) => {
+			const desabilitado = desabilitados.some((desabilitado) => desabilitado?.reservado === seleccionado?.reservado)
+			return !desabilitado
+		})
+		setSeleccionados(newids)
+	}, [desabilitados])
+
 	return (
 		<Zoom id={id}>
 			<div className='flex flex-col  justify-center items-center  px-5 w-full py-16 gap-1'>
@@ -98,7 +106,7 @@ const Asientos = ({
 								({ reservado, precio, asiento, codigo, feriaId, tendido, eventoId }: IColums, index: any) => {
 									if (index < asiento) {
 										const isActive = seleccionados.some((seleccionado) => seleccionado.reservado === reservado)
-										console.log(reservado)
+
 										const disabled = desabilitados.some((_item) => _item?.reservado === reservado)
 										return (
 											<button
@@ -129,7 +137,7 @@ const Asientos = ({
 												}}
 												disabled={disabled}
 												className={`
-                                  ${disabled ? 'bg-text text-white' : isActive ? 'bg-primary text-white' : 'bg-yellow-500  text-primary'}
+                                  ${disabled ? 'bg-text text-white' : isActive ? 'bg-butacas text-white' : 'bg-yellow-500  text-primary'}
                                    rounded-full  h-4 w-4  font-semibold  flex justify-center items-center `}>
 												<p className='text-[7px] leading-0'>{asiento}</p>
 											</button>
