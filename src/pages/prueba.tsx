@@ -146,19 +146,38 @@ function ImageCropper({ src, crop, onCropChange }: any) {
 							WebkitUserDrag: 'none'
 						}}
 						className='relative w-[2000px]  h-full max-w-none max-h-none '>
-						<button onClick={() => console.log('elmoaa')}>afafaffaf</button>
 						<div className='flex-col flex w-full'>
 							<div className=' h-60 bg-secondary flex gap-5 '>
-								<div className='bg-red-500 w-40 h-40'>1</div>
-								<div className='bg-red-500 w-40 h-40'>2</div>
-								<div className='bg-red-500 w-40 h-40'>3</div>
-								<div className='bg-red-500 w-40 h-40'>4</div>
-								<div className='bg-red-500 w-40 h-40'>5</div>
-								<div className='bg-red-500 w-40 h-40'>1</div>
-								<div className='bg-red-500 w-40 h-40'>2</div>
-								<div className='bg-red-500 w-40 h-40'>3</div>
-								<div className='bg-red-500 w-40 h-40'>4</div>
-								<div className='bg-red-500 w-40 h-40'>5</div>
+								<button className='bg-red-500 w-40 h-40 flex' onClick={() => console.log('1')}>
+									1
+								</button>
+								<button className='bg-red-500 w-40 h-40' onClick={() => console.log('2')}>
+									2
+								</button>
+								<button className='bg-red-500 w-40 h-40' onClick={() => console.log('3')}>
+									3
+								</button>
+								<button className='bg-red-500 w-40 h-40' onClick={() => console.log('4')}>
+									4
+								</button>
+								<button className='bg-red-500 w-40 h-40' onClick={() => console.log('5')}>
+									5
+								</button>
+								<button className='bg-red-500 w-40 h-40' onClick={() => console.log('6')}>
+									1
+								</button>
+								<button className='bg-red-500 w-40 h-40' onClick={() => console.log('7')}>
+									2
+								</button>
+								<button className='bg-red-500 w-40 h-40' onClick={() => console.log('8')}>
+									3
+								</button>
+								<button className='bg-red-500 w-40 h-40' onClick={() => console.log('9')}>
+									4
+								</button>
+								<button className='bg-red-500 w-40 h-40' onClick={() => console.log('10')}>
+									5
+								</button>
 							</div>
 
 							<div className='w-full h-60 bg-secondary'></div>

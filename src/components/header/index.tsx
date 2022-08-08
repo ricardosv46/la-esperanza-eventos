@@ -120,7 +120,7 @@ const Header = () => {
 							className='bg-tertiary px-3 py-2 rounded-sm text-white font-semibold cursor-pointer  shadow-primary'>
 							<div className='flex items-center gap-x-3'>
 								<IconUser fill='#fff' height={25} width={25} />
-								<p>Ingresa</p>
+								<p className=' text-sm'>{status === 'authenticated' ? data?.user?.nombres : 'Ingresa'}</p>
 							</div>
 						</button>
 						<BtnBurger isOpen={isOpen} setIsOpen={setIsOpen} />

@@ -128,7 +128,7 @@ const Detalle = () => {
 							onClick={() => {
 								navigation.push({
 									pathname: '/check-out/',
-									query: { name: 'evento', fecha, hora }
+									query: { name: 'evento', fecha, hora, id }
 								})
 								EnviarPago(seleccionados)
 							}}>
