@@ -102,7 +102,7 @@ const Eventos = () => {
 						<h1 className='text-3xl font-bold text-primary'>Elige el evento</h1>
 						<p className='text-base w-full max-w-[530px] mt-5 text-justify'>
 							La compra de abonos está ya <strong>disponible</strong> exclusivamente a través de nuestra plataforma online. Compra ahora
-							tus abonos con un 20% de descuento y disfruta de la mejor fiesta taurina de la temporada.
+							tus abonos con un {abono.descuento}% de descuento y disfruta de la mejor fiesta taurina de la temporada.
 						</p>
 					</div>
 
