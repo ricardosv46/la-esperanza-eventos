@@ -56,6 +56,18 @@ export type AsignacionEntradaInput = {
   tipoDocumento?: InputMaybe<Scalars['String']>;
 };
 
+export type Asistente = {
+  __typename?: 'Asistente';
+  apellidos?: Maybe<Scalars['String']>;
+  asiento?: Maybe<Scalars['String']>;
+  asientoId?: Maybe<Scalars['ID']>;
+  codigo?: Maybe<Scalars['String']>;
+  estado?: Maybe<Scalars['String']>;
+  nombres?: Maybe<Scalars['String']>;
+  numDocumento?: Maybe<Scalars['String']>;
+  tipoDocumento?: Maybe<Scalars['String']>;
+};
+
 export type Butaca = {
   __typename?: 'Butaca';
   butacaId?: Maybe<Scalars['ID']>;
@@ -225,7 +237,9 @@ export type Mutation = {
   DeleteEvento?: Maybe<Scalars['String']>;
   DeleteImagen: Scalars['String'];
   Login?: Maybe<User>;
+  RestartAsientos?: Maybe<Scalars['String']>;
   UpdateAsignacionEntrada?: Maybe<AsignacionEntrada>;
+  UpdateAsistencia?: Maybe<Asistente>;
   UpdateEstadoEvento?: Maybe<Evento>;
   UpdateEvento?: Maybe<Evento>;
   UpdateFeria?: Maybe<Feria>;
@@ -233,7 +247,7 @@ export type Mutation = {
   UpdatePrecio: Butaca;
   UpdatePrecioReferencial?: Maybe<Referencial>;
   UpdateUsuario: User;
-  ValidacionEntrada?: Maybe<Scalars['String']>;
+  ValidacionEntrada?: Maybe<Asistente>;
 };
 
 
@@ -291,8 +305,18 @@ export type MutationLoginArgs = {
 };
 
 
+export type MutationRestartAsientosArgs = {
+  feriaId: Scalars['Int'];
+};
+
+
 export type MutationUpdateAsignacionEntradaArgs = {
   input: AsignacionEntradaInput;
+};
+
+
+export type MutationUpdateAsistenciaArgs = {
+  input: UpdateAsistenciaInput;
 };
 
 
@@ -333,8 +357,10 @@ export type MutationUpdateUsuarioArgs = {
 
 
 export type MutationValidacionEntradaArgs = {
-  asientoId?: InputMaybe<Scalars['Int']>;
   constante?: InputMaybe<Scalars['String']>;
+  fecha?: InputMaybe<Scalars['Date']>;
+  numDocumento?: InputMaybe<Scalars['String']>;
+  tipoDocumento?: InputMaybe<Scalars['String']>;
 };
 
 /** Allows ordering a list of records. */
@@ -519,6 +545,13 @@ export enum Trashed {
   Without = 'WITHOUT'
 }
 
+export type UpdateAsistenciaInput = {
+  asientoId?: InputMaybe<Scalars['ID']>;
+  constante?: InputMaybe<Scalars['String']>;
+  numDocumento?: InputMaybe<Scalars['String']>;
+  tipoDocumento?: InputMaybe<Scalars['String']>;
+};
+
 export type UpdateEstadoEventoInput = {
   estado?: InputMaybe<Scalars['String']>;
   eventoId?: InputMaybe<Scalars['ID']>;
@@ -600,6 +633,13 @@ export type UpdateAsignacionEntradaMutationVariables = Exact<{
 
 
 export type UpdateAsignacionEntradaMutation = { __typename?: 'Mutation', UpdateAsignacionEntrada?: { __typename?: 'AsignacionEntrada', asientoId?: string | null, tipoDocumento?: string | null, numDocumento?: string | null, nombres?: string | null, apellidos?: string | null, reservado?: string | null, tendido?: string | null, codigo?: string | null, estado?: string | null, eventoId?: number | null, userId?: number | null } | null };
+
+export type UpdateUsuarioMutationVariables = Exact<{
+  input: UserInput;
+}>;
+
+
+export type UpdateUsuarioMutation = { __typename?: 'Mutation', UpdateUsuario: { __typename?: 'User', id?: string | null, tipoUsuario?: number | null, tipoDocumento?: string | null, numeroDocumento?: string | null, nombres?: string | null, apellidos?: string | null, celular?: string | null, email?: string | null, apiToken?: string | null } };
 
 export type GetAllAsientosQueryVariables = Exact<{
   tendido?: InputMaybe<Scalars['String']>;
@@ -925,6 +965,47 @@ export function useUpdateAsignacionEntradaMutation(baseOptions?: Apollo.Mutation
 export type UpdateAsignacionEntradaMutationHookResult = ReturnType<typeof useUpdateAsignacionEntradaMutation>;
 export type UpdateAsignacionEntradaMutationResult = Apollo.MutationResult<UpdateAsignacionEntradaMutation>;
 export type UpdateAsignacionEntradaMutationOptions = Apollo.BaseMutationOptions<UpdateAsignacionEntradaMutation, UpdateAsignacionEntradaMutationVariables>;
+export const UpdateUsuarioDocument = gql`
+    mutation UpdateUsuario($input: UserInput!) {
+  UpdateUsuario(input: $input) {
+    id
+    tipoUsuario
+    tipoDocumento
+    numeroDocumento
+    nombres
+    apellidos
+    celular
+    email
+    apiToken
+  }
+}
+    `;
+export type UpdateUsuarioMutationFn = Apollo.MutationFunction<UpdateUsuarioMutation, UpdateUsuarioMutationVariables>;
+
+/**
+ * __useUpdateUsuarioMutation__
+ *
+ * To run a mutation, you first call `useUpdateUsuarioMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateUsuarioMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateUsuarioMutation, { data, loading, error }] = useUpdateUsuarioMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateUsuarioMutation(baseOptions?: Apollo.MutationHookOptions<UpdateUsuarioMutation, UpdateUsuarioMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateUsuarioMutation, UpdateUsuarioMutationVariables>(UpdateUsuarioDocument, options);
+      }
+export type UpdateUsuarioMutationHookResult = ReturnType<typeof useUpdateUsuarioMutation>;
+export type UpdateUsuarioMutationResult = Apollo.MutationResult<UpdateUsuarioMutation>;
+export type UpdateUsuarioMutationOptions = Apollo.BaseMutationOptions<UpdateUsuarioMutation, UpdateUsuarioMutationVariables>;
 export const GetAllAsientosDocument = gql`
     query GetAllAsientos($tendido: String, $eventoId: Int) {
   GetAllAsientos(tendido: $tendido, eventoId: $eventoId) {

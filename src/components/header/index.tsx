@@ -44,7 +44,7 @@ const Header = () => {
 	useEffect(() => {
 		if (status === 'authenticated') {
 			localStorage.setItem('token', data?.user?.apiToken)
-			console.log('token', data?.user?.apiToken)
+			localStorage.setItem('user', JSON.stringify(data?.user))
 		}
 	}, [status])
 
