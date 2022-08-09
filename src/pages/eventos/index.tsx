@@ -57,27 +57,13 @@ const Eventos = () => {
 					<div className='flex flex-col  max-w-[1200px]  mx-auto px-5 mt-10'>
 						<div className='mx-auto'>
 							<div>
-								<div className='mt-5 relative hidden sm:block'>
+								<div className='mt-5 relative '>
 									<Image src={abono?.imagenPrincipal?.url!} loading='lazy' alt='descuento' width={1000} height={250} />
 									<div className='absolute w-full  bottom-5 md:bottom-10 '>
 										<div className='w-full flex flex-col gap-1 md:gap-y-2 items-center'>
 											{/* <h2 className='text-xs sm:text-3xl md:text-4xl text-yellow-500 font-semibold'>{abono?.titulo}</h2>
 											<p className='text-white'>{abono?.descripcionCorta}</p> */}
 										</div>
-									</div>
-								</div>
-								<div className='mt-5 relative sm:hidden'>
-									<Image
-										src={abono?.imagenPrincipal?.url!}
-										objectFit='cover'
-										loading='lazy'
-										alt='descuento'
-										width={400}
-										height={400}
-									/>
-									<div className='absolute w-full px-10 bottom-10 left-1/2 -translate-x-1/2  text-center'>
-										{/* <h2 className='text-2xl text-yellow-500'> {abono?.titulo}</h2>
-										<p className='text-white'>{abono?.descripcionCorta}</p> */}
 									</div>
 								</div>
 							</div>
