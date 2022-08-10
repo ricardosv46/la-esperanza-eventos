@@ -73,7 +73,10 @@ const ModalPayme = ({ isOpen, onClose, onChange, payload }: Props) => {
       const capture = new FlexCapture({
         payload,
         additionalFields: [],
-        key: 'FsVVX37w7ZSK1HNQ8NXxDhFEFLXjREorode1sokWZzz2ZahPfG1F35DpOd1miSuh'
+        // DEV 
+        // key: 'FsVVX37w7ZSK1HNQ8NXxDhFEFLXjREorode1sokWZzz2ZahPfG1F35DpOd1miSuh'
+        // PRD
+        key: 'g51BswhZXrQzyPH2EMl1KmDrBK0li7bxEhpB0YLUGNGdlJbIWkGj3fiLqIeFVUe2'
       })
 
       capture.init(paymeForm, handleRequest)
