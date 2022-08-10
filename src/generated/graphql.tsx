@@ -237,6 +237,7 @@ export type Mutation = {
   DeleteEvento?: Maybe<Scalars['String']>;
   DeleteImagen: Scalars['String'];
   Login?: Maybe<User>;
+  RecoverPassword?: Maybe<Scalars['String']>;
   RestartAsientos?: Maybe<Scalars['String']>;
   UpdateAsignacionEntrada?: Maybe<AsignacionEntrada>;
   UpdateAsistencia?: Maybe<Asistente>;
@@ -244,6 +245,7 @@ export type Mutation = {
   UpdateEvento?: Maybe<Evento>;
   UpdateFeria?: Maybe<Feria>;
   UpdateImagen: Imagen;
+  UpdatePassword: User;
   UpdatePrecio: Butaca;
   UpdatePrecioReferencial?: Maybe<Referencial>;
   UpdateUsuario: User;
@@ -305,6 +307,11 @@ export type MutationLoginArgs = {
 };
 
 
+export type MutationRecoverPasswordArgs = {
+  email?: InputMaybe<Scalars['String']>;
+};
+
+
 export type MutationRestartAsientosArgs = {
   feriaId: Scalars['Int'];
 };
@@ -338,6 +345,11 @@ export type MutationUpdateFeriaArgs = {
 export type MutationUpdateImagenArgs = {
   id?: InputMaybe<Scalars['Int']>;
   titulo?: InputMaybe<Scalars['String']>;
+};
+
+
+export type MutationUpdatePasswordArgs = {
+  input?: InputMaybe<UpdatePasswordInput>;
 };
 
 
@@ -421,6 +433,7 @@ export type Pedido = {
   numeroComprobante?: Maybe<Scalars['String']>;
   pedidoId?: Maybe<Scalars['ID']>;
   precioTotal?: Maybe<Scalars['Float']>;
+  razonSocial?: Maybe<Scalars['String']>;
   tipoComprobante?: Maybe<Scalars['String']>;
   transaccionId?: Maybe<Scalars['Float']>;
   usuarioId?: Maybe<Scalars['Int']>;
@@ -431,6 +444,7 @@ export type PedidoInput = {
   numeroComprobante?: InputMaybe<Scalars['String']>;
   pedidoId?: InputMaybe<Scalars['ID']>;
   precioTotal?: InputMaybe<Scalars['Float']>;
+  razonSocial?: InputMaybe<Scalars['String']>;
   tipoComprobante?: InputMaybe<Scalars['String']>;
   transaccionId?: InputMaybe<Scalars['Float']>;
 };
@@ -449,6 +463,7 @@ export type Query = {
   GetAllSuscriptores?: Maybe<GetAllSuscriptores>;
   GetEventoSlug?: Maybe<Evento>;
   GetFeria?: Maybe<Feria>;
+  GetReporteExcel?: Maybe<Scalars['String']>;
 };
 
 
@@ -500,6 +515,11 @@ export type QueryGetAllSuscriptoresArgs = {
 
 export type QueryGetEventoSlugArgs = {
   slug?: InputMaybe<Scalars['String']>;
+};
+
+
+export type QueryGetReporteExcelArgs = {
+  pedidoId: Scalars['Int'];
 };
 
 export type Referencial = {
@@ -555,6 +575,12 @@ export type UpdateAsistenciaInput = {
 export type UpdateEstadoEventoInput = {
   estado?: InputMaybe<Scalars['String']>;
   eventoId?: InputMaybe<Scalars['ID']>;
+};
+
+export type UpdatePasswordInput = {
+  email?: InputMaybe<Scalars['String']>;
+  passwordAntiguo?: InputMaybe<Scalars['String']>;
+  passwordNuevo?: InputMaybe<Scalars['String']>;
 };
 
 export type User = {

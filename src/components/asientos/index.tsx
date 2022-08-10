@@ -179,7 +179,7 @@ const Asientos = ({
 									d='M0.00,49.98 C-71.95,55.77 250.27,-17.25 500.00,49.98 L500.00,120.00 L-0.27,117.94 Z'
 									className='fill-text '></path>
 							</svg>
-							<div className='absolute top-0 z-10 text-white flex justify-center items-center  w-full h-full '>RUEDO</div>
+							<div className='absolute top-0  text-white flex justify-center items-center  w-full h-full '>RUEDO</div>
 						</>
 					)}
 				</div>

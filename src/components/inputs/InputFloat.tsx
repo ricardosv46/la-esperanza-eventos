@@ -12,7 +12,6 @@ const InputFloat = ({ label, value, name, onChange, className = 'w-full', type =
 		<>
 			<div className='relative '>
 				<input
-					{...props}
 					type={type}
 					id={name}
 					name={name}
@@ -20,6 +19,7 @@ const InputFloat = ({ label, value, name, onChange, className = 'w-full', type =
 					onChange={onChange}
 					className={`${className} block px-2.5  pb-2 pt-5 text-sm text-gray-900 font-semibold border border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-primary peer rounded-md`}
 					placeholder=' '
+					{...props}
 				/>
 				<label
 					htmlFor={name}

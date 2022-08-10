@@ -67,19 +67,19 @@ const Compra = () => {
 											<p className='text-2xl '>Compra tu Abono</p>
 										</div>
 										<div className='flex gap-x-5 items-center mt-4'>
-											<div className='flex gap-x-3'>
+											{/* <div className='flex gap-x-3'>
 												<div className='mt-0.5'>
 													<IconCalendar width={16} height={16} fill='#4C000C' />
 												</div>
 
 												<div className=''>{moment(eventoSlug?.fecha).format('LL')}</div>
-											</div>
-											<div className='flex gap-x-3'>
+											</div> */}
+											{/* <div className='flex gap-x-3'>
 												<div className='mt-0.5'>
 													<IconHour width={16} height={16} fill='#4C000C' />
 												</div>
 												<div className=''>{moment(eventoSlug?.fecha + ' ' + eventoSlug?.hora).format('hh:mm A')}</div>
-											</div>
+											</div> */}
 										</div>
 										<div className='flex justify-center mt-5'>
 											<Image src={`/imgs/compra/coliseo.jpg`} alt='Picture of the author' width={600} height={600} />
@@ -103,26 +103,26 @@ const Compra = () => {
 
 									<h2 className='text-[27px] text-center mt-2 text-primary font-bold '>{eventoSlug?.titulo}</h2>
 									<div className='flex gap-x-5 justify-center items-center'>
-										<div className='flex gap-x-3'>
+										{/* <div className='flex gap-x-3'>
 											<div className='mt-0.5'>
 												<IconCalendar width={16} height={16} fill='#4C000C' />
 											</div>
 
 											<div className=''>{moment(eventoSlug?.fecha).format('LL')}</div>
-										</div>
-										<div className='flex gap-x-3'>
+										</div> */}
+										{/* <div className='flex gap-x-3'>
 											<div className='mt-0.5'>
 												<IconHour width={16} height={16} fill='#4C000C' />
 											</div>
 											<div className=''>{moment(eventoSlug?.fecha + ' ' + eventoSlug?.hora).format('hh:mm A')}</div>
-										</div>
+										</div> */}
 									</div>
 									<p className='text-md text-text text-center border-b border-black pb-5'>
 										¡Disfruta una emocionante tarde de toros en la comodidad de nuestras butacas!
 									</p>
 								</article>
 								<article className='mb-5'>
-									<p className='text-2xl text-primary font-bold px-3 pb-3'>Entradas</p>
+									<p className='text-2xl text-primary font-bold px-3 pb-3'>Eventos</p>
 									<section className='flex flex-col'>
 										{precios.map((item, index) => (
 											<article

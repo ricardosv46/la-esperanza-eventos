@@ -49,19 +49,19 @@ const Abonados = () => {
 										<h2 className='text-3xl font-extrabold'>Compra tu Abono</h2>
 									</div>
 									<div className='flex gap-x-5 items-center mt-4'>
-										<div className='flex gap-x-3'>
+										{/* <div className='flex gap-x-3'>
 											<div className='mt-0.5'>
 												<IconCalendar width={16} height={16} fill='#4C000C' />
 											</div>
 
 											<div className=''>{moment(abono?.fecha).format('LL')}</div>
-										</div>
-										<div className='flex gap-x-3'>
+										</div> */}
+										{/* <div className='flex gap-x-3'>
 											<div className='mt-0.5'>
 												<IconHour width={16} height={16} fill='#4C000C' />
 											</div>
 											<div className=''>{moment(abono?.fecha + ' ' + abono?.hora).format('hh:mm A')}</div>
-										</div>
+										</div> */}
 									</div>
 									<div className='flex justify-center mt-5 '>
 										<Image
@@ -91,7 +91,7 @@ const Abonados = () => {
 									/>
 									<h2 className='text-2xl text-center mt-2 text-primary font-bold '>{abono?.titulo}</h2>
 									<div className='flex gap-x-5 justify-center items-center'>
-										<div className='flex gap-x-3'>
+										{/* <div className='flex gap-x-3'>
 											<div className='mt-0.5'>
 												<IconCalendar width={16} height={16} fill='#4C000C' />
 											</div>
@@ -103,7 +103,7 @@ const Abonados = () => {
 												<IconHour width={16} height={16} fill='#4C000C' />
 											</div>
 											<div className=''>{moment(abono?.fecha + ' ' + abono?.hora).format('hh:mm A')}</div>
-										</div>
+										</div> */}
 									</div>
 									<p className='text-md text-text text-center'>
 										¡Disfruta una emocionante tarde de toros en la comodidad de nuestras butacas!
@@ -111,7 +111,7 @@ const Abonados = () => {
 								</article>
 							)}
 							<article className='my-5'>
-								<h2 className='text-2xl text-primary font-bold '>Entradas</h2>
+								<h2 className='text-2xl text-primary font-bold '>Abonos</h2>
 								<section className='flex flex-col gap-2'>
 									{precios?.map((item, index) => (
 										<article

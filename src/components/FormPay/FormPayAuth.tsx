@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useFormik } from 'formik'
+import { FormikErrors, FormikValues, useFormik } from 'formik'
 import * as Yup from 'yup'
 import Image from 'next/image'
 import IconShield from '../../../public/icons/IconShield'
@@ -12,6 +12,7 @@ import { usePedidoEvento } from '../../services/usePedidoEvento'
 import { usePedidoAbonado } from '../../services/usePedidoAbonado'
 import moment from 'moment'
 import { useRouter } from 'next/router'
+import { isEmpty } from '../../utils/isEmpty'
 
 interface Props {
 	isAbono: boolean
@@ -19,13 +20,40 @@ interface Props {
 	desabilitados: any[]
 }
 
-const validationSchema = Yup.object().shape({
-	documento: Yup.string()
-		.required(`El número es requerido`)
-		.matches(/^[0-9]+$/, 'Debe ser solo números')
-})
-
 const fecha = moment().format('YYYY-MM-DD')
+
+const validate = async (values: FormikValues) => {
+	let errors: FormikErrors<FormikValues> = {}
+
+	const isDNI = values.tipoComprobante === 'Boleta'
+	const isRUC = values.tipoComprobante === 'Factura'
+
+	if (isDNI) {
+		if (isEmpty(values.documento)) {
+			errors.documento = 'El DNI es requerido'
+		}
+
+		if (values.documento.length !== 8) {
+			errors.documento = 'El DNI debe tener 8 dígitos'
+		}
+	}
+
+	if (isRUC) {
+		if (isEmpty(values.documento)) {
+			errors.documento = 'El RUC es requerido'
+		}
+
+		if (values.documento.length !== 11) {
+			errors.documento = 'El RUC debe tener 11 dígitos'
+		}
+
+		if (isEmpty(values.razonSocial)) {
+			errors.razonSocial = 'La Razon Social es requerida'
+		}
+	}
+
+	return errors
+}
 
 export const FormPayAuth = ({ isAbono, onSubmit, desabilitados }: Props) => {
 	const { pago, EnviarPago } = usePaymentContext()
@@ -34,10 +62,11 @@ export const FormPayAuth = ({ isAbono, onSubmit, desabilitados }: Props) => {
 	const navigation = useRouter()
 	const { createPedidoEvento } = usePedidoEvento()
 	const { createPedidoAbonado } = usePedidoAbonado()
+	const user = JSON.parse(localStorage.getItem('user') as any)
 	const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
-		validationSchema,
+		validate,
 		onSubmit: onOpen,
-		initialValues: { tipoComprobante: 'Boleta', documento: '' }
+		initialValues: { tipoComprobante: 'Boleta', documento: '', razonSocial: '' }
 	})
 
 	const handleOnChangeCheckBox = () => {
@@ -54,7 +83,8 @@ export const FormPayAuth = ({ isAbono, onSubmit, desabilitados }: Props) => {
 					precioTotal: total,
 					fechaPedido: fecha,
 					numeroComprobante: values.documento,
-					tipoComprobante: values.tipoComprobante
+					tipoComprobante: values.tipoComprobante,
+					razonSocial: values.tipoComprobante === 'Factura' ? values?.razonSocial : `${user?.nombres} ${user?.apellidos}`
 				},
 				input2: pago,
 				input3: {}
@@ -70,7 +100,8 @@ export const FormPayAuth = ({ isAbono, onSubmit, desabilitados }: Props) => {
 					precioTotal: total,
 					fechaPedido: fecha,
 					numeroComprobante: values.documento,
-					tipoComprobante: values.tipoComprobante
+					tipoComprobante: values.tipoComprobante,
+					razonSocial: values.tipoComprobante === 'Factura' ? values?.razonSocial : `${user?.nombres} ${user?.apellidos}`
 				},
 				input2: pago,
 				input3: {}
@@ -118,11 +149,29 @@ export const FormPayAuth = ({ isAbono, onSubmit, desabilitados }: Props) => {
 						value={values.documento}
 						onChange={handleChange}
 						onBlur={handleBlur}
+						maxLength={values.tipoComprobante === 'Factura' ? 11 : 8}
 					/>
 					{errors.documento && touched.documento ? (
 						<p className='text-red-500 leading-5 absolute top-[50px] text-sm px-1 '>{errors.documento}</p>
 					) : null}
 				</div>
+
+				{values.tipoComprobante === 'Factura' && (
+					<div className='relative'>
+						<InputFloat
+							type='text'
+							label='Razon Social'
+							name='razonSocial'
+							value={values.razonSocial}
+							onChange={handleChange}
+							onBlur={handleBlur}
+						/>
+						{errors.razonSocial && touched.razonSocial ? (
+							<p className='text-red-500 leading-5 absolute -bottom-5 text-sm px-1 '>{errors.razonSocial}</p>
+						) : null}
+					</div>
+				)}
+				{values.tipoComprobante === 'Factura' && <div></div>}
 
 				<div className='flex items-center gap-x-2'>
 					<input type='checkbox' id='topping' name='topping' value='Terminos' checked={isChecked} onChange={handleOnChangeCheckBox} />

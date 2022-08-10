@@ -44,29 +44,33 @@ const consultaCorreo = async (email: string) => {
 	return res.data?.ConsultEmail === 'EMAIL_VALIDO'
 }
 
-const validationSchema = async (values: FormikValues) => {
+const validate = async (values: FormikValues) => {
 	let errors: FormikErrors<FormikValues> = {}
 
 	const isDNI = values.tipoComprobante === 'Boleta'
 	const isRUC = values.tipoComprobante === 'Factura'
 
 	if (isDNI) {
-		if (isEmpty(values.dni)) {
-			errors.dni = 'El DNI es requerido'
+		if (isEmpty(values.documento)) {
+			errors.documento = 'El DNI es requerido'
 		}
 
-		if (values.dni.length !== 8) {
-			errors.dni = 'El DNI debe tener 8 dígitos'
+		if (values.documento.length !== 8) {
+			errors.documento = 'El DNI debe tener 8 dígitos'
 		}
 	}
 
 	if (isRUC) {
-		if (isEmpty(values.ruc)) {
-			errors.ruc = 'El RUC es requerido'
+		if (isEmpty(values.documento)) {
+			errors.documento = 'El RUC es requerido'
 		}
 
-		if (values.ruc.length !== 11) {
-			errors.ruc = 'El RUC debe tener 11 dígitos'
+		if (values.documento.length !== 11) {
+			errors.documento = 'El RUC debe tener 11 dígitos'
+		}
+
+		if (isEmpty(values.razonSocial)) {
+			errors.razonSocial = 'La Razon Social es requerida'
 		}
 	}
 
@@ -86,7 +90,7 @@ const validationSchema = async (values: FormikValues) => {
 		errors.email = 'El Email es requerido'
 	}
 
-	if (!isEmail(values.email)) {
+	if (!isEmpty(values.email) && !isEmail(values.email)) {
 		errors.email = 'Debe ser un Email valido'
 	}
 
@@ -104,16 +108,15 @@ export const FormPayNotAuth = ({ isAbono, onSubmit, errores, desabilitados }: Pr
 	const navigation = useRouter()
 	const { isOpen, onOpen, onClose } = useToggle()
 	const [isChecked, setIsChecked] = useState(false)
-
 	const { createPedidoEvento } = usePedidoEvento()
 	const { createPedidoAbonado } = usePedidoAbonado()
 	const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
-		validate: validationSchema,
+		validate,
 		onSubmit: onOpen,
 		initialValues: {
 			tipoComprobante: 'Boleta',
-			ruc: '',
-			dni: '',
+			documento: '',
+			razonSocial: '',
 			nombres: '',
 			apellidos: '',
 			celular: '',
@@ -136,8 +139,9 @@ export const FormPayNotAuth = ({ isAbono, onSubmit, errores, desabilitados }: Pr
 					transaccionId,
 					precioTotal: total,
 					fechaPedido: fecha,
-					numeroComprobante: values.tipoComprobante === 'Factura' ? values.ruc : values.dni,
-					tipoComprobante: values.tipoComprobante
+					numeroComprobante: values.documento,
+					tipoComprobante: values.tipoComprobante,
+					razonSocial: values.tipoComprobante === 'Factura' ? values?.razonSocial : `${values.apellidos} ${values.nombres}`
 				},
 				input2: pago,
 				input3: {
@@ -157,8 +161,9 @@ export const FormPayNotAuth = ({ isAbono, onSubmit, errores, desabilitados }: Pr
 					transaccionId,
 					precioTotal: total,
 					fechaPedido: fecha,
-					numeroComprobante: values.tipoComprobante === 'Factura' ? values.ruc : values.dni,
-					tipoComprobante: values.tipoComprobante
+					numeroComprobante: values.documento,
+					tipoComprobante: values.tipoComprobante,
+					razonSocial: values.tipoComprobante === 'Factura' ? values?.razonSocial : `${values.apellidos} ${values.nombres}`
 				},
 				input2: pago,
 				input3: {
@@ -191,7 +196,7 @@ export const FormPayNotAuth = ({ isAbono, onSubmit, errores, desabilitados }: Pr
 				<div className='grid grid-cols-1 sm:grid-cols-2 gap-6'>
 					<select
 						name='tipoComprobante'
-						className='rounded-md h-[50px] px-3 border border-gray-300 '
+						className='rounded-md h-[50px] px-3 border border-gray-300'
 						value={values.tipoComprobante}
 						onChange={handleChange}
 						onBlur={handleBlur}>
@@ -207,14 +212,31 @@ export const FormPayNotAuth = ({ isAbono, onSubmit, errores, desabilitados }: Pr
 						<InputFloat
 							type='text'
 							label={values.tipoComprobante === 'Factura' ? 'RUC' : 'DNI'}
-							name={values.tipoComprobante === 'Factura' ? 'ruc' : 'dni'}
-							value={values.tipoComprobante === 'Factura' ? values.ruc : values.dni}
+							name='documento'
+							value={values.documento}
 							onChange={handleChange}
 							onBlur={handleBlur}
+							maxLength={values.tipoComprobante === 'Factura' ? 11 : 8}
 						/>
-						{errors.ruc && touched.ruc ? <p className='text-red-500 leading-5 absolute -bottom-5 text-sm px-1 '>{errors.ruc}</p> : null}
-						{errors.dni && touched.dni ? <p className='text-red-500 leading-5 absolute -bottom-5 text-sm px-1 '>{errors.dni}</p> : null}
+						{errors.documento && touched.documento ? (
+							<p className='text-red-500 leading-5 absolute -bottom-5 text-sm px-1 '>{errors.documento}</p>
+						) : null}
 					</div>
+					{values.tipoComprobante === 'Factura' && (
+						<div className='relative'>
+							<InputFloat
+								type='text'
+								label='Razon Social'
+								name='razonSocial'
+								value={values.razonSocial}
+								onChange={handleChange}
+								onBlur={handleBlur}
+							/>
+							{errors.razonSocial && touched.razonSocial ? (
+								<p className='text-red-500 leading-5 absolute -bottom-5 text-sm px-1 '>{errors.razonSocial}</p>
+							) : null}
+						</div>
+					)}
 
 					<div className='relative'>
 						<InputFloat type='text' label='Nombres' name='nombres' value={values.nombres} onChange={handleChange} onBlur={handleBlur} />
@@ -250,6 +272,8 @@ export const FormPayNotAuth = ({ isAbono, onSubmit, errores, desabilitados }: Pr
 							<p className='text-red-500 leading-5 absolute -bottom-5 text-sm px-1 '>{errors.email}</p>
 						) : null}
 					</div>
+					{values.tipoComprobante === 'Factura' && <div></div>}
+
 					<div className='flex items-center gap-x-2'>
 						<input type='checkbox' id='topping' name='topping' value='Terminos' checked={isChecked} onChange={handleOnChangeCheckBox} />
 						<p
