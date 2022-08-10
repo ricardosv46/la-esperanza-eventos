@@ -13,7 +13,7 @@ interface Props {
   onChange: (data: any) => void
 }
 
-const PAYME_URL = 'https://alignet-flex-demo.s3.amazonaws.com'
+const PAYME_URL = 'https://d23b52o2im4p82.cloudfront.net/'
 
 const ModalPayme = ({ isOpen, onClose, onChange, payload }: Props) => {
   const [error, setError] = useState(false)
