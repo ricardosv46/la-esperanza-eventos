@@ -5,7 +5,9 @@ import React, { useEffect, useState } from 'react'
 import IconEdit from '../../../public/icons/IconEdit'
 import Container from '../../components/container'
 import ModalMiCuenta from '../../components/modal/modalMiCuenta'
+import ModalUpdatePassword from '../../components/modal/modalUpdatePassword'
 import useForm from '../../hooks/useForm'
+import useToggle from '../../hooks/useToggle'
 import { useEventosUsuario } from '../../services/useEventosUsuario'
 import { useUsuario } from '../../services/useUsuario'
 
@@ -16,6 +18,7 @@ const MiCuenta = () => {
 	const { status, data } = useSession() as any
 	const [usuario, setUsuario] = useState<any>({})
 
+	const {isOpen, onClose, onOpen} = useToggle()
 	useEffect(() => {
 		if (status !== 'loading' && status !== 'authenticated') {
 			navigate.push('/')
@@ -50,7 +53,7 @@ const MiCuenta = () => {
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
-		console.log({ nombres, apellidos, numeroDocumento, email, tipoDocumento, celular })
+		// console.log({ nombres, apellidos, numeroDocumento, email, tipoDocumento, celular })
 		updateUsuario({
 			id: usuario?.id,
 			tipoDocumento,
@@ -100,12 +103,15 @@ const MiCuenta = () => {
 									<div className='w-24'>Email:</div>
 									<div className='font-bold w-48'>{usuario?.email}</div>
 								</div>
+								<div className=''>
+									<button type='button' onClick={onOpen} className='font-bold w-48 bg-primary text-white rounded-sm h-9 outline-butacas'>Cambiar contraseña</button>
+								</div>
 							</div>
 						</div>
 					</div>
 
 					<div className='pt-10'>
-						<h2 className='text-4xl font-bold'>Mi Entradas</h2>
+						<h2 className='text-4xl font-bold'>Mis Entradas</h2>
 						<p className='text-xl'>Tienes {numeroTotal} entradas por registrar</p>
 
 						<div className='grid px-5 pb-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-[1200px]  mx-auto text-center text-[#505050] mt-20'>
@@ -119,8 +125,8 @@ const MiCuenta = () => {
 												width={500}
 												height={350}
 												className='object-cover'
-											/>
-										)}
+												/>
+												)}
 									</div>
 								</article>
 							))}
@@ -128,6 +134,7 @@ const MiCuenta = () => {
 					</div>
 				</div>
 			</Container>
+			<ModalUpdatePassword isOpen={isOpen} onClose={onClose} />
 			{usuario?.apiToken && (
 				<ModalMiCuenta
 					isOpen={showModal}
