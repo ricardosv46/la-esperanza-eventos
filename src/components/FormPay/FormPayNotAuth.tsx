@@ -214,7 +214,7 @@ export const FormPayNotAuth = ({
         isOpen={isOpen}
         onClose={onClose}
         onChange={handlePay}
-        payload={payRequest({ amount: total * 100000 })}
+        payload={payRequest({ amount: total * 100 })}
       />
       <form
         onSubmit={handleSubmit}
