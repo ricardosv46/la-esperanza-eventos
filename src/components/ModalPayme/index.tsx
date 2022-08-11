@@ -32,7 +32,7 @@ const ModalPayme = ({ isOpen, onClose, onChange, payload }: Props) => {
       linkcss = document.createElement('link')
       linkcss.type = 'text/css'
       linkcss.rel = 'stylesheet'
-      linkcss.href = `${PAYME_URL_PRD}/css/flex-capture.css`
+      linkcss.href = `${PAYME_URL_DEV}/css/flex-capture.css`
 
       document.head.append(linkcss)
     }
@@ -46,7 +46,7 @@ const ModalPayme = ({ isOpen, onClose, onChange, payload }: Props) => {
       scriptjs = document.createElement('script')
       scriptjs.type = 'text/javascript'
       scriptjs.onload = () => setScriptReady(true)
-      scriptjs.src = `${PAYME_URL_PRD}/flex-capture.min.js`
+      scriptjs.src = `${PAYME_URL_DEV}/flex-capture.min.js`
 
       document.head.append(scriptjs)
     }
@@ -55,13 +55,11 @@ const ModalPayme = ({ isOpen, onClose, onChange, payload }: Props) => {
   useEffect(() => {
     const paymeForm = document.querySelector('#payme')
 
-    console.log({ payload })
-
     if (scriptReady && isOpen) {
       // @ts-ignore
       const capture = new FlexCapture({
         payload,
-        key: PAYME_KEY_PRD,
+        key: PAYME_KEY_DEV,
         additionalFields: []
       })
 
@@ -70,6 +68,7 @@ const ModalPayme = ({ isOpen, onClose, onChange, payload }: Props) => {
         if (!isSuccess) {
           setError(true)
         } else {
+          setError(false)
           onChange(data)
           onClose()
         }
@@ -81,7 +80,13 @@ const ModalPayme = ({ isOpen, onClose, onChange, payload }: Props) => {
     <Fragment>
       {scriptReady &&
         ReactDOM.createPortal(
-          <Modal isOpen={isOpen} onClose={onClose}>
+          <Modal
+            isOpen={isOpen}
+            onClose={() => {
+              onClose()
+              setError(false)
+            }}
+          >
             <div className="bg-white p-3 rounded">
               <div className="grid place-items-center mb-5">
                 <Image
@@ -92,7 +97,7 @@ const ModalPayme = ({ isOpen, onClose, onChange, payload }: Props) => {
                   src="/imgs/logos/logo.png"
                 />
               </div>
-              <div id="payme" />
+              {isOpen && <div id="payme" />}
               {error && <p>Ha ocurrido un error intente nuevamente</p>}
               <div className="grid place-items-center my-5">
                 <IconPayme width={160} height={40} />

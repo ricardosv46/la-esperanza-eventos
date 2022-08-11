@@ -62,7 +62,10 @@ export interface PaymePayload {
 }
 
 const formatAmount = (amount: number) => {
-  return parseInt(amount.toString().replace('.', '').replace(',', '')) * 1000
+  const res =
+    parseInt(amount.toString().replace('.', '').replace(',', '')) * 100000
+  console.log({ res })
+  return res
 }
 
 export const payRequest = ({ amount }: Props): PaymePayload => ({

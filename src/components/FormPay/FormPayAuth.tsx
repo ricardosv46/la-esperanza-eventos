@@ -146,7 +146,7 @@ export const FormPayAuth = ({ isAbono, onSubmit, desabilitados }: Props) => {
         isOpen={isOpen}
         onClose={onClose}
         onChange={handlePay}
-        payload={payRequest({ amount: total * 100 })}
+        payload={payRequest({ amount: total })}
       />
 
       <div className="grid h-auto grid-cols-1 sm:grid-cols-2 gap-6">
