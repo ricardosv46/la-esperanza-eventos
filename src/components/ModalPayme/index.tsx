@@ -1,5 +1,5 @@
 import * as ReactDOM from 'react-dom'
-import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 
 import Modal from '../modal'
 import { PaymePayload } from '../../data/paydata'
@@ -13,21 +13,16 @@ interface Props {
   onChange: (data: any) => void
 }
 
-const PAYME_URL = 'https://d23b52o2im4p82.cloudfront.net'
+const PAYME_URL_PRD = 'https://d23b52o2im4p82.cloudfront.net'
+const PAYME_URL_DEV = 'https://alignet-flex-demo.s3.amazonaws.com'
+const PAYME_KEY_PRD =
+  'g51BswhZXrQzyPH2EMl1KmDrBK0li7bxEhpB0YLUGNGdlJbIWkGj3fiLqIeFVUe2'
+const PAYME_KEY_DEV =
+  'FsVVX37w7ZSK1HNQ8NXxDhFEFLXjREorode1sokWZzz2ZahPfG1F35DpOd1miSuh'
 
 const ModalPayme = ({ isOpen, onClose, onChange, payload }: Props) => {
   const [error, setError] = useState(false)
   const [scriptReady, setScriptReady] = useState(false)
-
-  const handleRequest = useCallback(
-    (data) => {
-      if (!data?.id) return setError(true)
-
-      onChange(data)
-      onClose()
-    },
-    [onChange]
-  )
 
   // Load css
   useEffect(() => {
@@ -37,13 +32,9 @@ const ModalPayme = ({ isOpen, onClose, onChange, payload }: Props) => {
       linkcss = document.createElement('link')
       linkcss.type = 'text/css'
       linkcss.rel = 'stylesheet'
-      linkcss.href = `${PAYME_URL}/css/flex-capture.css`
+      linkcss.href = `${PAYME_URL_PRD}/css/flex-capture.css`
 
       document.head.append(linkcss)
-    }
-
-    return () => {
-      document.head.removeChild(linkcss)
     }
   }, [])
 
@@ -55,33 +46,34 @@ const ModalPayme = ({ isOpen, onClose, onChange, payload }: Props) => {
       scriptjs = document.createElement('script')
       scriptjs.type = 'text/javascript'
       scriptjs.onload = () => setScriptReady(true)
-      scriptjs.src = `${PAYME_URL}/flex-capture.min.js`
+      scriptjs.src = `${PAYME_URL_PRD}/flex-capture.min.js`
 
       document.head.append(scriptjs)
-    }
-
-    return () => {
-      document.head.removeChild(scriptjs)
     }
   }, [])
 
   useEffect(() => {
     const paymeForm = document.querySelector('#payme')
 
-    if (isOpen && scriptReady) {
+    if (scriptReady && isOpen) {
       // @ts-ignore
       const capture = new FlexCapture({
         payload,
-        additionalFields: [],
-        // DEV 
-        // key: 'FsVVX37w7ZSK1HNQ8NXxDhFEFLXjREorode1sokWZzz2ZahPfG1F35DpOd1miSuh'
-        // PRD
-        key: 'g51BswhZXrQzyPH2EMl1KmDrBK0li7bxEhpB0YLUGNGdlJbIWkGj3fiLqIeFVUe2'
+        key: PAYME_KEY_PRD,
+        additionalFields: []
       })
 
-      capture.init(paymeForm, handleRequest)
+      capture.init(paymeForm, (data: any) => {
+        console.log({ code: data.transaction.meta.status.code })
+        // if (!data?.id) {
+        //   setError(true)
+        // } else {
+        //   onChange(data)
+        //   onClose()
+        // }
+      })
     }
-  }, [isOpen, handleRequest, payload, scriptReady])
+  }, [isOpen, payload, onClose, onChange, scriptReady])
 
   return (
     <Fragment>
@@ -98,9 +90,8 @@ const ModalPayme = ({ isOpen, onClose, onChange, payload }: Props) => {
                   src="/imgs/logos/logo.png"
                 />
               </div>
-              <div id="payme">
-                {!error && <p>Ha ocurrido un error intente nuevamente</p>}
-              </div>
+              <div id="payme" />
+              {!error && <p>Ha ocurrido un error intente nuevamente</p>}
               <div className="grid place-items-center my-5">
                 <IconPayme width={160} height={40} />
               </div>
