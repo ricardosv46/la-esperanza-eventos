@@ -32,7 +32,7 @@ const ModalPayme = ({ isOpen, onClose, onChange, payload }: Props) => {
       linkcss = document.createElement('link')
       linkcss.type = 'text/css'
       linkcss.rel = 'stylesheet'
-      linkcss.href = `${PAYME_URL_DEV}/css/flex-capture.css`
+      linkcss.href = `${PAYME_URL_PRD}/css/flex-capture.css`
 
       document.head.append(linkcss)
     }
@@ -46,7 +46,7 @@ const ModalPayme = ({ isOpen, onClose, onChange, payload }: Props) => {
       scriptjs = document.createElement('script')
       scriptjs.type = 'text/javascript'
       scriptjs.onload = () => setScriptReady(true)
-      scriptjs.src = `${PAYME_URL_DEV}/flex-capture.min.js`
+      scriptjs.src = `${PAYME_URL_PRD}/flex-capture.min.js`
 
       document.head.append(scriptjs)
     }
@@ -61,7 +61,7 @@ const ModalPayme = ({ isOpen, onClose, onChange, payload }: Props) => {
       // @ts-ignore
       const capture = new FlexCapture({
         payload,
-        key: PAYME_KEY_DEV,
+        key: PAYME_KEY_PRD,
         additionalFields: []
       })
 
