@@ -1,31 +1,18 @@
-import { ErrorMessage, Formik } from 'formik'
-import Image from 'next/image'
 import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import IconCalendar from '../../../public/icons/IconCalendar'
 import IconHour from '../../../public/icons/IconHour'
-import IconShield from '../../../public/icons/IconShield'
 import Container from '../../components/container'
-import InputFloat from '../../components/inputs/InputFloat'
-import { usePaymentContext } from '../../context/payment/PaymentState'
-
-import * as Yup from 'yup'
 import { useSession } from 'next-auth/react'
-import { usePedidoAbonado } from '../../services/usePedidoAbonado'
-import { usePedidoEvento } from '../../services/usePedidoEvento'
-import ModalPayme from '../../components/ModalPayme'
-import useToggle from '../../hooks/useToggle'
-import { payRequest } from '../../data/paydata'
 import { FormPayAuth, FormPayNotAuth } from '../../components/FormPay'
 import moment from 'moment'
 import IconCheck from '../../../public/icons/IconCheck'
 import { useAsientosAbonado } from '../../services/useAsientosAbonado'
-const desabilitados: any[] = []
 const CheckOut = () => {
 	const { status, data } = useSession() as any
 	const { query } = useRouter()
 	const { fecha, hora, id } = useRouter().query as any
-	// const { asientos: desabilitados } = useAsientosAbonado({ feriaId: 1, tendido: id })
+	const { asientos: desabilitados } = useAsientosAbonado({ feriaId: 1, tendido: id })
 	const [pagado, setPagado] = useState(false)
 	const [errores, setErrores] = useState('')
 	const navigate = useRouter()
