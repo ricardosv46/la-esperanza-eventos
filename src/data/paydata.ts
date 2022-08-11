@@ -4,7 +4,6 @@ interface Props {
   last_name: string
   email: string
   subscriber: string
-  identity_document_type: string
   identity_document_identifier: string
 }
 
@@ -74,7 +73,7 @@ const formatAmount = (amount: number) => {
   return res
 }
 
-export const payRequest = ({ amount,first_name,last_name,email,subscriber,identity_document_type,identity_document_identifier}: Props): PaymePayload => ({
+export const payRequest = ({ amount,first_name,last_name,email,subscriber,identity_document_identifier}: Props): PaymePayload => ({
   action: 'authorize',
   transaction: {
     currency: '604',
@@ -129,7 +128,7 @@ export const payRequest = ({ amount,first_name,last_name,email,subscriber,identi
       last_name,
       email_address: email,
       identity_document_country: 'PE',
-      identity_document_type,
+      identity_document_type:'DNI',
       identity_document_identifier,
     }
   ]

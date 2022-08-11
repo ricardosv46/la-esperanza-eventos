@@ -138,6 +138,8 @@ export const FormPayNotAuth = ({
       }
     })
 
+    
+
   const fecha = moment().format('YYYY-MM-DD')
 
   const handleOnChangeCheckBox = () => {
@@ -228,7 +230,6 @@ export const FormPayNotAuth = ({
           last_name:values.apellidos,
           email:values.email ,
           subscriber:values.celular ,
-          identity_document_type:'',
           identity_document_identifier:values.documento,
         })}
       />

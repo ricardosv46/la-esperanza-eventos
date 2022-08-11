@@ -160,7 +160,6 @@ export const FormPayAuth = ({ isAbono, onSubmit, desabilitados ,isOpen, onOpen, 
           last_name:user?.apellidos || '',
           email:user?.email || '',
           subscriber:user?.celular || '',
-          identity_document_type:user?.tipoDocumento || '',
           identity_document_identifier:user.documento || values?.documento
          })}
       />
