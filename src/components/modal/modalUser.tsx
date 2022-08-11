@@ -165,7 +165,7 @@ const ModalUser = ({ isOpen, onClose }: Props) => {
       isOpen={isOpen}
       onClose={handleClose}
       className='w-[95%] md:w-[800px] md:h-[540px] flex rounded-xl shadow-lg overflow-hidden'>
-      <div className='w-full hidden md:block lg:w-1/2'>
+      <div className='w-full hidden md:block lg:w-1/2 z-50'>
         <Image
           src='/imgs/home/torero.jpg'
           alt='Torero'

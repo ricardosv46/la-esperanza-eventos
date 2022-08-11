@@ -8,6 +8,8 @@ import { FormPayAuth, FormPayNotAuth } from '../../components/FormPay'
 import moment from 'moment'
 import IconCheck from '../../../public/icons/IconCheck'
 import { useAsientosAbonado } from '../../services/useAsientosAbonado'
+import useToggle from '../../hooks/useToggle'
+import ModalLoading from '../../components/modal/modalLoading'
 const CheckOut = () => {
 	const { status, data } = useSession() as any
 	const { query } = useRouter()
@@ -16,6 +18,7 @@ const CheckOut = () => {
 	const [pagado, setPagado] = useState(false)
 	const [errores, setErrores] = useState('')
 	const navigate = useRouter()
+	const { isOpen, onOpen, onClose } = useToggle()
 
 	return (
 		<Container bgColor='bg-[#fff2e6]' className='px-5 py-5'>
@@ -67,6 +70,7 @@ const CheckOut = () => {
 
 					{status === 'authenticated' && (
 						<FormPayAuth
+							{...{isOpen, onOpen, onClose}}
 							desabilitados={desabilitados}
 							isAbono={query.name === 'abono'}
 							onSubmit={(res) => {
@@ -84,6 +88,7 @@ const CheckOut = () => {
 
 					{status !== 'authenticated' && (
 						<FormPayNotAuth
+						{...{isOpen, onOpen, onClose}}
 							desabilitados={desabilitados}
 							errores={errores}
 							isAbono={query.name === 'abono'}
@@ -102,6 +107,7 @@ const CheckOut = () => {
 				</div>
 			)}
 		</Container>
+		
 	)
 }
 

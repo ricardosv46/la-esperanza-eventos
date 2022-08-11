@@ -13,11 +13,15 @@ import { usePedidoAbonado } from '../../services/usePedidoAbonado'
 import moment from 'moment'
 import { useRouter } from 'next/router'
 import { isEmpty } from '../../utils/isEmpty'
+import ModalLoading from '../modal/modalLoading'
 
 interface Props {
   isAbono: boolean
   onSubmit: (res: { ok?: boolean; error?: string }) => void
   desabilitados: any[]
+  isOpen:boolean
+  onOpen: () => void
+  onClose: () => void
 }
 
 const fecha = moment().format('YYYY-MM-DD')
@@ -55,13 +59,13 @@ const validate = async (values: FormikValues) => {
   return errors
 }
 
-export const FormPayAuth = ({ isAbono, onSubmit, desabilitados }: Props) => {
+export const FormPayAuth = ({ isAbono, onSubmit, desabilitados ,isOpen, onOpen, onClose}: Props) => {
   const { pago, EnviarPago } = usePaymentContext()
   const [isChecked, setIsChecked] = useState(false)
-  const { isOpen, onOpen, onClose } = useToggle()
+  
   const navigation = useRouter()
-  const { createPedidoEvento } = usePedidoEvento()
-  const { createPedidoAbonado } = usePedidoAbonado()
+  const { createPedidoEvento,loadingCreate:loadingCreateAbonado  } = usePedidoEvento()
+  const { createPedidoAbonado,loadingCreate:loadingCreateEvento } = usePedidoAbonado()
   const user = JSON.parse(localStorage.getItem('user') as any)
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
@@ -130,6 +134,10 @@ export const FormPayAuth = ({ isAbono, onSubmit, desabilitados }: Props) => {
         (desabilitado) => desabilitado?.reservado === seleccionado?.reservado
       )
     )[0]
+
+    if(desabilitados){
+      onClose()
+    }
     setIsChecked(!desabilitado)
 
     if (pago?.length < 1) {
@@ -142,11 +150,19 @@ export const FormPayAuth = ({ isAbono, onSubmit, desabilitados }: Props) => {
       onSubmit={handleSubmit}
       className="grid grid-cols-1 lg:grid-cols-2 gap-3 mt-8"
     >
+      <ModalLoading isOpen={loadingCreateAbonado|| loadingCreateEvento } />
       <ModalPayme
         isOpen={isOpen}
         onClose={onClose}
         onChange={handlePay}
-        payload={payRequest({ amount: total })}
+        payload={payRequest({ amount: total,
+          first_name:user?.nombres || '',
+          last_name:user?.apellidos || '',
+          email:user?.email || '',
+          subscriber:user?.celular || '',
+          identity_document_type:user?.tipoDocumento || '',
+          identity_document_identifier:user.documento || values?.documento
+         })}
       />
 
       <div className="grid h-auto grid-cols-1 sm:grid-cols-2 gap-6">

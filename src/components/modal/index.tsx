@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 interface Props {
 	children: React.ReactNode
 	isOpen: boolean
-	onClose: () => void
+	onClose?: () => void
 	className?: string
 }
 
@@ -28,7 +28,7 @@ const variants = {
 const Modal = ({ children, isOpen = false, onClose, className }: Props) => {
 	return (
 		<div
-			className={`fixed h-full top-0 w-full flex justify-center items-center z-[99999] ${
+			className={`fixed h-full inset-0  top-0 w-full flex justify-center items-center z-[99999] ${
 				isOpen ? 'pointer-events-auto' : 'pointer-events-none'
 			}`}>
 			<motion.div

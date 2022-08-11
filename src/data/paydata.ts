@@ -1,5 +1,11 @@
 interface Props {
   amount: number
+  first_name: string
+  last_name: string
+  email: string
+  subscriber: string
+  identity_document_type: string
+  identity_document_identifier: string
 }
 
 export interface PaymePayload {
@@ -68,7 +74,7 @@ const formatAmount = (amount: number) => {
   return res
 }
 
-export const payRequest = ({ amount }: Props): PaymePayload => ({
+export const payRequest = ({ amount,first_name,last_name,email,subscriber,identity_document_type,identity_document_identifier}: Props): PaymePayload => ({
   action: 'authorize',
   transaction: {
     currency: '604',
@@ -83,12 +89,12 @@ export const payRequest = ({ amount }: Props): PaymePayload => ({
   },
   address: {
     billing: {
-      first_name: 'Juan',
-      last_name: 'Perez',
-      email: 'jperez@gmail.com',
+      first_name,
+      last_name,
+      email,
       phone: {
         country_code: '51',
-        subscriber: '987654321'
+        subscriber
       },
       location: {
         line_1: 'Mi casa',
@@ -100,12 +106,12 @@ export const payRequest = ({ amount }: Props): PaymePayload => ({
       }
     },
     shipping: {
-      first_name: 'Juan',
-      last_name: 'Perez',
-      email: 'jperez@gmail.com',
+      first_name,
+      last_name,
+      email,
       phone: {
         country_code: '51',
-        subscriber: '987654321'
+        subscriber,
       },
       location: {
         line_1: 'Mi casa',
@@ -119,12 +125,12 @@ export const payRequest = ({ amount }: Props): PaymePayload => ({
   },
   card_holder: [
     {
-      first_name: 'Juan',
-      last_name: 'Perez',
-      email_address: 'jperez@gmail.com',
+      first_name,
+      last_name,
+      email_address: email,
       identity_document_country: 'PE',
-      identity_document_type: 'DNI',
-      identity_document_identifier: '87654321'
+      identity_document_type,
+      identity_document_identifier,
     }
   ]
 })

@@ -15,12 +15,16 @@ import { isEmpty } from '../../utils/isEmpty'
 import moment from 'moment'
 import { Router, useRouter } from 'next/router'
 import { route } from 'next/dist/server/router'
+import ModalLoading from '../modal/modalLoading'
 
 interface Props {
   errores: string
   isAbono: boolean
   onSubmit: (res: { ok?: boolean; error?: string }) => void
   desabilitados: any[]
+  isOpen:boolean
+  onOpen: () => void
+  onClose: () => void
 }
 
 const consultaCorreo = async (email: string) => {
@@ -110,14 +114,15 @@ export const FormPayNotAuth = ({
   isAbono,
   onSubmit,
   errores,
-  desabilitados
+  desabilitados,
+  isOpen, onOpen, onClose
 }: Props) => {
   const { pago, EnviarPago } = usePaymentContext()
   const navigation = useRouter()
-  const { isOpen, onOpen, onClose } = useToggle()
   const [isChecked, setIsChecked] = useState(false)
-  const { createPedidoEvento } = usePedidoEvento()
-  const { createPedidoAbonado } = usePedidoAbonado()
+  const { createPedidoEvento,loadingCreate:loadingCreateEvento } = usePedidoEvento()
+  const { createPedidoAbonado,loadingCreate:loadingCreateAbonado } = usePedidoAbonado()
+  const user =  typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('user') as any) :''
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       validate,
@@ -201,6 +206,9 @@ export const FormPayNotAuth = ({
         (desabilitado) => desabilitado?.reservado === seleccionado?.reservado
       )
     )[0]
+    if(desabilitados){
+      onClose()
+    }
     setIsChecked(!desabilitado)
 
     if (pago?.length < 1) {
@@ -210,12 +218,21 @@ export const FormPayNotAuth = ({
 
   return (
     <>
+     <ModalLoading isOpen={loadingCreateAbonado|| loadingCreateEvento } />
       <ModalPayme
         isOpen={isOpen}
         onClose={onClose}
         onChange={handlePay}
-        payload={payRequest({ amount: total })}
+        payload={payRequest({ amount: total,
+          first_name:values.nombres ,
+          last_name:values.apellidos,
+          email:values.email ,
+          subscriber:values.celular ,
+          identity_document_type:'',
+          identity_document_identifier:values.documento,
+        })}
       />
+     
       <form
         onSubmit={handleSubmit}
         className="grid grid-cols-1 lg:grid-cols-2 gap-3 mt-8"
