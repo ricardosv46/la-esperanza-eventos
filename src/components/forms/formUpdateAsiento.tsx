@@ -1,11 +1,9 @@
-import { Field, Form, Formik } from 'formik'
+import { Field, Form, Formik, useFormik } from 'formik'
 import React, { useState } from 'react'
 import IconCalendar from '../../../public/icons/IconCalendar'
 import IconHour from '../../../public/icons/IconHour'
 import * as Yup from 'yup'
 import { useEntradasUsuario } from '../../services/useEntradasUsuario'
-import { useUpdateAsignacionEntrada } from '../../services/useUpdateAsignacionEntrada'
-
 interface Props {
   eventoId?: number | null | undefined
   tendido?: string | null | undefined
@@ -15,6 +13,7 @@ interface Props {
   nombres?: string | null | undefined
   apellidos?: string | null | undefined
   asientoId: string
+  slug: number
 }
 
 const FormUpdateAsiento = ({
@@ -25,11 +24,51 @@ const FormUpdateAsiento = ({
   numDocumento,
   nombres,
   apellidos,
-  asientoId
+  asientoId,
+  slug
 }: Props) => {
   const [mensaje, setMensaje] = useState('')
   const [error, serError] = useState(false)
-  const { updateAsignacionEntrada } = useUpdateAsignacionEntrada()
+  const { updateAsignacionEntrada,loadingUpdate } = useEntradasUsuario(slug)
+
+  const {values, handleChange, handleBlur, handleSubmit, errors, touched} = useFormik({
+    initialValues:{
+      tipoDocumento: tipoDocumento ?? 'DNI',
+      documento: numDocumento ?? '',
+      nombres: nombres ?? '',
+      apellidos: apellidos ?? ''
+    },
+   validationSchema: Yup.object({
+      documento: Yup.string()
+      .required(`El número es requerido`)
+      .matches(/^[0-9]+$/, 'Debe ser solo números'),
+      nombres: Yup.string().required(`El nombre es requerido`),
+      apellidos: Yup.string().required(`El apellido es requerido`)
+   }),
+    onSubmit:() => {
+      updateAsignacionEntrada({
+        apellidos: values.apellidos,
+        asientoId: asientoId,
+        nombres: values.nombres,
+        numDocumento: values.documento,
+        tipoDocumento: values.tipoDocumento
+      }).then((res) => {
+        if (res?.ok) {
+          setMensaje('Datos actualizados')
+          serError(false)
+        } else {
+          setMensaje('No se pudo actualizar')
+          serError(true)
+        }
+        setTimeout(() => {
+          setMensaje('')
+          serError(false)
+        }, 5000)
+      })
+    }
+  })
+
+  const isDisabled = numDocumento === values.documento && nombres === values.nombres && apellidos === values.apellidos || loadingUpdate
 
   return (
     <article key={eventoId} className='max-w-[280px] p-5 bg-white rounded-xl shadow-lg'>
@@ -49,46 +88,8 @@ const FormUpdateAsiento = ({
           <p className='text-xs mt-0.5'> 1:05</p>
         </div>
       </div>
-
-      <Formik
-        initialValues={{
-          tipoDocumento: tipoDocumento ?? '',
-          documento: numDocumento ?? '',
-          nombres: nombres ?? '',
-          apellidos: apellidos ?? ''
-        }}
-        validationSchema={Yup.object().shape({
-          documento: Yup.string()
-            .required(`El número es requerido`)
-            .matches(/^[0-9]+$/, 'Debe ser solo números'),
-          nombres: Yup.string().required(`El nombre es requerido`),
-          apellidos: Yup.string().required(`El apellido es requerido`)
-        })}
-        onSubmit={(values) => {
-          updateAsignacionEntrada({
-            apellidos: values.apellidos,
-            asientoId: asientoId,
-            nombres: values.nombres,
-            numDocumento: values.documento,
-            tipoDocumento: values.tipoDocumento
-          }).then((res) => {
-            if (res?.ok) {
-              setMensaje('Datos actualizados')
-              serError(false)
-            } else {
-              setMensaje('No se pudo actualizar')
-              serError(true)
-            }
-            setTimeout(() => {
-              setMensaje('')
-              serError(false)
-            }, 5000)
-          })
-        }}>
-        {({ values, handleChange, handleBlur, handleSubmit, errors, touched }) => (
-          <Form onSubmit={handleSubmit} className='flex flex-col gap-y-6'>
-            <Field
-              as='select'
+          <form onSubmit={handleSubmit} className='flex flex-col gap-y-6'>
+            <select
               name='tipoDocumento'
               className='rounded-sm h-10 px-3 border border-gray-40'
               value={values.tipoDocumento}
@@ -100,37 +101,46 @@ const FormUpdateAsiento = ({
               <option className='' value='CE'>
                 CE
               </option>
-            </Field>
+            </select>
 
             <div className='relative'>
-              <Field
+              <input
                 name='documento'
                 type='text'
                 className='rounded-sm w-full text-black focus:outline-none h-10 px-3 border border-gray-400'
                 placeholder='Nro de Documento'
+                value={values.documento}
+                onChange={handleChange}
+                onBlur={handleBlur}
               />
               {errors.documento && touched.documento ? (
                 <p className='text-red-500 leading-5 absolute -bottom-5 text-sm px-1 '>{errors.documento}</p>
               ) : null}
             </div>
             <div className='relative'>
-              <Field
+              <input
                 name='nombres'
                 type='text'
                 className='rounded-sm w-full text-black focus:outline-none h-10 px-3 border border-gray-400'
                 placeholder='Nombres'
+                value={values.nombres}
+                onChange={handleChange}
+                onBlur={handleBlur}
               />
               {errors.nombres && touched.nombres ? (
                 <p className='text-red-500 leading-5 absolute -bottom-5 text-sm px-1 '>{errors.nombres}</p>
               ) : null}
             </div>
             <div className='relative'>
-              <Field
+              <input
                 name='apellidos'
                 type='text'
                 className='rounded-sm w-full text-black focus:outline-none h-10 px-3 border border-gray-400'
                 placeholder='Apellidos'
-              />{' '}
+                value={values.apellidos}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
               {errors.apellidos && touched.apellidos ? (
                 <p className='text-red-500 leading-5 absolute -bottom-5 text-sm px-1 '>{errors.apellidos}</p>
               ) : null}
@@ -140,14 +150,14 @@ const FormUpdateAsiento = ({
               <p className={`absolute -top-5 ${error ? 'text-red-500' : 'text-green-500'}`}>{mensaje}</p>
 
               <button
+               disabled={isDisabled}
                 type='submit'
-                className='bg-[#a02e2b] w-full text-white pb-2 pt-1 mt-5  px-4 hover:opacity-75 transition-all duration-500 rounded-md'>
+                className={`bg-butacas w-full text-white pb-2 pt-1 mt-5   px-4  transition-all duration-500 rounded-md ${isDisabled?'opacity-50':'opacity-100 hover:bg-tertiary'}`}>
                 Registrar
               </button>
             </div>
-          </Form>
-        )}
-      </Formik>
+          </form>
+      
 
       <div className=' text-xs'>
         <p className='text-justify mt-4'>
