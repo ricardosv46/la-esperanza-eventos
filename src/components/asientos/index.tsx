@@ -84,7 +84,9 @@ const Asientos = ({
 
 	useEffect(() => {
 		const newids = seleccionados.filter((seleccionado) => {
-			const desabilitado = desabilitados.some((desabilitado) => desabilitado?.reservado === seleccionado?.reservado)
+			const desabilitado = desabilitados.some(
+				(desabilitado) => desabilitado?.reservado === seleccionado?.reservado
+			)
 			return !desabilitado
 		})
 		setSeleccionados(newids)
@@ -100,12 +102,25 @@ const Asientos = ({
 						</div>
 						<div
 							className={`flex flex-row-reverse justify-${direccion} items-center gap-x-1.5  ${
-								id === 'T2S' ? 'w-[2740px]' : id === 'T2B' ? 'w-[1500px]' : id === 'T3' ? 'w-[2100px]' : 'w-[1200px]'
+								id === 'T1'
+									? 'w-[1200px]'
+									: id === 'T2S'
+									? 'w-[2740px]'
+									: id === 'T2B'
+									? 'w-[1500px]'
+									: id === 'T3'
+									? 'w-[2100px]'
+									: 'w-[700px]'
 							} px-5 `}>
 							{filas[`${fila.toString()}`].map(
-								({ reservado, precio, asiento, codigo, feriaId, tendido, eventoId }: IColums, index: any) => {
+								(
+									{ reservado, precio, asiento, codigo, feriaId, tendido, eventoId }: IColums,
+									index: any
+								) => {
 									if (index < asiento) {
-										const isActive = seleccionados.some((seleccionado) => seleccionado.reservado === reservado)
+										const isActive = seleccionados.some(
+											(seleccionado) => seleccionado.reservado === reservado
+										)
 
 										const disabled = desabilitados.some((_item) => _item?.reservado === reservado)
 										return (
@@ -137,7 +152,13 @@ const Asientos = ({
 												}}
 												disabled={disabled}
 												className={`
-                                  ${disabled ? 'bg-text text-white' : isActive ? 'bg-butacas text-white' : 'bg-yellow-500  text-primary'}
+                                  ${
+										disabled
+											? 'bg-text text-white'
+											: isActive
+											? 'bg-butacas text-white'
+											: 'bg-yellow-500  text-primary'
+									}
                                    rounded-full  h-4 w-4  font-semibold  flex justify-center items-center `}>
 												<p className='text-[7px] leading-0'>{asiento}</p>
 											</button>
@@ -153,22 +174,36 @@ const Asientos = ({
 				))}
 				<div
 					className={`${
-						id === 'T2S' ? 'w-[2670px]' : id === 'T2B' ? 'w-[1450px]' : id === 'T3' ? 'w-[2000px]' : 'w-[1160px]'
+						id === 'T1'
+							? 'w-[1160px]'
+							: id === 'T2S'
+							? 'w-[2670px]'
+							: id === 'T2B'
+							? 'w-[1450px]'
+							: id === 'T3'
+							? 'w-[2000px]'
+							: 'w-[650px]'
 					} h-14 overflow-hidden relative mt-5 mx-auto`}>
 					{doble === 'Tendido3' && (
 						<div className='flex justify-between gap-5'>
 							<div className='bg-text w-full  h-9'>
-								<p className=' text-white flex justify-center items-center  w-full h-full'>TENDIDO 3B</p>
+								<p className=' text-white flex justify-center items-center  w-full h-full'>
+									TENDIDO 3B
+								</p>
 							</div>
 							<div className='bg-text w-full  h-9'>
-								<p className=' text-white flex justify-center items-center  w-full h-full'>TENDIDO 3A</p>
+								<p className=' text-white flex justify-center items-center  w-full h-full'>
+									TENDIDO 3A
+								</p>
 							</div>
 						</div>
 					)}
 					{doble === 'Tendido2' && (
 						<div className='flex'>
 							<div className='bg-text w-full  h-9'>
-								<p className=' text-white flex justify-center items-center  w-full h-full'>TENDIDO 2 BAJO</p>
+								<p className=' text-white flex justify-center items-center  w-full h-full'>
+									TENDIDO 2 BAJO
+								</p>
 							</div>
 						</div>
 					)}
@@ -179,7 +214,9 @@ const Asientos = ({
 									d='M0.00,49.98 C-71.95,55.77 250.27,-17.25 500.00,49.98 L500.00,120.00 L-0.27,117.94 Z'
 									className='fill-text '></path>
 							</svg>
-							<div className='absolute top-0  text-white flex justify-center items-center  w-full h-full '>RUEDO</div>
+							<div className='absolute top-0  text-white flex justify-center items-center  w-full h-full '>
+								RUEDO
+							</div>
 						</>
 					)}
 				</div>
