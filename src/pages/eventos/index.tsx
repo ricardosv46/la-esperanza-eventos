@@ -28,10 +28,10 @@ const Eventos = () => {
 				title='La Esperanza - Eventos'
 				link='La Esperanza'
 				description='Compra tus entradas del mejor evento de la ciudad.'
-				domain='la-esperanza-eventos.vercel.app'
-				img='https://la-esperanza-eventos.vercel.app/imgs/flyers/flyer1.jpg'
+				domain='laesperanza.plazaticket.com'
+				img='https://laesperanza.plazaticket.com/imgs/flyers/flyer1.jpg'
 				keywords='Entradas,Eventos,PLazas'
-				url='https://la-esperanza-eventos.vercel.app/eventos'
+				url='https://laesperanza.plazaticket.com/eventos'
 			/>
 
 			<div className='bg-fondo pb-10'>

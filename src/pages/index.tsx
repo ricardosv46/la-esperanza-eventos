@@ -24,10 +24,10 @@ const Home: NextPage = () => {
 				title='La Esperanza - Incio'
 				link='La Esperanza'
 				description='Disfuta del mejor evento de la ciudad, La esperanza, con una gran variedad de eventos, promociones y mucho más.'
-				domain='la-esperanza-eventos.vercel.app'
-				img='https://la-esperanza-eventos.vercel.app/imgs/banners/banner3.jpg'
+				domain='laesperanza.plazaticket.com'
+				img='https://laesperanza.plazaticket.com/imgs/banners/banner3.jpg'
 				keywords='Entradas,Eventos,PLazas'
-				url='https://la-esperanza-eventos.vercel.app/'
+				url='https://laesperanza.plazaticket.com/'
 			/>
 
 			<Swiper

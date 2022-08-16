@@ -12,10 +12,10 @@ const Plaza = () => {
         title="La Esperanza - La Plaza"
         link="La Esperanza"
         description="La Plaza de Toros La Esperanza fue inaugurada en el año 2009, siendo un ruedo sin graderías, el punto de encuentro y lugar donde se incubó la nueva generación de aficionados prácticos."
-        domain="la-esperanza-eventos.vercel.app"
-        img="https://la-esperanza-eventos.vercel.app/imgs/la-esperanza/la-esperanza-01.jpg"
+        domain="laesperanza.plazaticket.com"
+        img="https://laesperanza.plazaticket.com/imgs/la-esperanza/la-esperanza-01.jpg"
         keywords="Entradas,Eventos,PLazas"
-        url="https://la-esperanza-eventos.vercel.app/"
+        url="https://laesperanza.plazaticket.com/"
       />
 
       <section className="bg-fondo  ">
