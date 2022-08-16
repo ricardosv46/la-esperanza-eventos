@@ -50,7 +50,7 @@ const Plaza = () => {
                     su coqueta identidad y esa personalidad que invita a
                     disfrutar una tarde de toros entre amigos.
                   </p>
-                  <div className="w-full aspect-video my-8">
+                  {/* <div className="w-full aspect-video my-8">
                     <iframe
                       width="100%"
                       height="100%"
@@ -60,7 +60,7 @@ const Plaza = () => {
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
                     ></iframe>
-                  </div>
+                  </div> */}
 
                   <p className="text-justify px-0 text-[#505050] font-normal text-[16px] ">
                     La Plaza de Toros La Esperanza fue inaugurada en el año
