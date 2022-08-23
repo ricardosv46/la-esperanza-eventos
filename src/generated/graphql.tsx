@@ -708,7 +708,7 @@ export type GetAllEntradasUsuarioQueryVariables = Exact<{
 }>;
 
 
-export type GetAllEntradasUsuarioQuery = { __typename?: 'Query', GetAllEntradasUsuario?: Array<{ __typename?: 'AsignacionEntrada', asientoId?: string | null, eventoId?: number | null, tipoDocumento?: string | null, numDocumento?: string | null, nombres?: string | null, apellidos?: string | null, reservado?: string | null, tendido?: string | null, codigo?: string | null, estado?: string | null } | null> | null };
+export type GetAllEntradasUsuarioQuery = { __typename?: 'Query', GetAllEntradasUsuario?: Array<{ __typename?: 'AsignacionEntrada', asientoId?: string | null, eventoId?: number | null, tipoDocumento?: string | null, numDocumento?: string | null, nombres?: string | null, apellidos?: string | null, reservado?: string | null, tendido?: string | null, codigo?: string | null, estado?: string | null, fecha?: any | null, hora?: string | null } | null> | null };
 
 export type GetAllEventosQueryVariables = Exact<{
   feriaId?: InputMaybe<Scalars['Int']>;
@@ -1247,6 +1247,8 @@ export const GetAllEntradasUsuarioDocument = gql`
     tendido
     codigo
     estado
+    fecha
+    hora
   }
 }
     `;

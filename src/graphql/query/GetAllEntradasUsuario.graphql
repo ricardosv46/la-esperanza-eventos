@@ -1,14 +1,16 @@
 query GetAllEntradasUsuario($eventoId: Int) {
-  GetAllEntradasUsuario(eventoId: $eventoId) {
-    asientoId
-    eventoId
-    tipoDocumento
-    numDocumento
-    nombres
-    apellidos
-    reservado
-    tendido
-    codigo
-    estado
-  }
+	GetAllEntradasUsuario(eventoId: $eventoId) {
+		asientoId
+		eventoId
+		tipoDocumento
+		numDocumento
+		nombres
+		apellidos
+		reservado
+		tendido
+		codigo
+		estado
+		fecha
+		hora
+	}
 }
