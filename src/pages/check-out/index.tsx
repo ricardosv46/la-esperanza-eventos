@@ -24,7 +24,7 @@ const CheckOut = () => {
 		<Container bgColor='bg-[#fff2e6]' className='px-5 py-5'>
 			{pagado && (
 				<div className='flex justify-center h-[533px] flex-col items-center text-primary-300 gap-10 py-5'>
-					<p className='text-center text-primary font-bold text-xl'>
+					<p className='text-xl font-bold text-center text-primary'>
 						Hemos recibido correctamente el pago y enviado tus datos de usuario al correo registrado. Ingresa a la sección de usuarios
 						para visualizar tus boletos o para asignar o modificar los asistentes con el usuario y contraseña enviados
 					</p>
@@ -48,10 +48,10 @@ const CheckOut = () => {
 
 			{!pagado && (
 				<div className='max-w-[1000px] w-full mx-auto p-10 bg-white shadow-xl rounded-xl'>
-					<h1 className='text-3xl font-bold border-b border-black pb-3'>Detalle</h1>
-					<div className='flex justify-between flex-wrap border-b border-black'>
-						<p className='text-xl  font-bold py-5'>{query.name === 'abono' ? 'Abonos' : 'Eventos'} 2022, Plaza - La Esperanza</p>
-						<div className='flex gap-x-5 justify-center flex-wrap items-center'>
+					<h1 className='pb-3 text-3xl font-bold border-b border-black'>Detalle</h1>
+					<div className='flex flex-wrap justify-between border-b border-black'>
+						<p className='py-5 text-xl font-bold'>{query.name === 'abono' ? 'Abonos' : 'Eventos'} 2022, Plaza - La Esperanza</p>
+						<div className='flex flex-wrap items-center justify-center gap-x-5'>
 							<div className='flex gap-x-3'>
 								<div className='mt-0.5'>
 									<IconCalendar width={16} height={16} />
@@ -70,7 +70,8 @@ const CheckOut = () => {
 
 					{status === 'authenticated' && (
 						<FormPayAuth
-							{...{isOpen, onOpen, onClose}}
+							errores={errores}
+							{...{ isOpen, onOpen, onClose }}
 							desabilitados={desabilitados}
 							isAbono={query.name === 'abono'}
 							onSubmit={(res) => {
@@ -88,7 +89,7 @@ const CheckOut = () => {
 
 					{status !== 'authenticated' && (
 						<FormPayNotAuth
-						{...{isOpen, onOpen, onClose}}
+							{...{ isOpen, onOpen, onClose }}
 							desabilitados={desabilitados}
 							errores={errores}
 							isAbono={query.name === 'abono'}
@@ -107,7 +108,6 @@ const CheckOut = () => {
 				</div>
 			)}
 		</Container>
-		
 	)
 }
 

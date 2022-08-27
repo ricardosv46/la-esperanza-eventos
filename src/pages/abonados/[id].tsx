@@ -16,7 +16,6 @@ import { useButacas } from '../../services/useButacas'
 const Detalle = () => {
 	const navigation = useRouter()
 	const { EnviarPago } = usePaymentContext()
-
 	const [seleccionados, setSeleccionados] = useState<IColums[]>([])
 	const { id, fecha, hora } = useRouter().query as any
 	const { butacas, loading, refetch } = useButacas(id)
@@ -58,7 +57,7 @@ const Detalle = () => {
 				<p className='text-3xl font-bold text-center text-primary '>SELECCIONA TUS ASIENTOS</p>
 				<div className='flex flex-col justify-center py-5 mt-5 overflow-hidden border-t-2 border-b-2 border-primary'>
 					<div className='flex items-center justify-between px-3 lg:px-8'>
-						<p className='text-base font-bold  text-primary lg:text-xl'>{gentituloButacas(id)}</p>
+						<p className='text-base font-bold text-primary lg:text-xl'>{gentituloButacas(id)}</p>
 						{/* <div className='flex items-center gap-3'>
 							<IconDate fill='#4C000C' width={20} height={20} />
 							<p className='text-xs font-bold text-primary lg:text-base'>{moment(fecha).format('LL')}</p>
@@ -95,7 +94,7 @@ const Detalle = () => {
 					</div>
 				</div>
 			</section>
-			<div className='flex justify-center w-full  bg-secondary'>
+			<div className='flex justify-center w-full bg-secondary'>
 				<div className='py-10 px-5 max-w-[1200px] flex flex-col lg:flex-row justify-between w-full'>
 					<div className='flex flex-col items-center gap-5 lg:flex-row'>
 						<p className='font-bold text-primary'>Seleccionados:</p>

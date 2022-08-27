@@ -34,7 +34,7 @@ const Eventos = () => {
 				url='https://laesperanza.plazaticket.com/eventos'
 			/>
 
-			<div className='bg-fondo pb-10'>
+			<div className='pb-10 bg-fondo'>
 				<div className=' flex flex-col md:flex-row justify-between max-w-[1200px] gap-x-5 items-center  mx-auto px-5 pt-10'>
 					<div className=''>
 						<h1 className='text-3xl font-bold text-primary'>Compra tu abono para toda la temporada</h1>
@@ -44,7 +44,7 @@ const Eventos = () => {
 						</p>
 					</div>
 					<div className='mt-5'>
-						<div className='bg-primary w-40  text-white font-bold leading-4 text-xs px-5 py-1'>
+						<div className='w-40 px-5 py-1 text-xs font-bold leading-4 text-white bg-primary'>
 							<p className=''>hasta</p>
 							<p className='text-6xl font-black'>{abono.descuento}%</p>
 							<p className='text-right'>De descuento</p>
@@ -57,11 +57,11 @@ const Eventos = () => {
 					<div className='flex flex-col  max-w-[1200px]  mx-auto px-5 mt-10'>
 						<div className='mx-auto'>
 							<div>
-								<div className='mt-5 relative '>
+								<div className='relative mt-5 '>
 									<Image src={abono?.imagenPrincipal?.url!} loading='lazy' alt='descuento' width={1000} height={250} />
-									<div className='absolute w-full  bottom-5 md:bottom-10 '>
-										<div className='w-full flex flex-col gap-1 md:gap-y-2 items-center'>
-											{/* <h2 className='text-xs sm:text-3xl md:text-4xl text-yellow-500 font-semibold'>{abono?.titulo}</h2>
+									<div className='absolute w-full bottom-5 md:bottom-10 '>
+										<div className='flex flex-col items-center w-full gap-1 md:gap-y-2'>
+											{/* <h2 className='text-xs font-semibold text-yellow-500 sm:text-3xl md:text-4xl'>{abono?.titulo}</h2>
 											<p className='text-white'>{abono?.descripcionCorta}</p> */}
 										</div>
 									</div>
@@ -97,7 +97,7 @@ const Eventos = () => {
 							const fechaInicialEvento = `${item?.fechaInicial} ${item?.horaInicial}`
 							const fechaFinalEvento = `${item?.fechaFinal} ${item?.horaFinal}`
 
-							const isDisabledEvento = moment().isBetween(moment(fechaInicialEvento), moment(fechaFinalEvento)) ? false : true
+							const isDisabledEvento = moment().isBetween(moment(fechaInicialEvento), moment(fechaFinalEvento)) ? false : false
 
 							return (
 								<article
@@ -112,7 +112,7 @@ const Eventos = () => {
 
 											<div className='mt-0.5 text-primary'>{moment(item?.fecha).format('LL')}</div>
 										</div>
-										<div className='flex  items-center gap-x-1'>
+										<div className='flex items-center gap-x-1'>
 											<div className=''>
 												<IconHour width={14} height={14} fill='#4c000c' />
 											</div>
@@ -120,7 +120,7 @@ const Eventos = () => {
 										</div>
 									</div>
 									<h6 className='text-[#4c000c] font-bold text-3xl text-left my-3'>{item?.titulo}</h6>
-									<div className='hover:-translate-y-3 transition-all duration-500 ease-in-out'>
+									<div className='transition-all duration-500 ease-in-out hover:-translate-y-3'>
 										<Image
 											loading='lazy'
 											src={item?.imagenPrincipal?.url!}
@@ -131,9 +131,9 @@ const Eventos = () => {
 										/>
 									</div>
 
-									<p className=' text-justify  text-sm my-3'>{item?.descripcionCorta}</p>
+									<p className='my-3 text-sm text-justify '>{item?.descripcionCorta}</p>
 									<button
-										disabled={true}
+										disabled={isDisabledEvento}
 										onClick={() => navigate.push(`/eventos/${item?.slug}`)}
 										style={{ boxShadow: '-8px 6px 13px 0px rgba(0,0,0,0.42)' }}
 										className={`bg-tertiary px-6 py-2 mt-2 text-md rounded-sm text-white font-semibold cursor-pointer  shadow-primary ${

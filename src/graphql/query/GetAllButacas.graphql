@@ -1,12 +1,12 @@
 query GetAllButacas($tendido: String) {
-  GetAllButacas(tendido: $tendido) {
-    numeroTotal
-    data {
-      butacaId
-      tendido
-      codigo
-      cantidad
-      precio
-    }
-  }
+	GetAllButacas(tendido: $tendido) {
+		numeroTotal
+		data {
+			butacaId
+			tendido
+			codigo
+			cantidad
+			precio
+		}
+	}
 }
