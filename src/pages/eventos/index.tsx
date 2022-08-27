@@ -97,7 +97,7 @@ const Eventos = () => {
 							const fechaInicialEvento = `${item?.fechaInicial} ${item?.horaInicial}`
 							const fechaFinalEvento = `${item?.fechaFinal} ${item?.horaFinal}`
 
-							const isDisabledEvento = moment().isBetween(moment(fechaInicialEvento), moment(fechaFinalEvento)) ? false : false
+							const isDisabledEvento = moment().isBetween(moment(fechaInicialEvento), moment(fechaFinalEvento)) ? false : true
 
 							return (
 								<article
