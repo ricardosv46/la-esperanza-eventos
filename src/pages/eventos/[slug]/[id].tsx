@@ -57,7 +57,7 @@ const Detalle = () => {
 
 	return (
 		<div className='flex flex-col items-center justify-center w-full'>
-			<section className='w-auto pt-5 bg-white'>
+			<section className='w-full pt-5 bg-white'>
 				<div className='flex justify-center mb-5'>
 					<Image
 						objectFit='scale-down'
