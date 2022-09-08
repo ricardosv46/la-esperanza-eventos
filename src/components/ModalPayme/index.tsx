@@ -1,8 +1,5 @@
 import * as ReactDOM from 'react-dom'
 import { Fragment, useEffect, useState } from 'react'
-
-import ReactPixel from 'react-facebook-pixel'
-
 import Modal from '../modal'
 import { PaymePayload } from '../../data/paydata'
 import Image from 'next/image'
@@ -40,7 +37,6 @@ const ModalPayme = ({ isOpen, onClose, onChange, payload }: Props) => {
 
   // Load js
   useEffect(() => {
-    ReactPixel.track('InitiateCheckout')
     let scriptjs: HTMLScriptElement
 
     if (typeof window !== 'undefined') {

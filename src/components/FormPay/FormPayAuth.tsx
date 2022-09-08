@@ -82,7 +82,15 @@ export const FormPayAuth = ({
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
     validate,
-    onSubmit: onOpen,
+    onSubmit: () => {
+      onOpen()
+
+      import('react-facebook-pixel')
+        .then((x) => x.default)
+        .then((ReactPixel) => {
+          ReactPixel.track('InitiateCheckout')
+        })
+    },
     initialValues: {
       tipoComprobante: 'Boleta',
       documento: '',

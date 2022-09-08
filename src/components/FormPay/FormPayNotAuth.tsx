@@ -124,7 +124,15 @@ export const FormPayNotAuth = ({
   const user = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('user') as any) : ''
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
     validate,
-    onSubmit: onOpen,
+    onSubmit: () => {
+      onOpen()
+
+      import('react-facebook-pixel')
+        .then((x) => x.default)
+        .then((ReactPixel) => {
+          ReactPixel.track('InitiateCheckout')
+        })
+    },
     initialValues: {
       tipoComprobante: 'Boleta',
       documento: '',
