@@ -11,6 +11,7 @@ import { useAsientosAbonado } from '../../services/useAsientosAbonado'
 import useToggle from '../../hooks/useToggle'
 import ModalLoading from '../../components/modal/modalLoading'
 import { useAsientosEventos } from '../../services/useAsientosEventos'
+import ReactPixel from 'react-facebook-pixel'
 const CheckOut = () => {
   const { status, data } = useSession() as any
   const { query } = useRouter()
@@ -82,6 +83,7 @@ const CheckOut = () => {
               onSubmit={(res) => {
                 if (res?.ok) {
                   setPagado(true)
+                  ReactPixel.track('Purchase')
                 } else {
                   setErrores(res?.error!)
                   setTimeout(() => {
@@ -101,6 +103,7 @@ const CheckOut = () => {
               onSubmit={(res) => {
                 if (res?.ok) {
                   setPagado(true)
+                  ReactPixel.track('Purchase')
                 } else {
                   setErrores(res?.error!)
                   setTimeout(() => {

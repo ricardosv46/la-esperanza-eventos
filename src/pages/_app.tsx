@@ -12,9 +12,26 @@ import client from '../apollo'
 import { SessionProvider } from 'next-auth/react'
 import moment from 'moment'
 import 'moment/locale/es'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 moment.locale('es')
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+  const router = useRouter()
+
+  useEffect(() => {
+    import('react-facebook-pixel')
+      .then((x) => x.default)
+      .then((ReactPixel) => {
+        ReactPixel.init('321309208840757')
+        ReactPixel.pageView()
+
+        router.events.on('routeChangeComplete', () => {
+          ReactPixel.pageView()
+        })
+      })
+  }, [router.events])
+
   return (
     <ApolloProvider client={client}>
       <SessionProvider session={session}>
